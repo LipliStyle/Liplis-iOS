@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="shift_jis" standalone="yes"?>
+<configuration>
+	<appSettings>
+		<add key="charName" value="LiliRenew" />
+		<add key="textFont" value="ＭＳ ゴシック" />
+		<add key="textColor" value="0,0,0" />
+		<add key="linkColor" value="0,0,0" />
+		<add key="titleColor" value="0,0,0" />
+		<add key="themaColor" value="236,215,255" />
+		<add key="themaColor2" value="104,104,255" />
+		<add key="charIntroduction" value="リプリスシスターズの姉 Liliです。おしとやかにおしゃべりします。" />
+		<add key="version" value="4.2.0" />
+		<add key="tone" value="http://liplis.mine.nu/FileSystem/Xml/Tone/little.pretty.lilirenew.xml" />
+	</appSettings>
+</configuration>

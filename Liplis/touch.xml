@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<touch>
+	<touchDiscription>
+		<name>pt1pitouch</name>
+		<type>0</type>
+		<sens>3</sens>
+		<top>144</top>
+		<left>133</left>
+		<bottom>164</bottom>
+		<right>176</right>
+		<chat>pitouch,pitouch2,pitouch3</chat>
+	</touchDiscription>
+	<touchDiscription>
+		<name>pt1facetouch</name>
+		<type>1</type>
+		<sens>1</sens>
+		<top>68</top>
+		<left>110</left>
+		<bottom>127</bottom>
+		<right>186</right>
+		<chat>facetouch1,facetouch2,facetouch3</chat>
+	</touchDiscription>
+	<touchDiscription>
+		<name>pt2pitouch</name>
+		<type>0</type>
+		<sens>3</sens>
+		<top>163</top>
+		<left>144</left>
+		<bottom>182</bottom>
+		<right>178</right>
+		<chat>pitouch,pitouch2,pitouch3</chat>
+	</touchDiscription>
+	<touchDiscription>
+		<name>pt2facetouch</name>
+		<type>1</type>
+		<sens>1</sens>
+		<top>98</top>
+		<left>105</left>
+		<bottom>150</bottom>
+		<right>172</right>
+		<chat>facetouch1,facetouch2,facetouch3</chat>
+	</touchDiscription>
+</touch>
