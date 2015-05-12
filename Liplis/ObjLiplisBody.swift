@@ -5,7 +5,7 @@
 // NSXMLParserDelegateを使うためには、NSObjectも継承する
 //
 //
-//  Created by kosuke on 2015/04/12.
+//  Created by sachin on 2015/04/12.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
 import UIKit
@@ -492,12 +492,13 @@ class ObjLiplisBody : NSObject, NSXMLParserDelegate {
     
     /**
         ボディデータをリストからランダムで１個選択し、返す
+        ver1.1.0 リストの一番最後のポーズが選択されないようになっていたバグ修正
     */
     func selectBody(bodyList : Array<ObjBody>)->ObjBody
     {
         if bodyList.count>0
         {
-            var idx = LiplisUtil.getRandormNumber(Min: 0, Max: bodyList.count - 1)
+            var idx = LiplisUtil.getRandormNumber(Min: 0, Max: bodyList.count)
             return bodyList[idx]
         }
         

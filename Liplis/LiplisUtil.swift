@@ -3,7 +3,7 @@
 //  Liplis
 //  リプリスユーティリティ
 //
-//  Created by kosuke on 2015/04/16.
+//  Created by sachin on 2015/04/16.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
 

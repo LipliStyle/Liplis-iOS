@@ -3,7 +3,7 @@
 //  Liplis
 //  設定のベースクラス
 //
-//  Created by kosuke on 2015/04/17.
+//  Created by sachin on 2015/04/17.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Liplis
 //
-//  Created by kosuke on 2015/01/04.
+//  Created by sachin on 2015/01/04.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //--------------------------------------------------------
 

@@ -2,7 +2,7 @@
 //  CtvCellMenuCtrlWidget.swift
 //  Liplis
 //
-//  Created by kosuke on 2015/05/07.
+//  Created by sachin on 2015/05/07.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
 

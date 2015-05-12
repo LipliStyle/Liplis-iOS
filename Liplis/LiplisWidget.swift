@@ -3,7 +3,7 @@
 //  Liplis
 //  ウィジェットのインスタンス
 //
-//  Created by kosuke on 2015/04/11.
+//  Created by sachin on 2015/04/11.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
 import UIKit
@@ -315,43 +315,44 @@ class LiplisWidget : NSObject {
     func dispose()
     {
         //プリファレンスの破棄
-        os.delPreference()
+        self.os.delPreference()
             
         //タイマー停止
-        stopNextTimer()
-        stopUpdateTimer()
+        self.stopNextTimer()
+        self.stopUpdateTimer()
        
         //イメージの破棄
-        if imgWindow != nil {imgWindow.image = nil}
-        if imgBody != nil {imgBody.image = nil}
-//        if icoSleep != nil {icoSleep.image = nil}
-//        if icoClock != nil {icoClock.image = nil}
-//        if icoLog != nil {icoLog.image = nil}
-//        if icoSetting != nil {icoSetting.image = nil}
-//        if icoChat != nil {icoChat.image = nil}
-//        if icoBattery != nil {icoBattery.image = nil}
+        if self.imgWindow != nil {self.imgWindow.image = nil}
+        if self.imgBody != nil {self.imgBody.image = nil}
         
-        if icoSleep != nil {icoSleep.setImage(nil,forState : UIControlState.Normal)}
-        if icoSleep != nil {icoLog.setImage(nil ,forState: UIControlState.Normal)}
-        if icoSleep != nil {icoSetting.setImage(nil, forState: UIControlState.Normal)}
-        if icoSleep != nil {icoChat.setImage(nil, forState: UIControlState.Normal)}
-        if icoSleep != nil {icoClock.setImage(nil, forState: UIControlState.Normal)}
-        if icoSleep != nil {icoBattery.setImage(nil, forState: UIControlState.Normal)}
+        if self.icoSleep != nil {self.icoSleep.setImage(nil,forState : UIControlState.Normal)}
+        if self.icoLog != nil {self.icoLog.setImage(nil ,forState: UIControlState.Normal)}
+        if self.icoSetting != nil {self.icoSetting.setImage(nil, forState: UIControlState.Normal)}
+        if self.icoChat != nil {self.icoChat.setImage(nil, forState: UIControlState.Normal)}
+        if self.icoClock != nil {self.icoClock.setImage(nil, forState: UIControlState.Normal)}
+        if self.icoBattery != nil {self.icoBattery.setImage(nil, forState: UIControlState.Normal)}
+        
+        if self.imgClockBase != nil {self.imgClockBase.image = nil}
+        if self.imgClockLongHand != nil {self.imgClockLongHand.image = nil}
+        if self.imgClockShortHand != nil {self.imgClockShortHand.image = nil}
             
         //要素の破棄
-        lblLpsTalkLabel = nil
-        imgWindow = nil
-        imgBody = nil
-        icoSleep = nil
-        icoClock = nil
-        icoLog = nil
-        icoSetting = nil
-        icoChat = nil
-        icoBattery = nil
+        self.lblLpsTalkLabel = nil
+        self.imgWindow = nil
+        self.imgBody = nil
+        self.icoSleep = nil
+        self.icoClock = nil
+        self.icoLog = nil
+        self.icoSetting = nil
+        self.icoChat = nil
+        self.icoBattery = nil
+        self.imgClockBase = nil
+        self.imgClockLongHand = nil
+        self.imgClockShortHand = nil
         
         //タイマーの破棄
-        nextTimer = nil
-        updateTimer = nil
+        self.nextTimer = nil
+        self.updateTimer = nil
     }
     
     

@@ -2,7 +2,7 @@
 //  CtvCellSettingCheck.swift
 //  Liplis
 //
-//  Created by kosuke on 2015/05/01.
+//  Created by sachin on 2015/05/01.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
 

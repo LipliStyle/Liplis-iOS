@@ -865,8 +865,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1390"
             endingLineNumber = "1390"
-            landmarkName = "checkSitdown()"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1153,8 +1153,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1232"
             endingLineNumber = "1232"
-            landmarkName = "refreshLiplis()"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1217,8 +1217,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1404"
             endingLineNumber = "1404"
-            landmarkName = "checkEnd()"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2152,8 +2152,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "450"
             endingLineNumber = "450"
-            landmarkName = "LiplisWidget"
-            landmarkType = "3">
+            landmarkName = "onUpdate(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

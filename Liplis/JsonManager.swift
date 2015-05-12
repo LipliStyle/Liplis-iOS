@@ -2,7 +2,7 @@
 //  JsonManagement.swift
 //  Liplis
 //
-//  Created by kosuke on 2015/04/27.
+//  Created by sachin on 2015/04/27.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
 
@@ -179,30 +179,3 @@ class JsonManager : ObjPreferenceBase
     }
     
 }
-
-//class JsonSet
-//{
-//    ///=============================
-//    /// キーバリューセット
-//    var key : String!    = "";
-//    var value : String! = "";
-//    
-//    //コンストラクター
-//    init(key : String, value : String)
-//    {
-//        self.key = key
-//        self.value = value
-//    }
-//    
-//    //ジェイソンストリングとして取得する
-//    func getJsonStr()->String
-//    {
-//        return "\"" + "key" + "\":" + value
-//    }
-//    
-//    //ジェイソンストリングとして取得する
-//    func getJsonStrWithConma()->String
-//    {
-//        return "\"" + "key" + "\":" + value + ","
-//    }
-//}
