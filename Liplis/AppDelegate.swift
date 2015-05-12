@@ -2,6 +2,17 @@
 //  AppDelegate.swift
 //  Liplis
 //
+//  アプリのライフタイムイベント管理
+//  画面インスタンスを全て管理し、データの受け渡しをしやすくする。
+//  キャラクターデータは、キャラクター選択画面、デスクトップのウィジェットで使用するため、ここでインスタンスを保持。
+//
+//
+//アップデート履歴
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/12 ver1.1.0 ObjLiplisBodyで管理しているボディのリストの最後尾が使用されていなかった問題修正
+//                       リファクタリング
+//
+//
 //  Created by sachin on 2015/01/04.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -13,37 +24,91 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     ///=============================
     /// ステータス
-    var window: UIWindow?
+    internal var window: UIWindow?
 
     ///=============================
     /// 画面
-    var activityDeskTop: ViewDeskTop!
-    var activityMenu: ViewSettingMenu!
-    var activityCharcter: ViewCharacter!
-    var activityLog: ViewLog!
-    var activityWeb: ViewWeb!
-    
-    var myTabBarController: UITabBarController!
+    internal var activityDeskTop: ViewDeskTop!           //デスクトップ画面
+    internal var activityMenu: ViewSettingMenu!          //設定メニュー
+    internal var activityCharcter: ViewCharacter!        //キャラクター選択画面
+    internal var activityLog: ViewLog!                   //ログ画面
+    internal var activityWeb: ViewWeb!                   //ウェブ画面
+    internal var myTabBarController: UITabBarController! //タブコントロール
 
     ///=============================
     /// キャラクターデータ管理
-    var cman : LiplisCharDataManager!
+    internal var cman : LiplisCharDataManager!
     
+    //============================================================
+    //
+    //ライフサイクルイベント
+    //
+    //============================================================
+
+    /**
+    アプリケーション開始時処理
+    */
+    internal func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        //Liplisの初期化
+        initLiplis()
+        return true
+    }
     
+    /**
+    アプリケーションが非アクティブ状態に遷移する時に送信される。
+    例えば(電話の着信やSMSメッセージのような)一時的な中断が発生する場合に、進行中のタスクを無効にし、タイマーを一時停止、
+    OpenGL ESのフレームレートを下げるために、このメソッドを使用する。
+    */
+    internal func applicationWillResignActive(application: UIApplication) {
+
+    }
+
+    /**
+    アプリケーションバックグラウンド遷移時
+    */
+    internal func applicationDidEnterBackground(application: UIApplication) {
+        //デスクトップにバックグラウンド遷移イベントを起こす。(おやすみ処理など)
+        activityDeskTop.onBackGround()
+    }
+
+    /**
+    アプリケーションフォアグラウンド遷移時
+    */
+    internal func applicationWillEnterForeground(application: UIApplication) {
+        //デスクトップにフォアグラウンド遷移イベントを起こす。(起きる処理など)
+        activityDeskTop.onForeGround()
+    }
+    
+    /**
+    アプリケーションが非アクティブまたは一時停止(または未開始)されていたタスクを再起動するときに呼ばれる
+    */
+    internal func applicationDidBecomeActive(application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    }
+
+    /**
+    アプリ終了時に呼ばれる
+    データ保存の必要がある場合はここで行う。
+    */
+    internal func applicationWillTerminate(application: UIApplication) {
+        
+    }
+
     //============================================================
     //
     //初期化処理
     //
     //============================================================
     /**
-    アプリケーション開始時処理
+    Liplisの初期化
     */
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    private func initLiplis()
+    {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-
+        
         //キャラクターデータの読み込み
         cman = LiplisCharDataManager()
-
+        
         //画面のインスタンス化
         activityDeskTop = ViewDeskTop(app: self)
         activityMenu = ViewSettingMenu(app: self)
@@ -52,49 +117,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         activityWeb = ViewWeb(app: self)
         
         // タブを要素に持つArrayの.を作成する.
-        let myTabs = NSArray(objects: activityDeskTop!, activityMenu!,activityCharcter!,activityLog!,activityWeb!)
+        let activityList = NSArray(objects: activityDeskTop!, activityMenu!,activityCharcter!,activityLog!,activityWeb!)
         
         // UITabControllerの作成する.
         myTabBarController = UITabBarController()
         
         // ViewControllerを設定する.
-        myTabBarController?.setViewControllers(myTabs as [AnyObject], animated: false)
+        myTabBarController?.setViewControllers(activityList as [AnyObject], animated: false)
         
         // RootViewControllerに設定する.
         self.window!.rootViewController = myTabBarController
         
         self.window!.makeKeyAndVisible()
         
-        return true
     }
-    
-    func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    }
-
-    /**
-    アプリケーションバックグラウンド遷移時
-    */
-    func applicationDidEnterBackground(application: UIApplication) {
-        activityDeskTop.onBackGround()
-    }
-
-    /**
-    アプリケーションフォアグラウンド遷移時
-    */
-    func applicationWillEnterForeground(application: UIApplication) {
-        activityDeskTop.onForeGround()
-    }
-
-    func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-
 }
 
