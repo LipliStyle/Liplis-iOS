@@ -385,8 +385,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "228"
             endingLineNumber = "228"
-            landmarkName = "LiplisWidget"
-            landmarkType = "3">
+            landmarkName = "initXml()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -817,8 +817,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "120"
             endingLineNumber = "120"
-            landmarkName = "init(desk:os:lpsSkinData:)"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -849,8 +849,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "598"
             endingLineNumber = "598"
-            landmarkName = "touchesEnded(_:)"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -865,8 +865,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1390"
             endingLineNumber = "1390"
-            landmarkName = "LiplisWidget"
-            landmarkType = "3">
+            landmarkName = "skipLiplis()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -961,8 +961,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1645"
             endingLineNumber = "1645"
-            landmarkName = "LiplisWidget"
-            landmarkType = "3">
+            landmarkName = "herfEyeCheck()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -993,8 +993,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "957"
             endingLineNumber = "957"
-            landmarkName = "LiplisWidget"
-            landmarkType = "3">
+            landmarkName = "onUpIcoBattery(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1057,8 +1057,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "370"
             endingLineNumber = "370"
-            landmarkName = "startUpdateTimer()"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1073,8 +1073,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "447"
             endingLineNumber = "447"
-            landmarkName = "onUpdate(_:)"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1089,8 +1089,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1189"
             endingLineNumber = "1189"
-            landmarkName = "LiplisWidget"
-            landmarkType = "3">
+            landmarkName = "runLiplis()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1105,8 +1105,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1231"
             endingLineNumber = "1231"
-            landmarkName = "LiplisWidget"
-            landmarkType = "3">
+            landmarkName = "updateLiplis()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1121,7 +1121,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1192"
             endingLineNumber = "1192"
-            landmarkName = "updateLiplis()"
+            landmarkName = "runLiplis()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1153,8 +1153,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1232"
             endingLineNumber = "1232"
-            landmarkName = "LiplisWidget"
-            landmarkType = "3">
+            landmarkName = "updateLiplis()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1185,8 +1185,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1190"
             endingLineNumber = "1190"
-            landmarkName = "LiplisWidget"
-            landmarkType = "3">
+            landmarkName = "runLiplis()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1217,8 +1217,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1404"
             endingLineNumber = "1404"
-            landmarkName = "LiplisWidget"
-            landmarkType = "3">
+            landmarkName = "checkSitdown()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1265,7 +1265,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1424"
             endingLineNumber = "1424"
-            landmarkName = "setText()"
+            landmarkName = "checkEnd()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1281,7 +1281,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1421"
             endingLineNumber = "1421"
-            landmarkName = "setText()"
+            landmarkName = "checkEnd()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1329,7 +1329,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1752"
             endingLineNumber = "1752"
-            landmarkName = "getPostDataForLiplisNewsList()"
+            landmarkName = "getPostDataForLiplisNews()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1361,8 +1361,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1586"
             endingLineNumber = "1586"
-            landmarkName = "setObjectBodyNeutral()"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1377,8 +1377,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1695"
             endingLineNumber = "1695"
-            landmarkName = "getTopic()"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1393,8 +1393,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1701"
             endingLineNumber = "1701"
-            landmarkName = "getTopic()"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1409,8 +1409,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1694"
             endingLineNumber = "1694"
-            landmarkName = "getTopic()"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1425,8 +1425,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "435"
             endingLineNumber = "435"
-            landmarkName = "onNext(_:)"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1610,11 +1610,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewLog.swift"
-            timestampString = "452567014.390736"
+            timestampString = "453217945.57093"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "init(app:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1647,7 +1647,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "761"
             endingLineNumber = "761"
-            landmarkName = "onClickWindow()"
+            landmarkName = "onClickBody()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1912,7 +1912,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "551"
             endingLineNumber = "551"
-            landmarkName = "touchesMoved(_:)"
+            landmarkName = "touchesBegan(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2040,7 +2040,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1754"
             endingLineNumber = "1754"
-            landmarkName = "getPostDataForLiplisNewsList()"
+            landmarkName = "getPostDataForLiplisNews()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2056,7 +2056,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1755"
             endingLineNumber = "1755"
-            landmarkName = "getPostDataForLiplisNewsList()"
+            landmarkName = "getPostDataForLiplisNews()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2072,8 +2072,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "448"
             endingLineNumber = "448"
-            landmarkName = "onUpdate(_:)"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2088,8 +2088,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "449"
             endingLineNumber = "449"
-            landmarkName = "onUpdate(_:)"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2104,7 +2104,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "445"
             endingLineNumber = "445"
-            landmarkName = "onUpdate(_:)"
+            landmarkName = "onNext(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2120,8 +2120,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "450"
             endingLineNumber = "450"
-            landmarkName = "onUpdate(_:)"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2200,7 +2200,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "999"
             endingLineNumber = "999"
-            landmarkName = "clockInfo()"
+            landmarkName = "batteryInfo()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2232,8 +2232,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1120"
             endingLineNumber = "1120"
-            landmarkName = "nextLiplis()"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2728,7 +2728,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "318"
             endingLineNumber = "318"
-            landmarkName = "dispose()"
+            landmarkName = "deinit"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2792,7 +2792,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "148"
             endingLineNumber = "148"
-            landmarkName = "initView()"
+            landmarkName = "init(desk:os:lpsSkinData:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3192,7 +3192,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "456"
             endingLineNumber = "456"
-            landmarkName = "reSetUpdateCount()"
+            landmarkName = "onUpdate(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3208,7 +3208,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "739"
             endingLineNumber = "739"
-            landmarkName = "onClickBody()"
+            landmarkName = "startMove()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3224,7 +3224,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "458"
             endingLineNumber = "458"
-            landmarkName = "reSetUpdateCount()"
+            landmarkName = "onUpdate(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3240,7 +3240,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1193"
             endingLineNumber = "1193"
-            landmarkName = "updateLiplis()"
+            landmarkName = "runLiplis()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3732,8 +3732,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "223"
             endingLineNumber = "223"
-            landmarkName = "initXml()"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3759,11 +3759,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewLog.swift"
-            timestampString = "452787210.335346"
+            timestampString = "453217945.57093"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
             landmarkName = "moveLowerMostPart()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3780,8 +3780,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1756"
             endingLineNumber = "1756"
-            landmarkName = "getPostDataForLiplisNewsList()"
-            landmarkType = "5">
+            landmarkName = "LiplisWidget"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3951,11 +3951,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewLog.swift"
-            timestampString = "452787210.335346"
+            timestampString = "453217945.57093"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>

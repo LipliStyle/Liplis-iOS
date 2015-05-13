@@ -2,6 +2,16 @@
 //  LiplisWidgetDefault.swift
 //  Liplis
 //
+//  ウィジェットのインスタンス
+//  スキンデータを読み込めるようにしたことに伴い、プリインストールのリリデータは、本クラスで読むようにする。
+//  XML、画像データはプリセットデータを読み込む
+//  立ち絵データは「ObjLiplisBodyDefault」クラスを使うことにより、プリセット画像をロードする
+//
+//アップデート履歴
+//   2015/05/05 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/12 ver1.1.0 リファクタリング
+//
 //  Created by sachin on 2015/05/05.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -19,7 +29,7 @@ class LiplisWidgetDefault : LiplisWidget {
     /**
     デフォルトイニシャライザ
     */
-    override init(desk:ViewDeskTop!, os : ObjPreference, lpsSkinData : LiplisSkinData!)
+    internal override init(desk:ViewDeskTop!, os : ObjPreference, lpsSkinData : LiplisSkinData!)
     {
         super.init(desk: desk, os: os, lpsSkinData: lpsSkinData)
     }
@@ -27,57 +37,55 @@ class LiplisWidgetDefault : LiplisWidget {
     /*
     XML読み込み
     */
-    override func initXml()
+    internal override func initXml()
     {
-        //ボディインスタンス
-        lpsChat = ObjLiplisChat(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("chat", ofType: "xml")!)!)
-        lpsBody = ObjLiplisBodyDefault(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("body", ofType: "xml")!)!)
-        lpsSkin = ObjLiplisSkin(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("skin", ofType: "xml")!)!)
-        lpsTouch = ObjLiplisTouch(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("touch", ofType: "xml")!)!)
-        lpsVer = ObjLiplisVersion(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("version", ofType: "xml")!)!)
-        lpsIcon = ObjLiplisIcon()
+        //プリセットファイルの読み込み
+        self.lpsChat = ObjLiplisChat(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("chat", ofType: "xml")!)!)
+        self.lpsBody = ObjLiplisBodyDefault(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("body", ofType: "xml")!)!)
+        self.lpsSkin = ObjLiplisSkin(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("skin", ofType: "xml")!)!)
+        self.lpsTouch = ObjLiplisTouch(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("touch", ofType: "xml")!)!)
+        self.lpsVer = ObjLiplisVersion(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("version", ofType: "xml")!)!)
+        self.lpsIcon = ObjLiplisIcon()
     }
     
     /*
     ウインドウのセット
     オーバーライドが必要
     */
-    override func setWindow()
+    internal override func setWindow()
     {
-        imgWindow.image = UIImage(named: os.lpsWindowColor)
+        self.imgWindow.image = UIImage(named: os.lpsWindowColor)
     }
     
     /*
     ボディの更新
     */
-    override func updateBody()->Bool
+    internal override func updateBody()->Bool
     {
         //感情変化セット
-        setObjectBody()
+        self.setObjectBody()
         
         //口パクカウント
-        if(flgChatting)
+        if(self.flgChatting)
         {
-            if(cntMouth == 1){cntMouth = 2}
-            else             {cntMouth = 1}
+            if(self.cntMouth == 1){self.cntMouth = 2}
+            else             {self.cntMouth = 1}
         }
         else
         {
-            cntMouth = 1
+            self.cntMouth = 1
         }
         
         //めぱちカウント
-        if(cntBlink == 0){cntBlink = getBlincCnt()}
-        else             {cntBlink = cntBlink - 1}
+        if(self.cntBlink == 0){self.cntBlink = self.getBlincCnt()}
+        else             {self.cntBlink = self.cntBlink - 1}
         
         autoreleasepool { () -> () in
             self.imgBody.image = nil
-            //self.imgBody.image = self.ob.getLiplisBodyImgId(self.getBlinkState(),mouthState: self.cntMouth)
             self.imgBody.image = self.ob.getLiplisBodyImgIdInsDefault(self.getBlinkState(),mouthState: self.cntMouth)
             self.imgBody.setNeedsDisplay()
         }
-        
-        
+
         return true
     }
 }

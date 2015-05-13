@@ -1,7 +1,15 @@
 //
 //  LiplisWidget.swift
 //  Liplis
+//
 //  ウィジェットのインスタンス
+//  ウィジェットの立ち絵、ウインドウ、アイコン等の像イメージを管理し、
+//  文字の送り制御、立ち絵の切り替え制御まで行う。
+//
+//アップデート履歴
+//   2015/04/11 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/12 ver1.1.0 リファクタリング
 //
 //  Created by sachin on 2015/04/11.
 //  Copyright (c) 2015年 sachin. All rights reserved.
@@ -12,99 +20,99 @@ import Foundation
 class LiplisWidget : NSObject {
     //=================================
     //画面要素
-    var lblLpsTalkLabel: UILabel!
-    var imgWindow: UIImageView!  //ウインドウ
-    var imgBody: UIImageView!    //本体画像
-    var icoSleep : UIButton!     //おやすみアイコン
-    var icoLog : UIButton!       //回想アイコン
-    var icoSetting : UIButton!   //設定アイコン
-    var icoChat : UIButton!      //会話アイコン
-    var icoClock : UIButton!     //時計アイコン
-    var icoBattery : UIButton!   //バッテリーアイコン
-    var imgClockBase: UIImageView!      //時計本体画像
-    var imgClockLongHand: UIImageView!  //時計長針
-    var imgClockShortHand: UIImageView! //時計短針
-    var frame : CGRect!                 //ウィジェットのレクトアングル
+    internal var lblLpsTalkLabel: UILabel!
+    internal var imgWindow: UIImageView!             //ウインドウ
+    internal var imgBody: UIImageView!               //本体画像
+    internal var icoSleep : UIButton!                //おやすみアイコン
+    internal var icoLog : UIButton!                  //回想アイコン
+    internal var icoSetting : UIButton!              //設定アイコン
+    internal var icoChat : UIButton!                 //会話アイコン
+    internal var icoClock : UIButton!                //時計アイコン
+    internal var icoBattery : UIButton!              //バッテリーアイコン
+    internal var imgClockBase: UIImageView!          //時計本体画像
+    internal var imgClockLongHand: UIImageView!      //時計長針
+    internal var imgClockShortHand: UIImageView!     //時計短針
+    internal var frame : CGRect!                     //ウィジェットのレクトアングル
     
     //=================================
     //XMLオブジェクト
-    var lpsSkinData : LiplisSkinData!
-    var lpsBody : ObjLiplisBody!
-    var lpsChat : ObjLiplisChat!
-    var lpsIcon : ObjLiplisIcon!
-    var lpsSkin : ObjLiplisSkin!
-    var lpsTouch : ObjLiplisTouch!
-    var lpsVer : ObjLiplisVersion!
+    internal var lpsSkinData : LiplisSkinData!
+    internal var lpsBody : ObjLiplisBody!
+    internal var lpsChat : ObjLiplisChat!
+    internal var lpsIcon : ObjLiplisIcon!
+    internal var lpsSkin : ObjLiplisSkin!
+    internal var lpsTouch : ObjLiplisTouch!
+    internal var lpsVer : ObjLiplisVersion!
     
     //=================================
     //ロードボディオブジェクト
-    var ob : ObjBody!
+    internal var ob : ObjBody!
     
     //=================================
     //キャラクター設定
-    var os : ObjPreference!
+    internal var os : ObjPreference!
     
     //=================================
     //デスクトップインスタンス
-    var desk:ViewDeskTop!
+    internal var desk:ViewDeskTop!
     
     //=================================
     //ニュースインスタンス
-    var lpsNews : LiplisNews!
-    var lpsBattery : ObjBattery!
-    var lpsChatTalk : LiplisApiChat!
+    internal var lpsNews : LiplisNews!
+    internal var lpsBattery : ObjBattery!
+    internal var lpsChatTalk : LiplisApiChat!
     
     //=================================
     //タイマー
-    var updateTimer : NSTimer!
-    var nextTimer : NSTimer!
-    var startMoveTimer : NSTimer!
-    var flgAlarm : Int! = 0
+    internal var updateTimer : NSTimer!
+    internal var nextTimer : NSTimer!
+    internal var startMoveTimer : NSTimer!
+    internal var flgAlarm : Int! = 0
     
     //=================================
     //制御プロパティ
-    var liplisNowTopic : MsgShortNews!  //現在ロードおしゃべりデータ
-    var liplisNowWord : String = ""     //ロード中の単語
-    var liplisChatText : String = ""    //テキストバッファ
-    var liplisUrl : String = ""         //現在ロード中の記事のURL
-    var cntLct : Int! = 0               //チャットテキストカウント
-    var cntLnw : Int! = 0               //ナウワードカウント
-    var nowPoint : Int! = 0             //現在感情レベル
-    var nowPos : Int! = 0               //現在品詞
-    var nowEmotion : Int! = 0           //現在感情
-    var prvEmotion : Int! = 0           //前回感情
-    var cntMouth : Int! = 0             //口パクカウント
-    var cntBlink  : Int! = 0            //まばたきカウント
-    var nowBlink    : Int! = 0          //現在目のオープン状態
-    var prvBlink    : Int! = 0          //１つ前の目のオープン状態
-    var nowDirection : Int! = 0         //現在の方向
-    var prvDirection  : Int = 0         //１つ前の方向
-    var cntSlow  : Int! = 0             //スローカウント
+    internal var liplisNowTopic : MsgShortNews!  //現在ロードおしゃべりデータ
+    internal var liplisNowWord : String = ""     //ロード中の単語
+    internal var liplisChatText : String = ""    //テキストバッファ
+    internal var liplisUrl : String = ""         //現在ロード中の記事のURL
+    internal var cntLct : Int! = 0               //チャットテキストカウント
+    internal var cntLnw : Int! = 0               //ナウワードカウント
+    internal var nowPoint : Int! = 0             //現在感情レベル
+    internal var nowPos : Int! = 0               //現在品詞
+    internal var nowEmotion : Int! = 0           //現在感情
+    internal var prvEmotion : Int! = 0           //前回感情
+    internal var cntMouth : Int! = 0             //口パクカウント
+    internal var cntBlink  : Int! = 0            //まばたきカウント
+    internal var nowBlink    : Int! = 0          //現在目のオープン状態
+    internal var prvBlink    : Int! = 0          //１つ前の目のオープン状態
+    internal var nowDirection : Int! = 0         //現在の方向
+    internal var prvDirection  : Int = 0         //１つ前の方向
+    internal var cntSlow  : Int! = 0             //スローカウント
 
     //=================================
     //制御フラグ
-    var flgConnect     : Bool = false   //接続フラグ
-    var flgBodyChencge : Bool = false   //ボディ変更フラグ
-    var flgChatting    : Bool = false   //おしゃべり中フラグ
-    var flgSkip        : Bool = false   //スキップフラグ
-    var flgSkipping    : Bool = false   //スキップ中フラグ
-    var flgSitdown     : Bool = false   //おすわり中フラグ
-    var flgThinking    : Bool = false   //考え中フラグ
-    var flgEnd         : Bool = false   //おしゃべり終了フラグ
-    var flgTag         : Bool = false   //タグチェック
-    var flgChatTalk    : Bool = false   //
-    var flgDebug       : Bool = false   //
-    var flgOutputDemo  : Bool = false   //
+    internal var flgConnect     : Bool = false   //接続フラグ
+    internal var flgBodyChencge : Bool = false   //ボディ変更フラグ
+    internal var flgChatting    : Bool = false   //おしゃべり中フラグ
+    internal var flgSkip        : Bool = false   //スキップフラグ
+    internal var flgSkipping    : Bool = false   //スキップ中フラグ
+    internal var flgSitdown     : Bool = false   //おすわり中フラグ
+    internal var flgThinking    : Bool = false   //考え中フラグ
+    internal var flgEnd         : Bool = false   //おしゃべり終了フラグ
+    internal var flgTag         : Bool = false   //タグチェック
+    internal var flgChatTalk    : Bool = false   //
+    internal var flgDebug       : Bool = false   //
+    internal var flgOutputDemo  : Bool = false   //
     
     ///=====================================
     /// 設定値
     //NOTE : liplisRefreshRate * liplisRate = 更新間隔 (updateCntに関連)
-    var liplisInterval : Int! = 100;		    //インターバル
-    var liplisRefresh : Int! = 10;			//リフレッシュレート
+    internal var liplisInterval : Int! = 100;		    //インターバル
+    internal var liplisRefresh : Int! = 10;			//リフレッシュレート
     
     ///=====================================
     /// 時報制御
-    var prvHour : Int = 0
+    internal var prvHour : Int = 0
     
     //============================================================
     //

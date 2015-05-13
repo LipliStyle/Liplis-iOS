@@ -8,9 +8,10 @@
 //
 //
 //アップデート履歴
+//   2015/01/04 ver0.1.0 作成
 //   2015/05/09 ver1.0.0 リリース
 //   2015/05/12 ver1.1.0 ObjLiplisBodyで管理しているボディのリストの最後尾が使用されていなかった問題修正
-//                       リファクタリング
+//   2015/05/13 ver1.2.0 ログの送りバグ修正
 //
 //
 //  Created by sachin on 2015/01/04.
@@ -104,6 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     private func initLiplis()
     {
+        //ウインドウ生成
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         //キャラクターデータの読み込み
