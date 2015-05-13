@@ -2,6 +2,10 @@
 //  ViewLog.swift
 //  Liplis
 //
+//アップデート履歴
+//   2015/04/20 ver0.1.0 作成
+//   2015/05/13 ver1.2.0 ログの送りバグ修正
+//
 //  Created by sachin on 2015/04/20.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -21,6 +25,10 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     ///画面要素
     var lblTitle : UILabel!
     var tblLog: UITableView!
+    
+    ///=============================
+    ///画面要素
+    private var logList : Array<ObjLiplisLog>!
     
     ///=============================
     ///オフセット定数
@@ -55,7 +63,7 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     */
     func initClass()
     {
-        
+        logList = []
     }
     
     /*
@@ -114,6 +122,7 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     */
     override func viewWillAppear(animated: Bool) {
         //ログリスト
+        self.logList = self.app.activityDeskTop.lpsLog.logList
         self.tblLog.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
         
         //サイズ設定
@@ -133,23 +142,23 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     Cellが選択された際に呼び出される.
     */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if(self.app.activityDeskTop.lpsLog.logList[indexPath.row].url != "")
+        if(self.logList[indexPath.row].url != "")
         {
             println("Num: \(indexPath.row)")
-            println("Value: \(self.app.activityDeskTop.lpsLog.logList[indexPath.row].log)")
-            println("Value: \(self.app.activityDeskTop.lpsLog.logList[indexPath.row].url)")
+            println("Value: \(self.logList[indexPath.row].log)")
+            println("Value: \(self.logList[indexPath.row].url)")
             
             //ベース設定の取得
             var baseSetting : LiplisPreference = LiplisPreference.SharedInstance
             
             if baseSetting.lpsBrowserMode == 0
             {
-                self.app.activityWeb.url = NSURL(string: self.app.activityDeskTop.lpsLog.logList[indexPath.row].url)!
+                self.app.activityWeb.url = NSURL(string: self.logList[indexPath.row].url)!
                 self.tabBarController?.selectedIndex=4
             }
             else  if baseSetting.lpsBrowserMode == 1
             {
-                let nurl = NSURL(string: self.app.activityDeskTop.lpsLog.logList[indexPath.row].url)
+                let nurl = NSURL(string: self.logList[indexPath.row].url)
                 if UIApplication.sharedApplication().canOpenURL(nurl!){
                     UIApplication.sharedApplication().openURL(nurl!)
                 }
@@ -157,7 +166,7 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
             else  if baseSetting.lpsBrowserMode == 2
             {
                 //URL設定
-                self.app.activityDeskTop.desktopWebSetUrl(self.app.activityDeskTop.lpsLog.logList[indexPath.row].url)
+                self.app.activityDeskTop.desktopWebSetUrl(self.logList[indexPath.row].url)
                 self.tabBarController?.selectedIndex=0
             }
         }
@@ -167,7 +176,7 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     Cellの総数を返す.
     */
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.app.activityDeskTop.lpsLog.logList.count
+        return self.logList.count
     }
     
     /*
@@ -179,7 +188,7 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as UITableViewCell
         
         // Cellに値を設定する.
-        cell.textLabel!.text = "\(self.app.activityDeskTop.lpsLog.logList[indexPath.row].log)"
+        cell.textLabel!.text = "\(self.logList[indexPath.row].log)"
         
         return cell
     }
