@@ -2,27 +2,25 @@
 //  LiplisChat.swift
 //  Liplis
 //
+//  LiplisChatAPIの応答データ
+//
+//アップデート履歴
+//   2015/04/26 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.3.0　リファクタリング
+//
 //  Created by sachin on 2015/04/26.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
 
 import Foundation
 struct LiplisChatJson {
-    
-    //============================================================
-    //
-    //初期化処理
-    //
-    //============================================================
-    /**
-    デフォルトイニシャライザ
-    */
-    init()
-    {
-        
-    }
-    
-    
+    ///=============================
+    ///XMLキー
+    internal static let KEY_TITLE            : String = "title"
+    internal static let KEY_URL              : String = "url"
+    internal static let KEY_DESCRIPTION_LIST : String = "descriptionList"
+
     //============================================================
     //
     //メッセージ生成
@@ -33,7 +31,7 @@ struct LiplisChatJson {
     /**
     ショートニュースリストの取得
     */
-    static func getChatTalkResponseRes(json:JSON)->MsgShortNews
+    internal static func getChatTalkResponseRes(json:JSON)->MsgShortNews
     {
         return json2MsgShortNews(json)
     }
@@ -42,14 +40,14 @@ struct LiplisChatJson {
     /**
     ショートニュースのJSON変換取得
     */
-    static func json2MsgShortNews(json:JSON)->MsgShortNews
+    internal static func json2MsgShortNews(json:JSON)->MsgShortNews
     {
         var result : MsgShortNews = MsgShortNews()
         
         //タイトル取得
-        if json["title"].string != nil
+        if json[self.KEY_TITLE].string != nil
         {
-            result.title = json["title"].string!
+            result.title = json[self.KEY_TITLE].string!
         }
         else
         {
@@ -57,9 +55,9 @@ struct LiplisChatJson {
         }
         
         //URL取得
-        if json["url"].string != nil
+        if json[self.KEY_URL].string != nil
         {
-            result.url = json["url"].string!
+            result.url = json[self.KEY_URL].string!
         }
         else
         {
@@ -77,26 +75,26 @@ struct LiplisChatJson {
 //        }
         
         //内容取得
-        if json["descriptionList"] != nil
+        if json[self.KEY_DESCRIPTION_LIST] != nil
         {
-            for (idx:String,subJson:JSON) in json["descriptionList"]
+            for (idx:String,subJson:JSON) in json[self.KEY_DESCRIPTION_LIST]
             {
                 //リザルト取得(コロン分割)
-                var resList : Array<String> = split(subJson.description,{$0 == ";"})
+                var resList : Array<String> = split(subJson.description,isSeparator : {$0 == ";"})
                 var title : String = ""
                 
                 //リーフエモーション分割
                 for leafAndEmotion : String in resList
                 {
                     //コンマ分割
-                    var leaf : Array<String> = split(leafAndEmotion,{$0 == ","})
+                    var leaf : Array<String> = split(leafAndEmotion,isSeparator : {$0 == ","})
                     
                     //リスト作成
                     
                     //配列チェック
                     if leaf.count == 3
                     {
-                        if(leaf[0] == "EOS")
+                        if(leaf[0] == LiplisDefine.EOS)
                         {
                             break
                         }

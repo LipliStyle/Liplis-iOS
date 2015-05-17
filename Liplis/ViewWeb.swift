@@ -2,6 +2,14 @@
 //  ViewWeb.swift
 //  Liplis
 //
+//  Liplisアプリ内ブラウザ
+//
+//アップデート履歴
+//   2015/04/20 ver0.1.0 作成
+//   2015/05/13 ver1.2.0 ログの送りバグ修正
+//   2015/05/16 ver1.4.0　swift1.2対応
+//                        リファクタリング
+//
 //  Created by sachin on 2015/04/20.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -10,25 +18,20 @@ import UIKit
 class ViewWeb : UIViewController , UIWebViewDelegate {
     ///=============================
     ///アプリケーションデリゲート
-    var app : AppDelegate!
+    private var app : AppDelegate!
     
     ///=============================
     ///ビュータイトル
-    var viewTitle = "ウェブ参照"
-    var tagTitle = "ウェブ"
+    private var viewTitle = "ウェブ参照"
+    private var tagTitle = "ウェブ"
     
     ///=============================
     ///画面要素
-    var lblTitle : UILabel!
-    let myWebView : UIWebView = UIWebView()
-    
-    ///=============================
-    ///オフセット定数
-    let labelHight : CGFloat = 60.0
-    let headerHight : CGFloat = 25.0
+    private var lblTitle : UILabel!
+    internal var myWebView : UIWebView!
     
     // URLを設定する.
-    var url: NSURL = NSURL(string: "")!
+    internal var url: NSURL = NSURL(string: "")!
     
     //============================================================
     //
@@ -38,14 +41,13 @@ class ViewWeb : UIViewController , UIWebViewDelegate {
     /*
     コンストラクター
     */
-    init(app : AppDelegate) {
-        super.init()
+    convenience init(app : AppDelegate) {
+        self.init(nibName: nil, bundle: nil)
         self.app = app
-        
-        initClass()
-        initView()
-
+        self.initClass()
+        self.initView()
     }
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -57,7 +59,7 @@ class ViewWeb : UIViewController , UIWebViewDelegate {
     /*
     クラスの初期化
     */
-    func initClass()
+    private func initClass()
     {
         
     }
@@ -65,37 +67,51 @@ class ViewWeb : UIViewController , UIWebViewDelegate {
     /*
     アクティビティの初期化
     */
-    func initView()
+    private func initView()
     {
-        self.view.opaque = true
-        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)
-        var img : UIImage = UIImage(named : "sel_in.png")!
-        self.tabBarItem = UITabBarItem(title: tagTitle,image: img, tag: 5)
-
-        // Viewの高さと幅を取得する.
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
+        //ビューの初期化
+        var img : UIImage = UIImage(named : ObjR.imgIconWeb)!                       //アイコン取得
+        self.view.opaque = true                                                     //背景透過許可
+        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)   //白透明背景
+        self.tabBarItem = UITabBarItem(title: self.tagTitle,image: img, tag: 5)     //タブ設定
         
+        //タイトルラベルの作成
+        self.createLblTitle()
         
-        // Labelを作成.
-        lblTitle = UILabel(frame: CGRectMake(0,0,displayWidth,labelHight))
-        lblTitle.backgroundColor = UIColor.hexStr("ffa500", alpha: 255)
-        lblTitle.text = viewTitle
-        lblTitle.textColor = UIColor.whiteColor()
-        lblTitle.shadowColor = UIColor.grayColor()
-        lblTitle.textAlignment = NSTextAlignment.Center
-        lblTitle.layer.position = CGPoint(x: self.view.bounds.width/2,y: headerHight)
-        self.view.addSubview(lblTitle)
+        //テーブル作成
+        self.createWebleView()
         
-        myWebView.delegate = self
-        myWebView.frame = self.view.bounds
-        myWebView.scalesPageToFit = true
-        self.view.addSubview(myWebView)
-        
-        //サイズ設定
-        setSize()
-        
+        //サイズ調整
+        self.setSize()
     }
+    
+    /*
+    タイトルラベルの初期化
+    */
+    private func createLblTitle()
+    {
+        // Labelを作成.
+        self.lblTitle = UILabel(frame: CGRectMake(0,0,0,0))
+        self.lblTitle.backgroundColor = UIColor.hexStr("ffa500", alpha: 255)
+        self.lblTitle.text = self.viewTitle
+        self.lblTitle.textColor = UIColor.whiteColor()
+        self.lblTitle.shadowColor = UIColor.grayColor()
+        self.lblTitle.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(self.lblTitle)
+    }
+    
+    /*
+    キャラクター要素テーブルの初期化
+    */
+    private func createWebleView()
+    {
+        self.myWebView = UIWebView()
+        self.myWebView.delegate = self
+        self.myWebView.frame = self.view.bounds
+        self.myWebView.scalesPageToFit = true
+        self.view.addSubview(myWebView)
+    }
+    
     
     //============================================================
     //
@@ -134,14 +150,14 @@ class ViewWeb : UIViewController , UIWebViewDelegate {
     /*
     Pageがすべて読み込み終わった時呼ばれる
     */
-    func webViewDidFinishLoad(webView: UIWebView) {
+    internal func webViewDidFinishLoad(webView: UIWebView) {
         println("webViewDidFinishLoad")
     }
     
     /*
     Pageがloadされ始めた時、呼ばれる
     */
-    func webViewDidStartLoad(webView: UIWebView) {
+    internal func webViewDidStartLoad(webView: UIWebView) {
         println("webViewDidStartLoad")
     }
     
@@ -154,30 +170,24 @@ class ViewWeb : UIViewController , UIWebViewDelegate {
     /*
     サイズ設定
     */
-    func setSize()
+    private func setSize()
     {
-        //ビューフレームサイズを取得
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
-        
-        //バー高さ
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-        
-        //ラベル位置設定
-        self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: labelHight)
-        
         // 現在のデバイスの向きを取得.
         let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
         
         // 向きによって設定サイズを調整する
         if UIDeviceOrientationIsLandscape(deviceOrientation) {
-            //横向きの判定.
-            self.myWebView.frame = CGRect(x: 0, y: barHeight + headerHight * 2, width: displayWidth, height: displayHeight - barHeight - 100)
+            //横向きの判定
         } else if UIDeviceOrientationIsPortrait(deviceOrientation){
-            //縦向きの判定.
-            self.myWebView.frame = CGRect(x: 0, y: barHeight + headerHight, width: displayWidth, height: displayHeight - barHeight - 75)
+            //縦向きの判定
         }
         
+        //ビューフレームサイズを取得
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: LiplisDefine.labelHight)
+        self.myWebView.frame = CGRectMake(0, self.lblTitle.frame.height, displayWidth, displayHeight - self.lblTitle.frame.height - LiplisDefine.futterHight)
     }
     
     //============================================================
@@ -188,12 +198,12 @@ class ViewWeb : UIViewController , UIWebViewDelegate {
     /*
     画面の向き変更時イベント
     */
-    override func viewDidAppear(animated: Bool) {
+    internal override func viewDidAppear(animated: Bool) {
         
         // 端末の向きがかわったらNotificationを呼ばす設定.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOrientationChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
-    func onOrientationChange(notification: NSNotification){
+    internal func onOrientationChange(notification: NSNotification){
         setSize()
     }
 }

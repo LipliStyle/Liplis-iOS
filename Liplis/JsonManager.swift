@@ -2,6 +2,14 @@
 //  JsonManagement.swift
 //  Liplis
 //
+//  Json管理クラス
+//
+//アップデート履歴
+//   2015/04/27 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0　swift1.2対応
+//                        サブストリングの取り扱い、UTF16カウントの取り扱い変更
+//
 //  Created by sachin on 2015/04/27.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -11,23 +19,23 @@ class JsonManager : ObjPreferenceBase
 {
     ///=============================
     /// キーリスト
-    var valueKeyList : Array<String> = []
+    internal var valueKeyList : Array<String> = []
     
     ///=============================
     /// キーバリューセット
-    var dataSet : Dictionary<String,String>!        //実データセット
-    var dataSetJson : Dictionary<String,String>!   //Json用データセット
+    internal var dataSet : Dictionary<String,String>!        //実データセット
+    internal var dataSetJson : Dictionary<String,String>!   //Json用データセット
     
     ///=============================
     /// Json管理
-    var key : String
-    var json : JSON!
-    var jsonStr : String!
+    internal var key : String
+    internal var json : JSON!
+    internal var jsonStr : String!
     
     /**
     初期化
     */
-    init(key : String, valueKeyList : Array<String>)
+    internal init(key : String, valueKeyList : Array<String>)
     {
         self.valueKeyList = valueKeyList
         self.dataSet = Dictionary<String,String>()
@@ -47,21 +55,21 @@ class JsonManager : ObjPreferenceBase
     /**
     プリファレンスからデータを読み込み、キーリストに従ってデータを生成する
     */
-    func loadJson()
+    internal func loadJson()
     {
         for key in valueKeyList
         {
             if self.json[key].string != nil
             {
-                setStr(key,value: self.json[key].description)
+                self.setStr(key,value: self.json[key].description)
             }
             else if self.json[key].int32 != nil
             {
-                setInt(key,value: self.json[key].description.toInt()!)
+                self.setInt(key,value: self.json[key].description.toInt()!)
             }
             else
             {
-                setStr(key,value: "")
+                self.setStr(key,value: "")
             }
         }
     }
@@ -69,9 +77,9 @@ class JsonManager : ObjPreferenceBase
     /**
     プリファレンスを削除する
     */
-    func delJson()
+    internal func delJson()
     {
-        deletePreference(self.key)
+        self.deletePreference(self.key)
     }
 
     //============================================================
@@ -83,31 +91,31 @@ class JsonManager : ObjPreferenceBase
     /**
     要素(文字)を入れる
     */
-    func setStr(key : String, value : String)
+    internal func setStr(key : String, value : String)
     {
-        dataSet[key] = value
-        dataSetJson[key] = "\"" + key + "\":\"" + value + "\""
+        self.dataSet[key] = value
+        self.dataSetJson[key] = "\"" + key + "\":\"" + value + "\""
     }
     
     /**
     要素(数字)を入れる
     */
-    func setInt(key : String, value : Int)
+    internal func setInt(key : String, value : Int)
     {
-        dataSet[key] = String(value)
-        dataSetJson[key] = "\"" + key + "\":" + String(value)
+        self.dataSet[key] = String(value)
+        self.dataSetJson[key] = "\"" + key + "\":" + String(value)
     }
     
     /**
     要素を取得する
     */
-    func getData(key : String)->String
+    internal func getData(key : String)->String
     {
-        return dataSet[key]!
+        return self.dataSet[key]!
     }
-    func getDataInt(key : String)->Int
+    internal func getDataInt(key : String)->Int
     {
-        if dataSet[key]!.toInt() != nil
+        if self.dataSet[key]!.toInt() != nil
         {
             return dataSet[key]!.toInt()!
         }
@@ -126,15 +134,15 @@ class JsonManager : ObjPreferenceBase
     /**
     JSONを保存する
     */
-    func saveSetting()
+    internal func saveSetting()
     {
-        wirtePreference(self.key, value: getJson())
+        self.wirtePreference(self.key, value: getJson())
     }
 
     /**
     JSONとして取得する
     */
-    func getJson()->String
+    internal func getJson()->String
     {
         var jsonStr : StringBuilder = StringBuilder()
         
@@ -150,8 +158,7 @@ class JsonManager : ObjPreferenceBase
             
             //最後の1文字を消して、閉じかっこをつける
             var str = jsonStr.toString()
-            str = str.substringToIndex(advance(str.startIndex,str.utf16Count - 1))
-
+            str = str.substringToIndex(advance(str.startIndex,count(str.utf16)  - 1))
             str = str + "}"
             
             return str

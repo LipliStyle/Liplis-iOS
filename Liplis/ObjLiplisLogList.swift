@@ -2,6 +2,13 @@
 //  ObjLiplisLogList.swift
 //  Liplis
 //
+//  ログ管理クラス
+//
+//アップデート履歴
+//   2015/04/17 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0 リファクタリング
+//
 //  Created by sachin on 2015/04/17.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -10,7 +17,7 @@ import Foundation
 class ObjLiplisLogList {
     ///=============================
     /// プロパティ
-    var logList : Array<ObjLiplisLog> = []
+    internal var logList : Array<ObjLiplisLog> = []
     
     //============================================================
     //
@@ -20,15 +27,15 @@ class ObjLiplisLogList {
     /**
         コンストラクター
     */
-    init()
+    internal init()
     {
-        logList = Array<ObjLiplisLog>()
+        self.logList = Array<ObjLiplisLog>()
     }
     
     /**
         ログアペンド
     */
-    func append(log : String, url : String)
+    internal func append(log : String, url : String)
     {
         var type : Int = 0
         
@@ -42,31 +49,31 @@ class ObjLiplisLogList {
         }
         
         //ログ追加
-        logList.append(ObjLiplisLog(log: log,url: url,type: type))
+        self.logList.append(ObjLiplisLog(log: log,url: url,type: type))
         
         //１００件以上あった場合、最初のデータを削除する
         if logList.count > 100
         {
-            logList.dequeue()
+            self.logList.dequeue()
         }
     }
-    func append(log : String, url : String, type : Int)
+    internal func append(log : String, url : String, type : Int)
     {
         //ログ追加
-        logList.append(ObjLiplisLog(log: log,url: url,type: type))
+        self.logList.append(ObjLiplisLog(log: log,url: url,type: type))
         
         //１００件以上あった場合、最初のデータを削除する
         if logList.count > 100
         {
-            logList.dequeue()
+            self.logList.dequeue()
         }
     }
     
     /**
         一件のlogを取得する
     */
-    func getLog(idx : Int)->ObjLiplisLog    {
-        return logList[idx]
+    internal func getLog(idx : Int)->ObjLiplisLog    {
+        return self.logList[idx]
     }
     
 }

@@ -2,6 +2,12 @@
 //  StringBuilder.swift
 //  Liplis
 //
+//  StringBuilder JavaやC#のStringBuilderを模したクラス
+//
+//アップデート履歴
+//   2015/04/27 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//
 //  Created by sachin on 2015/04/27.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -35,7 +41,7 @@ public class StringBuilder {
     Return the current length of the String object
     */
     public var length: Int {
-        return countElements(stringValue)
+        return count(stringValue)
     }
     
     /**

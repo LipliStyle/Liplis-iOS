@@ -1,6 +1,16 @@
 //
-//  CharDataManager.swift
+//  LiplisCharDataManager.swift
 //  Liplis
+//
+//  キャラクターマネージャー
+//  キャラクターのスキンデータを管理するクラス
+//  キャラクター選択画面に表示するデータ、ウィジェットを作成する時のベースデータもここから取得する。
+//
+//
+//アップデート履歴
+//   2015/04/11 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/14 ver1.3.0 キャラクターを削除した場合、キャラクターリストが正しく更新されなかった問題修正
 //
 //  Created by sachin on 2015/05/01.
 //  Copyright (c) 2015年 sachin. All rights reserved.
@@ -11,7 +21,8 @@ class LiplisCharDataManager
 {
     ///=============================
     /// プロパティ
-    var skinDataList : Array<LiplisSkinData>! = []
+    internal var skinDataList : Array<LiplisSkinData>! = []      //スキンデータリスト
+    private var preListCnt : Int! = 0                           //前回リストカウント値
     
     //============================================================
     //
@@ -21,7 +32,7 @@ class LiplisCharDataManager
     /**
     デフォルトイニシャライザ
     */
-    init()
+    internal init()
     {
         //スキンデータリストの初期化
         initSkinDataList()
@@ -30,13 +41,13 @@ class LiplisCharDataManager
     /**
     スキンデータリストの初期化
     */
-    func initSkinDataList()
+    private func initSkinDataList()
     {
         //スキンリストの初期化
-        skinDataList = Array<LiplisSkinData>()
+        self.skinDataList = Array<LiplisSkinData>()
         
         //デフォルトリリのデータを追加する
-        skinDataList.append(LiplisSkinData())
+        self.skinDataList.append(LiplisSkinData())
         
         //ドキュメントルートにあるディレクトリのリストを取得する
         var documentRoot : String = LiplisFileManager.getDocumentRoot()
@@ -61,11 +72,14 @@ class LiplisCharDataManager
                     //skin.xmlが見つかった
                     if fileName == "skin.xml"
                     {
-                        skinDataList.append(LiplisSkinData(charName: dirName))
+                        self.skinDataList.append(LiplisSkinData(charName: dirName))
                     }
                 }
             }
         }
+        
+        //前回カウント値取得(単純にスキンデータリストのカウントを取るとデフォリリの分ずれるので、1引く)
+        self.preListCnt = self.skinDataList.count - 1
     }
     
     //============================================================
@@ -77,64 +91,20 @@ class LiplisCharDataManager
     /**
     スキンデータリストの再読み込み
     */
-    func skinDataListReload()
+    internal func skinDataListReload()
     {
-        //キャラクターデータリストを取得する
-        var charNameDocumentList : Array<String> = getCharNameList()
-        var hit : Bool = false
-        
-        //比較して、実データリストを回し、読み込みデータを検索し、HITしなければ見読み込みなので追加する。
-        for chardoc in charNameDocumentList
+        //前回スキン取得時と数が異なっていたら、リロードする
+        if self.preListCnt != self.getCharNameList().count
         {
-            hit = false
-            
-            for skindata : LiplisSkinData in skinDataList
-            {
-                if(chardoc == skindata.charName)
-                {
-                    hit = true
-                }
-            }
-            
-            //見読み込み。追加
-            if !hit
-            {
-                skinDataList.append(LiplisSkinData(charName: chardoc))
-            }
-        }
-        
-        //比較して、読み込みデータを回し、実データリストを検索し、HITしなければ削除されたデータなので削除する。
-        var idx : Int = 0
-        for skindata : LiplisSkinData in skinDataList
-        {
-            hit = false
-            
-            if skindata.charDefine != LiplisDefine.SKIN_NAME_DEFAULT
-            {
-                for chardoc in charNameDocumentList
-                {
-                    if(chardoc == skindata.charName)
-                    {
-                        hit = true
-                    }
-                }
-                
-                //見読み込み。追加
-                if !hit
-                {
-                    skinDataList.removeAtIndex(idx)
-                }
-            }
-
-            
-            idx++
+            //スキンリストのリロード
+            initSkinDataList()
         }
     }
     
     /**
     現在共有フォルダにあるスキンのキャラクターリストを取得する
     */
-    func getCharNameList()->Array<String>
+    internal func getCharNameList()->Array<String>
     {
         var charNameList : Array<String> = Array<String>()
         
@@ -179,7 +149,7 @@ class LiplisCharDataManager
     /**
     名前指定でLiplisSkinDataを取得する
     */
-    func getLiplisSkinData(charDefine : String)->LiplisSkinData!
+    internal func getLiplisSkinData(charDefine : String)->LiplisSkinData!
     {
         for lsd in skinDataList
         {

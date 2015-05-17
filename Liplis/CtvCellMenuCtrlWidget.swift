@@ -85,7 +85,7 @@ class CtvCellMenuCtrlWidget : UITableViewCell
     スイッチ選択
     */
     func onClick(sender: UIButton) {
-        let modalView : ViewWidgetCtrl = ViewWidgetCtrl(app: parView.app)
+        let modalView : ViewWidgetCtrl = ViewWidgetCtrl(app: self.parView.app)
         modalView.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
         parView.presentViewController(modalView, animated: true, completion: nil)
     }

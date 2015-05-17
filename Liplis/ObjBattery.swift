@@ -2,6 +2,13 @@
 //  ObjBattery.swift
 //  Liplis
 //
+//  バッテリー管理クラス
+//
+//アップデート履歴
+//   2015/04/18 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0 リファクタリング
+//
 //  Created by sachin on 2015/04/18.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -13,97 +20,103 @@ class ObjBattery
 {
     ///=============================
     /// ステータス
-    var batteryText : String!    = "";
-    var batteryImage : String! = "";
-    var batteryNowLevel : Float!	= 0;
-    var batteryExists : Bool!	= false;
+    internal var batteryText : String!    = "";
+    internal var batteryImage : String! = "";
+    internal var batteryNowLevel : Float!	= 0;
+    internal var batteryExists : Bool!	= false;
     
     ///=============================
     /// 定数
-    let battery_100 : String! = "battery_100"
-    let battery_87 : String! = "battery_87"
-    let battery_75 : String! = "battery_75"
-    let battery_62 : String! = "battery_62"
-    let battery_50 : String! = "battery_50"
-    let battery_37 : String! = "battery_37"
-    let battery_25 : String! = "battery_25"
-    let battery_12 : String! = "battery_12"
-    let battery_0 : String! = "battery_0"
-    let battery_non : String! = "battery_non"
+    internal let battery_100 : String! = "battery_100"
+    internal let battery_87 : String! = "battery_87"
+    internal let battery_75 : String! = "battery_75"
+    internal let battery_62 : String! = "battery_62"
+    internal let battery_50 : String! = "battery_50"
+    internal let battery_37 : String! = "battery_37"
+    internal let battery_25 : String! = "battery_25"
+    internal let battery_12 : String! = "battery_12"
+    internal let battery_0 : String! = "battery_0"
+    internal let battery_non : String! = "battery_non"
     
-    init()
+    /**
+    デフォルトコンストラクター
+    */
+    internal init()
     {
-        batteryExists = false
-        batteryText = ""
+        self.batteryExists = false
+        self.batteryText = ""
     }
     
-    func getNon()->String
+    /**
+    バッテリーなしアイコンの取得
+    */
+    internal func getNon()->String
     {
-        return battery_non
+        return self.battery_non
     }
     
-    func getBatteryImage()
+    /**
+    バッテリーアイコンの取得
+    */
+    internal func getBatteryImage()
     {
-        batteryCheck()
+        self.batteryCheck()
         
-        if(batteryExists == true)
+        if(self.batteryExists == true)
         {
             //
-            if(batteryNowLevel <= 10)
+            if(self.batteryNowLevel <= 10)
             {
-                batteryImage = battery_0;
-            }else if(batteryNowLevel <= 12)
+                self.batteryImage = self.battery_0;
+            }else if(self.batteryNowLevel <= 12)
             {
-                batteryImage = battery_12;
-            }else if(batteryNowLevel <= 25)
+                self.batteryImage = self.battery_12;
+            }else if(self.batteryNowLevel <= 25)
             {
-                batteryImage = battery_25;
-            }else if(batteryNowLevel <= 37)
+                self.batteryImage = self.battery_25;
+            }else if(self.batteryNowLevel <= 37)
             {
-                batteryImage = battery_37;
-            }else if(batteryNowLevel <= 50)
+                self.batteryImage = self.battery_37;
+            }else if(self.batteryNowLevel <= 50)
             {
-                batteryImage = battery_50;
-            }else if(batteryNowLevel <= 62)
+                self.batteryImage = self.battery_50;
+            }else if(self.batteryNowLevel <= 62)
             {
-                batteryImage = battery_62;
-            }else if(batteryNowLevel <= 75)
+                self.batteryImage = self.battery_62;
+            }else if(self.batteryNowLevel <= 75)
             {
-                batteryImage = battery_75;
-            }else if(batteryNowLevel <= 87)
+                self.batteryImage = self.battery_75;
+            }else if(self.batteryNowLevel <= 87)
             {
-                batteryImage = battery_87;
-            }else if(batteryNowLevel > 87)
+                self.batteryImage = self.battery_87;
+            }else if(self.batteryNowLevel > 87)
             {
-                batteryImage = battery_100;
+                self.batteryImage = self.battery_100;
             }
             
             //バッテリー残量の表示
-            batteryText = String(Int(batteryNowLevel)) + "%"
+            self.batteryText = String(Int(self.batteryNowLevel)) + "%"
         }
         else
         {
             //バッテリー接続なし
-            batteryText = "-";
+            self.batteryText = "-";
         }
         
     }
     
-    /// <summary>
-    /// getBatteryRatel
-    /// バッテリー割合を取得する
-    /// </summary>
-    func getBatteryRatel()->Int{
-        batteryCheck()
-        return Int(batteryNowLevel*100)
+    /**
+    バッテリー割合を取得する
+    */
+    internal func getBatteryRatel()->Int{
+        self.batteryCheck()
+        return Int(self.batteryNowLevel*100)
     }
     
-    
-    /// <summary>
-    /// batteryCheck
-    /// バッテリーチェック
-    /// </summary>
-    func batteryCheck()
+    /**
+    バッテリーチェック
+    */
+    internal func batteryCheck()
     {
         //デバイスとバッテリー残量の宣言.
         let myDevice: UIDevice = UIDevice.currentDevice()
@@ -116,13 +129,13 @@ class ObjBattery
         
         if myBatteryLevel != -1
         {
-            batteryNowLevel 	= myBatteryLevel
-            batteryExists 		= true
+            self.batteryNowLevel 	= myBatteryLevel
+            self.batteryExists 		= true
         }
         else
         {
-            batteryNowLevel 	= 1
-            batteryExists 		= false
+            self.batteryNowLevel 	= 1
+            self.batteryExists 		= false
         }
     }
     

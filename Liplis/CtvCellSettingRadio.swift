@@ -16,8 +16,8 @@ class CtvCellSettingRadio : UITableViewCell
 
     ///=============================
     ///イメージ
-    let imgOn : UIImage!
-    let imgOff : UIImage!
+    var imgOn : UIImage!
+    var imgOff : UIImage!
     
     ///=============================
     ///レイアウト情報
@@ -84,7 +84,7 @@ class CtvCellSettingRadio : UITableViewCell
             baseLocationY = CGFloat(5 + idx * 45)
             
             let views = self.subviews
-            for (parts: UIView) in views as [UIView]
+            for (parts: UIView) in views as! [UIView]
             {
                 //対象ウィジェットのパーツだった場合、位置調整する
                 if(parts.hash == hashVal.hash)
@@ -153,11 +153,11 @@ class CtvCellSettingRadio : UITableViewCell
         for hashVal in childList
         {
             let views = self.contentView.subviews
-            for (parts: UIView) in views as [UIView]
+            for (parts: UIView) in views as! [UIView]
             {
                 if(parts.hash == hashVal.hash)
                 {
-                    var uiv = parts as UIButton
+                    var uiv = parts as! UIButton
                     if hashVal.trueValue == val
                     {
                         uiv.setImage(self.imgOn, forState: UIControlState.Normal)
@@ -188,11 +188,11 @@ class CtvCellSettingRadio : UITableViewCell
         for hashVal in childList
         {
             let views = self.contentView.subviews
-            for (parts: UIView) in views as [UIView]
+            for (parts: UIView) in views as! [UIView]
             {
                 if(parts.hash == hashVal.hash)
                 {
-                    var uiv = parts as UIButton
+                    var uiv = parts as! UIButton
                     
                     //選択ボタンの場合
                     if parts.hash == sender.hash

@@ -1,6 +1,14 @@
-	//
+//
 //  ObjLiplisChat.swift
 //  Liplis
+//
+//  固定文章管理クラス
+//  chat.xmlのインスタンス
+//
+//アップデート履歴
+//   2015/04/16 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0 Calendarの表記をSwift1.2.対応
 //
 //  Created by sachin on 2015/04/16.
 //  Copyright (c) 2015年 sachin. All rights reserved.
@@ -9,20 +17,20 @@ import Foundation
 class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     ///=============================
     /// バージョン 追加
-    var version : String! = "1.0"
+    internal var version : String! = "1.0"
     
     ///=============================
     /// ボディ
-    var nameList : Array<String> = []			//メッセージ名
-    var typeList : Array<String> = []			//タイプ
-    var discriptionList : Array<String> = []	//内容
-    var emotionList : Array<Int> = []			//エモーション
-    var prerequisiteList : Array<String> = []	//発言条件
+    internal var nameList : Array<String> = []			//メッセージ名
+    internal var typeList : Array<String> = []			//タイプ
+    internal var discriptionList : Array<String> = []	//内容
+    internal var emotionList : Array<Int> = []			//エモーション
+    internal var prerequisiteList : Array<String> = []	//発言条件
     
     //=================================
     //XML操作一時変数
-    var _ParseKey: String! = ""
-    var _Value: String! = ""
+    internal var _ParseKey: String! = ""
+    internal var _Value: String! = ""
     
     //============================================================
     //
@@ -32,28 +40,28 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
         デフォルトイニシャライザ
     */
-    init(url : NSURL)
+    internal init(url : NSURL)
     {
         //スーパークラスのイニット
         super.init()
         
         //リストの初期化
-        initList()
+        self.initList()
         
         //ロードXML
-        loadXml(url)
+        self.loadXml(url)
     }
     
     /**
         リストの初期化
     */
-    func initList()
+    private func initList()
     {
-        nameList = Array<String>()
-        typeList = Array<String>()
-        discriptionList = Array<String>()
-        emotionList = Array<Int>()
-        prerequisiteList = Array<String>()
+        self.nameList = Array<String>()
+        self.typeList = Array<String>()
+        self.discriptionList = Array<String>()
+        self.emotionList = Array<Int>()
+        self.prerequisiteList = Array<String>()
     }
     
     //============================================================
@@ -65,7 +73,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
         XMLのロード
     */
-    func loadXml(url : NSURL)
+    private func loadXml(url : NSURL)
     {
         var parser : NSXMLParser? = NSXMLParser(contentsOfURL: url)
         if parser != nil
@@ -81,7 +89,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
         読み込み開始処理完了時処理
     */
-    func parserDidStartDocument(parser: NSXMLParser!)
+    internal func parserDidStartDocument(parser: NSXMLParser)
     {
         //結果格納リストの初期化(イニシャラいざで初期化しているので省略)
     }
@@ -89,7 +97,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
         更新処理
     */
-    func parserDidEndDocument(parser: NSXMLParser!)
+    internal func parserDidEndDocument(parser: NSXMLParser)
     {
         // 画面など、他オブジェクトを更新する必要がある場合はここに記述する(必要ないので省略)
     }
@@ -97,27 +105,32 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
         タグの読み始めに呼ばれる
     */
-    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: NSDictionary!)
+    internal func parser(parser: NSXMLParser,
+        didStartElement elementName: String,
+        namespaceURI: String?,
+        qualifiedName qName: String?,
+        attributes attributeDict: [NSObject : AnyObject])
+
     {
         //エレメント取得
-        _ParseKey = elementName
+        self._ParseKey = elementName
     }
     
     /**
         タグの最後で呼ばれる
     */
-    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!)
+    internal func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
     {
-        if (_ParseKey == "name") {
-            nameList.append(_Value!)
+        if (self._ParseKey == "name") {
+            self.nameList.append(self._Value!)
         } else if (_ParseKey == "type") {
-            typeList.append(_Value!)
+            self.typeList.append(self._Value!)
         } else if (_ParseKey == "discription") {
-            discriptionList.append(_Value!)
+            self.discriptionList.append(self._Value!)
         } else if (_ParseKey == "emotion") {
-            emotionList.append(_Value.toInt()!)
+           self.emotionList.append(self._Value.toInt()!)
         } else if (_ParseKey == "prerequisite") {
-            prerequisiteList.append(_Value!)
+            self.prerequisiteList.append(self._Value!)
         } else {
             // nop
         }
@@ -130,18 +143,18 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
         パースする。
     */
-    func parser(parser: NSXMLParser!, foundCharacters value: String!)
+    internal func parser(parser: NSXMLParser, foundCharacters value: String?)
     {
-        if (_ParseKey == "name") {
-            _Value = _Value + value!
-        } else if (_ParseKey == "type") {
-            _Value = _Value + value!
-        } else if (_ParseKey == "discription") {
-            _Value = _Value + value!
-        } else if (_ParseKey == "emotion") {
-            _Value = _Value + value!
-        } else if (_ParseKey == "prerequisite") {
-            _Value = _Value + value!
+        if (self._ParseKey == "name") {
+            self._Value = self._Value + value!
+        } else if (self._ParseKey == "type") {
+            self._Value = self._Value + value!
+        } else if (self._ParseKey == "discription") {
+           self._Value = self._Value + value!
+        } else if (self._ParseKey == "emotion") {
+            self._Value = self._Value + value!
+        } else if (self._ParseKey == "prerequisite") {
+            self._Value = self._Value + value!
         } else {
             // nop
         }
@@ -156,7 +169,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
     あいさつ
     */
-    func getGreet()->MsgShortNews
+    internal func getGreet()->MsgShortNews
     {
         var result : MsgShortNews = MsgShortNews()
         var prerequinste : String = ""
@@ -180,18 +193,18 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
             if(type == "greet"){
                 
                 prerequinste = prerequisiteList[idx]
-                timeList = split(prerequinste,{$0 == ","})
+                timeList = split(prerequinste,isSeparator : {$0 == ","})
                 
                 if(timeList.count == 2)
                 {
-                    startList = split(timeList[0],{$0 == ":"});
-                    endList = split(timeList[1],{$0 == ":"});
+                    startList = split(timeList[0],isSeparator : {$0 == ":"});
+                    endList = split(timeList[1],isSeparator : {$0 == ":"});
                     
                     if(startList.count == 2 && endList.count == 2)
                     {
                         let date = NSDate()
                         let calendar = NSCalendar.currentCalendar()
-                        var comps:NSDateComponents = calendar.components(NSCalendarUnit.YearCalendarUnit|NSCalendarUnit.MonthCalendarUnit|NSCalendarUnit.DayCalendarUnit|NSCalendarUnit.HourCalendarUnit|NSCalendarUnit.MinuteCalendarUnit|NSCalendarUnit.SecondCalendarUnit,fromDate: date)
+                        var comps:NSDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond,fromDate: date)
                         
                         nowHour = comps.hour
                         nowMin = comps.minute
@@ -252,7 +265,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
     対象のタイプのセリフを1つランダムに返す
     */
-    func getChatWord(pType : String)->MsgShortNews
+    internal func getChatWord(pType : String)->MsgShortNews
     {
         var result : MsgShortNews  = MsgShortNews()
         var idx : Int = 0
@@ -291,7 +304,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
     対象のタイプのセリフを1つランダムに返す
     */
-    func getChatWordStr(pType : String)->String
+    internal func getChatWordStr(pType : String)->String
     {
         var result : String = ""
         var idx : Int = 0
@@ -334,7 +347,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
     バッテリー情報を取得する
     */
-    func getBatteryInfo(batteryLevel : Int)->MsgShortNews
+    internal func getBatteryInfo(batteryLevel : Int)->MsgShortNews
     {
         
         var result : MsgShortNews
@@ -382,7 +395,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
     時刻情報を取得する
     */
-    func getClockInfo()->MsgShortNews
+    internal func getClockInfo()->MsgShortNews
     {
         var resStr : String = "";
         var nowTime : LiplisDate = LiplisDate()
@@ -406,7 +419,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
     時報を取得する
     */
-    func getTimeSignal(hour : Int)->MsgShortNews!
+    internal func getTimeSignal(hour : Int)->MsgShortNews!
     {
         var result : MsgShortNews = MsgShortNews();
         var buf : MsgShortNews;
@@ -473,7 +486,5 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
         {
             return nil
         }
-        
-        
     }
 }

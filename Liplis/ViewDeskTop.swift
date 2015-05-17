@@ -2,6 +2,16 @@
 //  ViewController.swift
 //  Liplis
 //
+//  Liplils iOSのデスクトップ画面
+//  この画面にキャラクターウィジェットが配置される
+//
+//
+//アップデート履歴
+//   2015/01/04 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/14 ver1.3.0　リファクタリング
+//   2015/05/16 ver1.4.0　swift1.2対応
+//
 //  Created by sachin on 2015/01/04.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //--------------------------------------------------------
@@ -11,40 +21,47 @@ import UIKit
 class ViewDeskTop: UIViewController{
     ///=============================
     ///アプリケーションデリゲート
-    var app : AppDelegate!
+    internal var app : AppDelegate!
     
     ///=============================
     ///キーマネージャー
-    var kman : LiplisKeyManager!
+    internal var kman : LiplisKeyManager!
     
     //=================================
     //リプリスベース設定
-    var baseSetting : LiplisPreference!
+    internal var baseSetting : LiplisPreference!
+    
+    ///=============================
+    ///ビュータイトル
+    private var viewTitle = "デスクトップマスコット"
+    private var tagTitle = "デスクトップ"
     
     //=================================
     //リプリスウィジェット
-    var widgetList: Array<LiplisWidget> = []
-    var trashBox: UIImageView!   //ゴミ箱
-    var trashRect : CGRect!
-    var imgTrash : UIImage!
-    var imgTrashOn : UIImage!
-    var imgClockBase : UIImage!
-    var imgClockLongHand : UIImage!
-    var imgClockShortHand : UIImage!
-    //var webBackGround : UIWebView!
+    private var widgetList: Array<LiplisWidget> = []
+    private var trashBox: UIImageView!   //ゴミ箱
+    private var trashRect : CGRect!
+    private var imgTrash : UIImage!
+    private var imgTrashOn : UIImage!
     
     //=================================
+    //時計用イメージ
+    internal var imgClockBase : UIImage!
+    internal var imgClockLongHand : UIImage!
+    internal var imgClockShortHand : UIImage!
+
+    //=================================
     //logリスト
-    var lpsLog : ObjLiplisLogList!
+    internal var lpsLog : ObjLiplisLogList!
     
     ///=====================================
     /// 移動制御
-    var flgMoving : Bool = false
-    var movingIdx : Int! = -1       //移動中ウィジェットのID
+    internal var flgMoving : Bool = false
+    internal var movingIdx : Int! = -1       //移動中ウィジェットのID
     
     //=================================
     //タイマー
-    var clockTimer : NSTimer!
+    private var clockTimer : NSTimer!
     
     //============================================================
     //
@@ -53,15 +70,23 @@ class ViewDeskTop: UIViewController{
     //============================================================
     
     /*
-    コンストラクター
+    コンビニット
+    swift1.2対応
     */
-    init(app : AppDelegate) {
-        super.init()
+    convenience init(app : AppDelegate) {
+        self.init(nibName: nil, bundle: nil)
+        
+        //アプリケーションデリゲート取得
         self.app = app
         
-        initClass()
-        initView()
-        initLiplis()
+        //クラスの初期化
+        self.initClass()
+        
+        //ビューの初期化
+        self.initView()
+        
+        //リプリスの初期化
+        self.initLiplis()
     }
     
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
@@ -72,71 +97,91 @@ class ViewDeskTop: UIViewController{
         super.init(coder: aDecoder)
     }
     
-
     
     /*
-        画面要素の初期化
+    画面要素の初期化
     */
-    func initView()
+    private func initView()
+    {
+        //ビューの初期化
+        var img : UIImage = UIImage(named: ObjR.imgIconDesktop)!                    //アイコン取得
+        self.view.opaque = true                                                     //背景透過許可
+        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)   //白透明背景
+        self.tabBarItem = UITabBarItem(title: tagTitle,image: img, tag: 1)          //タブ設定//アイコン取得
+        
+        //クロックイメージの初期化
+        self.createClockImage()
+        
+        //トラッシュボックスの作成
+        self.createImgTrashBox()
+        
+        //背景ブラウザの作成
+        self.createWebViewBackGround()
+        
+        //サイズ調整
+        self.setSize()
+    }
+    
+    /*
+    クロックイメージの初期化
+    */
+    private func createClockImage()
     {
         //クロックイメージインスタンスの生成
-        imgClockBase = UIImage(named: "ClockBase.png")
-        imgClockLongHand = UIImage(named: "ClockLongHand.png")
-        imgClockShortHand = UIImage(named: "ClockShortHand.png")
-        
-        
-        var img : UIImage = UIImage(named : "sel_desktop.png")!
-        self.tabBarItem = UITabBarItem(title: "デスクトップ",image: img, tag: 1)
-
-        self.view.opaque = true
-        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)
-     
-        let width = self.view.frame.maxX
-        let height = self.view.frame.maxY
-        
-        //ごみばこの表示
-        imgTrash = UIImage(named: "trash")
-        imgTrashOn = UIImage(named: "trashRed")
-        trashRect = CGRectMake(width/2 - 32, height - 120,64,64)
-        trashBox = UIImageView(frame:trashRect)
-        trashBox.image = imgTrash
-        trashBox.hidden = true
+        self.imgClockBase = UIImage(named: ObjR.imgClockBase)
+        self.imgClockLongHand = UIImage(named: ObjR.imgClockLongHand)
+        self.imgClockShortHand = UIImage(named: ObjR.imgClockShortHand)
+    }
     
+    /*
+    トラッシュボックスの初期化
+    */
+    private func createImgTrashBox()
+    {
+        //ごみばこの表示
+        self.imgTrash = UIImage(named: ObjR.imgTrash)
+        self.imgTrashOn = UIImage(named: ObjR.imgTrashOn)
+        self.trashRect = CGRectMake(0,0,0,0)
+        self.trashBox = UIImageView(frame:trashRect)
+        self.trashBox.image = imgTrash
+        self.trashBox.hidden = true
+        self.view.addSubview(trashBox)
+        self.view.sendSubviewToBack(trashBox)   //表示順序 再背面移動
+    }
+    
+    /*
+    背景ブラウザの初期化
+    */
+    private func createWebViewBackGround()
+    {
         //ウェブビュー
         //webBackGround = UIWebView()
         //webBackGround.delegate = self
         //webBackGround.frame = self.view.bounds
-        
-        self.view.addSubview(trashBox)
         //self.view.addSubview(webBackGround)
-        
-        //表示順序 再背面移動
-        self.view.sendSubviewToBack(trashBox)
         //self.view.sendSubviewToBack(webBackGround)
-        
-        //サイズ調整
-        setSize()
     }
+    
     
     /*
         リプリスの初期化
     */
-    func initLiplis()
+    private func initLiplis()
     {
         //ウィジェットリストの初期化
-        widgetList =  Array<LiplisWidget>()
+        self.widgetList =  Array<LiplisWidget>()
         
-        if kman.keyList.count == 0
+        if self.kman.keyList.count == 0
         {
             //キーリストが０件の場合、リリを一個追加して起動
-            addNewWidget(LiplisSkinData())
+            self.addNewWidget(LiplisSkinData())
         }
         else
         {
             //キーリストを回してウィジェットインスタンスを生成する
-            for key in kman.keyList
+            for key in self.kman.keyList
             {
-                addLoadWidget(key)
+                self.addLoadWidget(key)
             }
         }
     }
@@ -144,19 +189,19 @@ class ViewDeskTop: UIViewController{
     /*
         クラスの初期化
     */
-    func initClass()
+    private func initClass()
     {
         //キーマネ
         self.kman = LiplisKeyManager()
         
         //ログの初期化
-        lpsLog = ObjLiplisLogList()
+        self.lpsLog = ObjLiplisLogList()
         
         //ベース設定の取得
-        baseSetting = LiplisPreference.SharedInstance
+        self.baseSetting = LiplisPreference.SharedInstance
         
         //クロックタイマーのスタート
-        startClockTimer()
+        self.startClockTimer()
     }
     
     //============================================================
@@ -168,30 +213,30 @@ class ViewDeskTop: UIViewController{
     /*
     クロックタイマースタート
     */
-    func startClockTimer()
+    private func startClockTimer()
     {
         //すでに動作中なら破棄しておく
-        stopClockTimer()
+        self.stopClockTimer()
         
         //タイマースタート
-        clockTimer = NSTimer.scheduledTimerWithTimeInterval(60.0, target: self, selector: "onClock:", userInfo: nil, repeats: true)
+        self.clockTimer = NSTimer.scheduledTimerWithTimeInterval(60.0, target: self, selector: "onClock:", userInfo: nil, repeats: true)
     }
-    func stopClockTimer()
+    private func stopClockTimer()
     {
         //すでに起動していたら破棄する
-        if clockTimer != nil && clockTimer.valid
+        if self.clockTimer != nil && self.clockTimer.valid
         {
-            clockTimer.invalidate()
+            self.clockTimer.invalidate()
         }
     }
     
     /*
     時計合わせ
     */
-    func onClock(timer : NSTimer)
+    internal func onClock(timer : NSTimer)
     {
         //全てのウィジェットの時計を合わせに行く
-        for lips in widgetList
+        for lips in self.widgetList
         {
             lips.setClock()
         }
@@ -207,30 +252,28 @@ class ViewDeskTop: UIViewController{
     /*
     ロードイベント
     */
-    override func viewDidLoad() {
+    internal override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
     
     /*
     ビュー呼び出し時
     */
-    override func viewWillAppear(animated: Bool) {
+    internal override func viewWillAppear(animated: Bool) {
         //サイズ設定
-        setSize()
+        self.setSize()
     }
     
     /*
     タッチを感知した際に呼ばれるメソッド.
     */
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    internal override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         var widgetListIdx : Int = 0
         
         println("touchesBegan")
         
         //ウィジェットのタッチ開始イベントを呼び出す
-        for lips in widgetList
+        for lips in self.widgetList
         {
             if(lips.touchesBegan(touches))
             {
@@ -246,24 +289,25 @@ class ViewDeskTop: UIViewController{
         self.movingIdx = -1
     }
     
+    
     /*
         ドラッグを感知した際に呼ばれるメソッド.
         (ドラッグ中何度も呼ばれる)
     */
-    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+    internal override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
         var widgetListIdx : Int = 0
         
         println("touchesMoved")
         
         //ウィジェットのムーブイベントを呼び出す
-        for lips in widgetList
+        for lips in self.widgetList
         {
             if self.movingIdx == widgetListIdx
             {
                 if(lips.touchesMoved(touches))
                 {
                     //トラッシュの描画
-                    onDragTrashMove(touches)
+                    self.onDragTrashMove(touches)
                     
                     return
                 }
@@ -276,16 +320,16 @@ class ViewDeskTop: UIViewController{
     /*
         ドラッグエンド
     */
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    internal override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         
         println("touchesEnded")
         
         //ウィジェットのタッチエンドイベントを呼び出す
-        for lips in widgetList
+        for lips in self.widgetList
         {
             if(lips.touchesEnded(touches))
             {
-                onDragTrashEnd(lips,touches: touches)
+                self.onDragTrashEnd(lips,touches: touches)
                 break
             }
         }
@@ -297,18 +341,21 @@ class ViewDeskTop: UIViewController{
     /*
     トラッシュ表示開始
     */
-    func onDragTrashBegin()
+    internal func onDragTrashBegin()
     {
+        //トラッシュボックスの表示
         self.trashBox.hidden = false
-        self.trashBox.image = imgTrash
+        
+        //ノーマルトラッシュボックスロード
+        self.trashBox.image = self.imgTrash
+        
+        //アニメーション
         UIView.animateWithDuration(0.1,
-            // アニメーション中の処理.
             animations: { () -> Void in
                 self.trashBox.transform = CGAffineTransformMakeScale(2.0, 2.0)
         })
         
         UIView.animateWithDuration(0.1,
-            // アニメーション中の処理.
             animations: { () -> Void in
                 self.trashBox.transform = CGAffineTransformMakeScale(1.0, 1.0)
         })
@@ -317,14 +364,15 @@ class ViewDeskTop: UIViewController{
     /*
     トラッシュムーブ
     */
-    func onDragTrashMove(touches: NSSet)
+    internal func onDragTrashMove(touches: NSSet)
     {
         // タッチイベントを取得.
-        let aTouch = touches.anyObject() as UITouch
+        let aTouch = touches.anyObject() as! UITouch
         
         // タッチ位置取得
         let location = aTouch.locationInView(trashBox)
         
+        //範囲に入ったらトラッシュボックスを赤くする
         if(location.x >= 0 && location.x <= trashRect.width) && (location.y >= 0 && location.y <= trashRect.height)
         {
             self.trashBox.image = imgTrashOn
@@ -338,10 +386,10 @@ class ViewDeskTop: UIViewController{
     /*
     トラッシュ表示終了
     */
-    func onDragTrashEnd(var widget : LiplisWidget!,touches: NSSet)
+    internal func onDragTrashEnd(var widget : LiplisWidget!,touches: NSSet)
     {
         //もし破棄座標にドロップされていたら、対象のウィジェットを削除する
-        let aTouch = touches.anyObject() as UITouch
+        let aTouch = touches.anyObject() as! UITouch
         let location = aTouch.locationInView(trashBox)
         if(location.x >= -10 && location.x <= trashRect.width + 10) && (location.y >= -10 && location.y <= trashRect.height + 10)
         {
@@ -364,32 +412,30 @@ class ViewDeskTop: UIViewController{
                 self.trashBox.transform = CGAffineTransformMakeScale(1.0, 1.0)
         })
         self.trashBox.hidden = true
-        self.trashBox.image = imgTrash
+        self.trashBox.image = self.imgTrash
     }
     
     /*
         メモリーエラーハンドラ
     */
-    override func didReceiveMemoryWarning() {
-        
+    internal override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
     }
     
     /*
     バックグラウンド遷移時
     */
-    func onBackGround()
+    internal func onBackGround()
     {
-        widgetSleep()
+        self.widgetSleep()
     }
     
     /*
     フォアグラウンド遷移時
     */
-    func onForeGround()
+    internal func onForeGround()
     {
-        widgetWakeup()
+        self.widgetWakeup()
     }
 
     //============================================================
@@ -401,36 +447,33 @@ class ViewDeskTop: UIViewController{
     /*
     サイズ設定
     */
-    func setSize()
+    private func setSize()
     {
-        // 現在のデバイスの向きを取得.
+        //現在のデバイスの向きを取得
         let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
         
+        //画面サイズ取得
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
         
-        // 向きの判定.
+        //方向別の処理
         if UIDeviceOrientationIsLandscape(deviceOrientation) {
-            //横向きの判定.
-            self.trashRect = CGRectMake(displayWidth/2 - 32, displayHeight - 120,64,64)
-            self.trashBox.frame = self.trashRect
-            self.view.sendSubviewToBack(self.trashBox)
-            self.trashBox.hidden = true
-            //self.webBackGround.frame = CGRect(x: 0, y: 0, width: displayWidth, height: displayHeight)
-            
+            //横向きの判定
         } else if UIDeviceOrientationIsPortrait(deviceOrientation){
-            //縦向きの判定.
-            self.trashRect = CGRectMake(displayWidth/2 - 32, displayHeight - 120,64,64)
-            self.trashBox.frame = self.trashRect
-            self.view.sendSubviewToBack(self.trashBox)
-            self.trashBox.hidden = true
-            //self.webBackGround.frame = CGRect(x: 0, y: 0, width: displayWidth, height: displayHeight)
+            //縦向きの判定
         }
+        
+        //画面要素調整
+        self.trashRect = CGRectMake(displayWidth/2 - 32, displayHeight - 120,64,64)
+        self.trashBox.frame = self.trashRect
+        self.view.sendSubviewToBack(self.trashBox)
+        self.trashBox.hidden = true
+        //self.webBackGround.frame = CGRect(x: 0, y: 0, width: displayWidth, height: displayHeight)
         
         //回転時のレスキュー
         if baseSetting.lpsAutoRescue == 1
         {
-            rescueWidgetAll()
+            self.rescueWidgetAll()
         }
     }
     
@@ -442,13 +485,13 @@ class ViewDeskTop: UIViewController{
     /*
     画面の向き変更時イベント
     */
-    override func viewDidAppear(animated: Bool) {
+    internal override func viewDidAppear(animated: Bool) {
         
         // 端末の向きがかわったらNotificationを呼ばす設定.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOrientationChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
-    func onOrientationChange(notification: NSNotification){
-        setSize()
+    internal func onOrientationChange(notification: NSNotification){
+        self.setSize()
     }
     
     
@@ -461,59 +504,77 @@ class ViewDeskTop: UIViewController{
     /*
     ウィジェットを追加する(新規追加)
     */
-    func addNewWidget(lsd : LiplisSkinData)
+    internal func addNewWidget(lsd : LiplisSkinData)
     {
         //新規キー作成
         var os : ObjPreference = createObjPreferenceFromLsd(lsd)
+        
+        //ウィジェット
         var lps: LiplisWidget!
         
+        //キャラクター名チェック
         if lsd.charDefine == LiplisDefine.SKIN_NAME_DEFAULT
         {
+            //デフォリリならデフォルトデータを追加する
             lps = LiplisWidgetDefault(desk:self, os: os, lpsSkinData: lsd)
         }
         else
         {
+            //通常のキャラクター名指定なら、スキンデータからウィジェットを生成する
             lps = LiplisWidget(desk:self, os: os,lpsSkinData : lsd)
         }
         
-        widgetList.append(lps)
-        kman.addKey(lps.os.key)
+        //ウィジェットリストに追加する
+        self.widgetList.append(lps)
+        
+        //キーマネージャに追加する
+        self.kman.addKey(lps.os.key)
     }
     
     /*
     ウィジェットを追加する(読み込み追加)
     */
-    func addLoadWidget(key : String)
+    internal func addLoadWidget(key : String)
     {
+        //キー取得
         var os : ObjPreference = createObjPreferenceFromKey(key)
+        
+        //スキンデータ取得
         var lsd : LiplisSkinData! = app.cman.getLiplisSkinData(os.charName)
         
+        //スキンデータ取得チェック
         if lsd != nil{
             var lps: LiplisWidget!
             
+            //キャラクター名チェック
             if os.charName == LiplisDefine.SKIN_NAME_DEFAULT
             {
+                //デフォリリならデフォルトデータを追加する
                 lps = LiplisWidgetDefault(desk:self, os: os,lpsSkinData: lsd)
             }
             else
             {
+                //通常のキャラクター名指定なら、スキンデータからウィジェットを生成する
                 lps = LiplisWidget(desk:self, os: os,lpsSkinData: lsd)
             }
             
-            widgetList.append(lps)
-            kman.addKey(lps.os.key)
+            //ウィジェットリストに追加する
+            self.widgetList.append(lps)
+            
+            //キーマネージャに追加する
+            self.kman.addKey(lps.os.key)
         }
         else
         {
             //スキンデータが削除されている場合は、ウィジェット登録を行わず、キーリストから削除する
-            kman.addKey(key)
+            self.kman.addKey(key)
         }
     }
     
     /*
     キーからプリファレンスを読み出す
     */
-    func createObjPreferenceFromKey(key : String)->ObjPreference
+    private func createObjPreferenceFromKey(key : String)->ObjPreference
     {
         var os : ObjPreference = ObjPreference()
         if key == ""
@@ -526,7 +587,7 @@ class ViewDeskTop: UIViewController{
             os.locationY = Int(self.view.frame.maxY/2)
             
         }
-            else
+        else
         {
             //キーからロード
             os = ObjPreference(key: key)
@@ -538,7 +599,7 @@ class ViewDeskTop: UIViewController{
     /*
     スキンデータからosを作成する
     */
-    func createObjPreferenceFromLsd(lsd : LiplisSkinData)->ObjPreference
+    private func createObjPreferenceFromLsd(lsd : LiplisSkinData)->ObjPreference
     {
         var os : ObjPreference = ObjPreference()
         os = ObjPreference()
@@ -555,7 +616,7 @@ class ViewDeskTop: UIViewController{
     /*
     ウィジェットをデスクトップに登録する
     */
-    func registWidget(widget : LiplisWidget)
+    internal func registWidget(widget : LiplisWidget)
     {
         self.view.addSubview(widget.imgWindow)
         self.view.addSubview(widget.imgBody)
@@ -577,11 +638,11 @@ class ViewDeskTop: UIViewController{
     /*
     ウィジェットをデスクトップから削除する
     */
-    func delWidget(var widget : LiplisWidget!)
+    internal func delWidget(var widget : LiplisWidget!)
     {
         //ウィジェットのパーツのハッシュと登録オブジェクトのハッシュを比較し、対象を調べる。対象なら削除する。
         let views = self.view.subviews
-        for (parts: UIView) in views as [UIView]
+        for (parts: UIView) in views as! [UIView]
         {
             println("View:\(parts.description)")
             
@@ -593,10 +654,10 @@ class ViewDeskTop: UIViewController{
         }
         
         //キーマネージャーからキーを削除する
-        kman.delKey(widget.os.key)
+        self.kman.delKey(widget.os.key)
         
         //ウィジェットリストから削除する
-        delFromWidgetList(widget)
+        self.delFromWidgetList(widget)
 
         //Liplisオブジェクトの削除
         widget.dispose()
@@ -606,27 +667,27 @@ class ViewDeskTop: UIViewController{
     /*
     デスクトップの全てのウィジェットを削除する
     */
-    func delWidgetAll()
+    internal func delWidgetAll()
     {
         for widget in widgetList
         {
-            delWidget(widget)
+            self.delWidget(widget)
         }
         
         //キーは全て削除
-        kman.delAllKey()
+        self.kman.delAllKey()
     }
     
     /*
     ウィジェットをウィジェットリストから削除する
     */
-    func delFromWidgetList(widget : LiplisWidget)
+    internal func delFromWidgetList(widget : LiplisWidget)
     {
         var idx : Int = 0
         var exists : Bool = false
         
         //ターゲットのインデックスを捜す
-        for wid in widgetList
+        for wid in self.widgetList
         {
             //ハッシュが一致したら抜ける
             if wid.hash == widget.hash
@@ -640,20 +701,20 @@ class ViewDeskTop: UIViewController{
         //ヒットしたら削除
         if exists
         {
-            widgetList.removeAtIndex(idx)
+            self.widgetList.removeAtIndex(idx)
         }
     }
     
     /*
     ウィジェットをスリープにする
     */
-    func widgetSleep()
+    internal func widgetSleep()
     {
         //設定チェック
-        if (baseSetting.lpsAutoSleep == 1)
+        if (self.baseSetting.lpsAutoSleep == 1)
         {
             //ウィジェットリストを回してらりほー
-            for wid in widgetList
+            for wid in self.widgetList
             {
                 wid.sleep()
             }
@@ -663,13 +724,13 @@ class ViewDeskTop: UIViewController{
     /*
     ウィジェットをウェイクアップする
     */
-    func widgetWakeup()
+    internal func widgetWakeup()
     {
         //設定チェック
-        if (baseSetting.lpsAutoWakeup == 1)
+        if (self.baseSetting.lpsAutoWakeup == 1)
         {
             //ウィジェットリストを回して起こす
-            for wid in widgetList
+            for wid in self.widgetList
             {
                 wid.wakeup()
             }
@@ -679,9 +740,9 @@ class ViewDeskTop: UIViewController{
     /*
     デスクトップの全てのウィジェットにレスキューする
     */
-    func rescueWidgetAll()
+    internal func rescueWidgetAll()
     {
-        for widget in widgetList
+        for widget in self.widgetList
         {
             widget.rescue(0)
         }
@@ -696,12 +757,9 @@ class ViewDeskTop: UIViewController{
     /*
     デスクトップウェブにURLを設定する
     */
-    func desktopWebSetUrl(url : String)
+    internal func desktopWebSetUrl(url : String)
     {
         // リクエストを作成する.
         let request: NSURLRequest = NSURLRequest(URL: NSURL(string: url)!)
     }
-    
-
-    
 }

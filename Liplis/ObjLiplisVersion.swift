@@ -2,6 +2,14 @@
 //  ObjLiplisVersion.swift
 //  Liplis
 //
+//  バージョン管理クラス
+//  touch.xmlのインスタンス
+//
+//アップデート履歴
+//   2015/04/16 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0 リファクタリング
+//
 //  Created by sachin on 2015/04/16.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -10,16 +18,16 @@ import Foundation
 class ObjLiplisVersion : NSObject, NSXMLParserDelegate {
     ///=============================
     /// プロパティ
-    var skinVersion : String! = ""
-    var liplisMiniVersion : String! = ""
-    var url : String! = ""
-    var apkUrl : String! = ""
-    var flgCheckOn : Bool = false
+    internal var skinVersion : String! = ""
+    internal var liplisMiniVersion : String! = ""
+    internal var url : String! = ""
+    internal var apkUrl : String! = ""
+    internal var flgCheckOn : Bool = false
     
     //=================================
     //XML操作一時変数
-    var _ParseKey: String! = ""
-    var _Value: String! = ""
+    internal var _ParseKey: String! = ""
+    internal var _Value: String! = ""
     
     //============================================================
     //
@@ -27,7 +35,7 @@ class ObjLiplisVersion : NSObject, NSXMLParserDelegate {
     //
     //============================================================
     
-    init(url : NSURL)
+    internal init(url : NSURL)
     {
         self.skinVersion = ""
         self.liplisMiniVersion = ""
@@ -42,7 +50,7 @@ class ObjLiplisVersion : NSObject, NSXMLParserDelegate {
         loadXml(url)
     }
     
-    func getFlgCheckOn()->Bool
+    internal func getFlgCheckOn()->Bool
     {
         return self.flgCheckOn
     }
@@ -57,7 +65,7 @@ class ObjLiplisVersion : NSObject, NSXMLParserDelegate {
     /**
     XMLのロード
     */
-    func loadXml(url : NSURL)
+    internal func loadXml(url : NSURL)
     {
         var parser : NSXMLParser? = NSXMLParser(contentsOfURL: url)
         if parser != nil
@@ -73,7 +81,7 @@ class ObjLiplisVersion : NSObject, NSXMLParserDelegate {
     /**
     読み込み開始処理完了時処理
     */
-    func parserDidStartDocument(parser: NSXMLParser!)
+    internal func parserDidStartDocument(parser: NSXMLParser)
     {
         //結果格納リストの初期化(イニシャラいざで初期化しているので省略)
     }
@@ -81,7 +89,7 @@ class ObjLiplisVersion : NSObject, NSXMLParserDelegate {
     /**
     更新処理
     */
-    func parserDidEndDocument(parser: NSXMLParser!)
+    internal func parserDidEndDocument(parser: NSXMLParser)
     {
         // 画面など、他オブジェクトを更新する必要がある場合はここに記述する(必要ないので省略)
     }
@@ -89,47 +97,51 @@ class ObjLiplisVersion : NSObject, NSXMLParserDelegate {
     /**
     タグの読み始めに呼ばれる
     */
-    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: NSDictionary!)
+    internal func parser(parser: NSXMLParser,
+        didStartElement elementName: String,
+        namespaceURI : String?,
+        qualifiedName qName: String?,
+        attributes attributeDict: [NSObject : AnyObject])
     {
         //エレメント取得
-        _ParseKey = elementName
+        self._ParseKey = elementName
     }
     
     /**
     タグの最後で呼ばれる
     */
-    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!)
+    internal func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
     {
-        if (_ParseKey == "skinVersion") {
-            self.skinVersion = _Value!
-        } else if (_ParseKey == "liplisMiniVersion") {
-            self.liplisMiniVersion = _Value!
-        } else if (_ParseKey == "url") {
+        if (self._ParseKey == "skinVersion") {
+            self.skinVersion = self._Value!
+        } else if (self._ParseKey == "liplisMiniVersion") {
+            self.liplisMiniVersion = self._Value!
+        } else if (self._ParseKey == "url") {
             self.url = _Value!
-        } else if (_ParseKey == "apkUrl") {
-            self.apkUrl = _Value!
+        } else if (self._ParseKey == "apkUrl") {
+            self.apkUrl = self._Value!
         } else {
             // nop
         }
         
         //エレメント初期化
-        _ParseKey = ""
-        _Value = ""
+        self._ParseKey = ""
+        self._Value = ""
     }
     
     /**
     パースする。
     */
-    func parser(parser: NSXMLParser!, foundCharacters value: String!)
+    internal func parser(parser: NSXMLParser, foundCharacters value: String?)
     {
-        if (_ParseKey == "skinVersion") {
-            _Value = _Value + value!
-        } else if (_ParseKey == "liplisMiniVersion") {
-            _Value = _Value + value!
-        } else if (_ParseKey == "url") {
-            _Value = _Value + value!
-        } else if (_ParseKey == "apkUrl") {
-            _Value = _Value + value!
+        if (self._ParseKey == "skinVersion") {
+            self._Value = self._Value + value!
+        } else if (self._ParseKey == "liplisMiniVersion") {
+            self._Value = self._Value + value!
+        } else if (self._ParseKey == "url") {
+            self._Value = self._Value + value!
+        } else if (self._ParseKey == "apkUrl") {
+            self._Value = self._Value + value!
         } else {
             // nop
         }

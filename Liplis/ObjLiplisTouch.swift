@@ -2,6 +2,14 @@
 //  ObjLiplisTouch.swift
 //  Liplis
 //
+//  タッチ設定管理クラス
+//  touch.xmlのインスタンス
+//
+//アップデート履歴
+//   2015/04/16 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0 リファクタリング
+//
 //  Created by sachin on 2015/04/16.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -10,24 +18,24 @@ import Foundation
 class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     ///==========================
     /// 内容
-    var touchDefList : Array<ObjTouch>!
+    internal var touchDefList : Array<ObjTouch>!
     
     ///==========================
     /// タッチおしゃべり中
-    var touchChatting : Bool! = false;
+    internal var touchChatting : Bool! = false;
     
     ///==========================
     /// フラグ
-    var checkFlg : Bool! = false;
+    internal var checkFlg : Bool! = false;
     
     ///===========================================
     /// スキンファイル読み込み完了フラグ
-    var loadDefault : Bool! = false
+    internal var loadDefault : Bool! = false
         
     //=================================
     //XML操作一時変数
-    var _ParseKey: String! = ""
-    var _touch : ObjTouch!
+    internal var _ParseKey: String! = ""
+    internal var _touch : ObjTouch!
     
     //============================================================
     //
@@ -37,22 +45,22 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     /**
     デフォルトイニシャライザ
     */
-    init(url : NSURL)
+    internal init(url : NSURL)
     {
         super.init()
         
-        initList()
+        self.initList()
         
         //ロードXML
-        loadXml(url)
+        self.loadXml(url)
     }
     
     /**
         リストの初期化
     */
-    func initList()
+    internal func initList()
     {
-        touchDefList = Array<ObjTouch>()
+        self.touchDefList = Array<ObjTouch>()
     }
     
     
@@ -65,7 +73,7 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     /**
     XMLのロード
     */
-    func loadXml(url : NSURL)
+    internal func loadXml(url : NSURL)
     {
         var parser : NSXMLParser? = NSXMLParser(contentsOfURL: url)
         if parser != nil
@@ -81,7 +89,7 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     /**
     読み込み開始処理完了時処理
     */
-    func parserDidStartDocument(parser: NSXMLParser!)
+    internal func parserDidStartDocument(parser: NSXMLParser)
     {
         //結果格納リストの初期化(イニシャラいざで初期化しているので省略)
     }
@@ -89,7 +97,7 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     /**
     更新処理
     */
-    func parserDidEndDocument(parser: NSXMLParser!)
+    internal func parserDidEndDocument(parser: NSXMLParser)
     {
         // 画面など、他オブジェクトを更新する必要がある場合はここに記述する(必要ないので省略)
     }
@@ -97,7 +105,11 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     /**
     タグの読み始めに呼ばれる
     */
-    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: NSDictionary!)
+    internal func parser(parser: NSXMLParser,
+        didStartElement elementName: String,
+        namespaceURI : String?,
+        qualifiedName qName: String?,
+        attributes attributeDict: [NSObject : AnyObject])
     {
         _ParseKey = elementName
         if elementName == "touchDiscription" {_touch = ObjTouch()}
@@ -106,33 +118,33 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     /**
     タグの最後で呼ばれる
     */
-    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!)
+    internal func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
     {
         if elementName == "touchDiscription" {touchDefList.append(_touch)}
-        _ParseKey = ""
+        self._ParseKey = ""
     }
     
     /**
     パースする。
     */
-    func parser(parser: NSXMLParser!, foundCharacters value: String!)
+    internal func parser(parser: NSXMLParser, foundCharacters value: String?)
     {
-        if (_ParseKey == "name") {
-            _touch!.name = value!
-        } else if (_ParseKey == "type") {
-            _touch!.type = value!.toInt()
-        } else if (_ParseKey == "sens") {
-            _touch!.sens = value!.toInt()
-        } else if (_ParseKey == "top") {
-            _touch!.top = value!.toInt()
-        } else if (_ParseKey == "left") {
-            _touch!.left = value!.toInt()
-        } else if (_ParseKey == "bottom") {
-            _touch!.bottom = value!.toInt()
-        } else if (_ParseKey == "right") {
-            _touch!.right = value!.toInt()
-        } else if (_ParseKey == "chat") {
-            _touch!.setChat(value!)
+        if (self._ParseKey == "name") {
+            self._touch!.name = value!
+        } else if (self._ParseKey == "type") {
+            self._touch!.type = value!.toInt()
+        } else if (self._ParseKey == "sens") {
+            self._touch!.sens = value!.toInt()
+        } else if (self._ParseKey == "top") {
+            self._touch!.top = value!.toInt()
+        } else if (self._ParseKey == "left") {
+            self._touch!.left = value!.toInt()
+        } else if (self._ParseKey == "bottom") {
+            self._touch!.bottom = value!.toInt()
+        } else if (self._ParseKey == "right") {
+            self._touch!.right = value!.toInt()
+        } else if (self._ParseKey == "chat") {
+            self._touch!.setChat(value!)
         } else {
             // nop
         }
@@ -142,11 +154,11 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     /// タッチチェック
     /// </summary>
     /// <returns></returns>
-    func checkTouch(x : Int, y : Int, checkList : Array<String> )->ObjTouchResult
+    internal func checkTouch(x : Int, y : Int, checkList : Array<String> )->ObjTouchResult
     {
         var result : ObjTouchResult = ObjTouchResult(obj: nil)
         
-        for msg in touchDefList
+        for msg in self.touchDefList
         {
             if !checkListContains(msg.name,checkList: checkList)
             {
@@ -160,31 +172,31 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
         
             var res : Int = msg.checkTouch(x, y: y)
         
-        if (res == 2)
-        {
-            result.result = 2
-            result.obj = msg
+            if (res == 2)
+            {
+                result.result = 2
+                result.obj = msg
+            
+                return result
+            }
+            else if (res == 1)
+            {
+                result.result = 1
+            }
+        }
         
-            return result
-        }
-        else if (res == 1)
-        {
-            result.result = 1
-        }
-    }
-    
-    return result;
+        return result;
     }
     
     /// <summary>
     /// クリックチェック
     /// </summary>
     /// <returns></returns>
-    func checkClick(x : Int, y : Int, checkList : Array<String>, mode : Int)->ObjTouchResult
+    internal func checkClick(x : Int, y : Int, checkList : Array<String>, mode : Int)->ObjTouchResult
     {
         var result : ObjTouchResult = ObjTouchResult(obj: nil)
         
-        for msg in touchDefList
+        for msg in self.touchDefList
         {
             if !checkListContains(msg.name,checkList: checkList)
             {
@@ -206,7 +218,7 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     }
     
     
-    func checkListContains(target : String, checkList : Array<String>) -> Bool
+    internal func checkListContains(target : String, checkList : Array<String>) -> Bool
     {
         for item : String in checkList
         {

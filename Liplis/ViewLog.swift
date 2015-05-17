@@ -2,9 +2,13 @@
 //  ViewLog.swift
 //  Liplis
 //
+//  Liplisログ画面
+//
 //アップデート履歴
 //   2015/04/20 ver0.1.0 作成
 //   2015/05/13 ver1.2.0 ログの送りバグ修正
+//   2015/05/16 ver1.4.0　swift1.2対応
+//                        リファクタリング
 //
 //  Created by sachin on 2015/04/20.
 //  Copyright (c) 2015年 sachin. All rights reserved.
@@ -14,26 +18,21 @@ import UIKit
 class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     ///=============================
     ///アプリケーションデリゲート
-    var app : AppDelegate!
+    private var app : AppDelegate!
     
     ///=============================
     ///ビュータイトル
-    var viewTitle = "Liplisログ"
-    var tagTitle = "ログ"
+    private var viewTitle = "Liplisログ"
+    private var tagTitle = "ログ"
     
     ///=============================
     ///画面要素
-    var lblTitle : UILabel!
-    var tblLog: UITableView!
+    private var lblTitle : UILabel!
+    private var tblLog: UITableView!
     
     ///=============================
     ///画面要素
-    private var logList : Array<ObjLiplisLog>!
-    
-    ///=============================
-    ///オフセット定数
-    let labelHight : CGFloat = 60.0
-    let headerHight : CGFloat = 25.0
+    internal var logList : Array<ObjLiplisLog>!
     
     //============================================================
     //
@@ -43,12 +42,11 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     /*
     コンストラクター
     */
-    init(app : AppDelegate) {
-        super.init()
+    convenience init(app : AppDelegate) {
+        self.init(nibName: nil, bundle: nil)
         self.app = app
-        
-        initClass()
-        initView()
+        self.initClass()
+        self.initView()
     }
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -61,47 +59,57 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     /*
     クラスの初期化
     */
-    func initClass()
+    private func initClass()
     {
-        logList = []
+        self.logList = []
     }
     
     /*
     アクティビティの初期化
     */
-    func initView()
+    private func initView()
     {
-        self.view.opaque = true
-        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)
-        var img : UIImage = UIImage(named : "sel_intro.png")!
-        self.tabBarItem = UITabBarItem(title: tagTitle,image: img, tag: 4)
+        //ビューの初期化
+        var img : UIImage = UIImage(named : ObjR.imgIconIntoro)!                   //アイコン取得
+        self.view.opaque = true                                                     //背景透過許可
+        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)   //白透明背景
+        self.tabBarItem = UITabBarItem(title: self.tagTitle,image: img, tag: 4)     //タブ設定
         
-        // Status Barの高さを取得する.
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        //タイトルラベルの作成
+        self.createLblTitle()
         
-        // Viewの高さと幅を取得する.
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
+        //テーブル作成
+        self.createTableView()
         
-        // Labelを作成.
-        lblTitle = UILabel(frame: CGRectMake(0,0,displayWidth,labelHight))
-        lblTitle.backgroundColor = UIColor.hexStr("ffa500", alpha: 255)
-        lblTitle.text = viewTitle
-        lblTitle.textColor = UIColor.whiteColor()
-        lblTitle.shadowColor = UIColor.grayColor()
-        lblTitle.textAlignment = NSTextAlignment.Center
-        lblTitle.layer.position = CGPoint(x: self.view.bounds.width/2,y: headerHight)
-        self.view.addSubview(lblTitle)
+        //サイズ調整
+        self.setSize()
+    }
     
-        // TableViewの生成する(status barの高さ分ずらして表示).
-        tblLog  = UITableView(frame: CGRect(x: 0, y: barHeight+headerHight, width: displayWidth, height: displayHeight - barHeight - 83))
-        tblLog.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
-        tblLog.dataSource = self
-        tblLog.delegate = self
+    /*
+    タイトルラベルの初期化
+    */
+    private func createLblTitle()
+    {
+        // Labelを作成.
+        self.lblTitle = UILabel(frame: CGRectMake(0,0,0,0))
+        self.lblTitle.backgroundColor = UIColor.hexStr("ffa500", alpha: 255)
+        self.lblTitle.text = self.viewTitle
+        self.lblTitle.textColor = UIColor.whiteColor()
+        self.lblTitle.shadowColor = UIColor.grayColor()
+        self.lblTitle.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(self.lblTitle)
+    }
+    
+    /*
+    キャラクター要素テーブルの初期化
+    */
+    private func createTableView()
+    {
+        self.tblLog = UITableView(frame: CGRectMake(0,0,0,0))
+        self.tblLog.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        self.tblLog.dataSource = self
+        self.tblLog.delegate = self
         self.view.addSubview(tblLog)
-        
-        //サイズ設定
-        setSize()
     }
     
     //============================================================
@@ -113,14 +121,14 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     /*
     ロードイベント
     */
-    override func viewDidLoad() {
+    internal override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     /*
     ビュー呼び出し時
     */
-    override func viewWillAppear(animated: Bool) {
+    internal override func viewWillAppear(animated: Bool) {
         //ログリスト
         self.logList = self.app.activityDeskTop.lpsLog.logList
         self.tblLog.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
@@ -134,14 +142,14 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     /*
     メモリーワーニング
     */
-    override func didReceiveMemoryWarning() {
+    internal override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     /*
     Cellが選択された際に呼び出される.
     */
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    internal func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(self.logList[indexPath.row].url != "")
         {
             println("Num: \(indexPath.row)")
@@ -151,13 +159,17 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
             //ベース設定の取得
             var baseSetting : LiplisPreference = LiplisPreference.SharedInstance
             
+            
+            //ブラウザモードチェック
             if baseSetting.lpsBrowserMode == 0
             {
+                //ブラウザモードが0なら、アプリ内ブラウザで表示する
                 self.app.activityWeb.url = NSURL(string: self.logList[indexPath.row].url)!
                 self.tabBarController?.selectedIndex=4
             }
             else  if baseSetting.lpsBrowserMode == 1
             {
+                //ブラウザモードが1ならサファリで表示する
                 let nurl = NSURL(string: self.logList[indexPath.row].url)
                 if UIApplication.sharedApplication().canOpenURL(nurl!){
                     UIApplication.sharedApplication().openURL(nurl!)
@@ -165,7 +177,7 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             else  if baseSetting.lpsBrowserMode == 2
             {
-                //URL設定
+                //ブラウザモードが2ならデスクトップ背景に表示する(未実装)
                 self.app.activityDeskTop.desktopWebSetUrl(self.logList[indexPath.row].url)
                 self.tabBarController?.selectedIndex=0
             }
@@ -175,17 +187,17 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     /*
     Cellの総数を返す.
     */
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.logList.count
     }
     
     /*
     Cellに値を設定する.
     */
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Cellの.を取得する.
-        let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as! UITableViewCell
         
         // Cellに値を設定する.
         cell.textLabel!.text = "\(self.logList[indexPath.row].log)"
@@ -202,36 +214,29 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     /*
     サイズ設定
     */
-    func setSize()
+    private func setSize()
     {
         // 現在のデバイスの向きを取得.
         let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
         
         // 向きの判定.
         if UIDeviceOrientationIsLandscape(deviceOrientation) {
-            
-            //横向きの判定.
-            let displayWidth: CGFloat = self.view.frame.width
-            let displayHeight: CGFloat = self.view.frame.height
-            let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-            self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: labelHight)
-            self.tblLog.frame = CGRect(x: 0, y: barHeight + headerHight * 2, width: displayWidth, height: displayHeight - barHeight - 100)
-            
+            //横向きの判定
         } else if UIDeviceOrientationIsPortrait(deviceOrientation){
-            
-            //縦向きの判定.
-            let displayWidth: CGFloat = self.view.frame.width
-            let displayHeight: CGFloat = self.view.frame.height
-            let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-            self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: labelHight)
-            self.tblLog.frame = CGRect(x: 0, y: barHeight + headerHight, width: displayWidth, height: displayHeight - barHeight - 75)
+            //縦向きの判定
         }
+        
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: LiplisDefine.labelHight)
+        self.tblLog.frame = CGRectMake(0, self.lblTitle.frame.height, displayWidth, displayHeight - self.lblTitle.frame.height - LiplisDefine.futterHight)
     }
     
     /*
     最下部にスクロールする
     */
-    func moveLowerMostPart()
+    internal func moveLowerMostPart()
     {
         self.tblLog.setContentOffset(CGPointMake(0, self.tblLog.contentSize.height - self.tblLog.frame.size.height), animated: false)
     }
@@ -245,12 +250,12 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     /*
     画面の向き変更時イベント
     */
-    override func viewDidAppear(animated: Bool) {
+    internal override func viewDidAppear(animated: Bool) {
         
         // 端末の向きがかわったらNotificationを呼ばす設定.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOrientationChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
-    func onOrientationChange(notification: NSNotification){
-        setSize()
+    internal func onOrientationChange(notification: NSNotification){
+        self.setSize()
     }
 }

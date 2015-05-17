@@ -2,29 +2,37 @@
 //  ObjTouch.swift
 //  Liplis
 //
+//  タッチ情報インスタンス
+//  touch.xmlのインスタンス
+//
+//アップデート履歴
+//   2015/04/16 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0 リファクタリング
+//
 //  Created by sachin on 2015/04/16.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
-
+import UIKit
 import Foundation
 class ObjTouch {
     ///=============================
     /// プロパティ
-    var name : String! = ""
-    var type : Int! = 0
-    var sens : Int! = 0
-    var top : Int! = 0
-    var left : Int! = 0
-    var bottom : Int! = 0
-    var right : Int! = 0
-    var chatSelected : String! = ""
-    var rect : Rect!
-    var chatList : Array<String>! = []
+    internal var name : String! = ""
+    internal var type : Int! = 0
+    internal var sens : Int! = 0
+    internal var top : Int! = 0
+    internal var left : Int! = 0
+    internal var bottom : Int! = 0
+    internal var right : Int! = 0
+    internal var chatSelected : String! = ""
+    internal var rect : CGRect!
+    internal var chatList : Array<String>! = []
     
     ///=============================
     /// プロパティ
-    var sennsitivity : Int! = 0
-    var sennsitivitCnt : Int = 0
+    internal var sennsitivity : Int! = 0
+    internal var sennsitivitCnt : Int = 0
     
     //============================================================
     //
@@ -34,7 +42,7 @@ class ObjTouch {
     /**
         イニシャライザ
     */
-    init(name : String, type : Int,sens : Int, top : Int, left : Int, bottom : Int,  right : Int, chatList : Array<String>)
+    internal init(name : String, type : Int,sens : Int, top : Int, left : Int, bottom : Int,  right : Int, chatList : Array<String>)
     {
         self.name  = name
         self.type  = type
@@ -44,7 +52,7 @@ class ObjTouch {
         self.bottom = top
         self.right = sens
         self.chatSelected = ""
-        self.rect = Rect(top: Int16(top),left: Int16(left),bottom: Int16(bottom),right: Int16(right))
+        self.rect = CGRect(origin: CGPoint(x: top,y: left), size: CGSize(width: bottom,height: right))
         self.chatList = chatList
     }
     /**
@@ -60,13 +68,13 @@ class ObjTouch {
         self.bottom = top
         self.right = sens
         self.chatSelected = ""
-        self.rect = Rect(top: Int16(top),left: Int16(left),bottom: Int16(bottom),right: Int16(right))
+        self.rect = CGRect(origin: CGPoint(x: top,y: left), size: CGSize(width: bottom,height: right))
         self.chatList = chat.componentsSeparatedByString(",")
     }
     /**
     イニシャライザ
     */
-    init()
+    internal init()
     {
         self.name = ""
         self.type  = 0
@@ -76,12 +84,15 @@ class ObjTouch {
         self.bottom  = 0
         self.right  = 0
         self.chatSelected = ""
-        self.rect = Rect(top: Int16(0),left: Int16(0),bottom: Int16(0),right: Int16(0))
+        self.rect = CGRect(origin: CGPoint(x: 0,y: 0), size: CGSize(width: 0,height: 0))
         self.chatList = []
         
     }
     
-    func setChat(chat : String)
+    /**
+    設定をチャットリストに追加する
+    */
+    internal func setChat(chat : String)
     {
         self.chatList = chat.componentsSeparatedByString(",")
     }
@@ -94,7 +105,7 @@ class ObjTouch {
     /**
         センシティビティをセットする
     */
-    func setSennsitivity()
+    internal func setSennsitivity()
     {
         if (sens == 0)
         {
@@ -148,7 +159,7 @@ class ObjTouch {
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <returns></returns>
-    func checkTouch(x : Int, y : Int)->Int
+    internal func checkTouch(x : Int, y : Int)->Int
     {
         var result : Int = 0;
         
@@ -158,7 +169,7 @@ class ObjTouch {
             //なでタイプならカウントアップ
             if (self.type == 0)
             {
-                sennsitivitCnt++;
+                self.sennsitivitCnt++;
             }
         
             //カーソルON
@@ -166,13 +177,13 @@ class ObjTouch {
         }
     
         //撫で閾値チェック
-        if (sennsitivitCnt > sennsitivity)
+        if (self.sennsitivitCnt > self.sennsitivity)
         {
             //0にリセット
-            sennsitivitCnt = 0;
+            self.sennsitivitCnt = 0;
     
             //おしゃべりする文章を選択する
-            chatSelected = getChat();
+            self.chatSelected = getChat();
     
             //2を返す
             result =  2;
@@ -188,13 +199,13 @@ class ObjTouch {
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <returns></returns>
-    func checkClick(x : Int, y : Int)->Bool
+    internal func checkClick(x : Int, y : Int)->Bool
     {
         //句形範囲チェック
         if rect.contains(Int16(x), y: Int16(y))
         {
             //おしゃべりする文章を選択する
-            chatSelected = getChat()
+            self.chatSelected = self.getChat()
         
             //2を返す
             return true
@@ -212,7 +223,7 @@ class ObjTouch {
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <returns></returns>
-    func Contains(x : Int, y : Int) -> Bool
+    internal func Contains(x : Int, y : Int) -> Bool
     {
         return rect.contains(Int16(x), y : Int16(y))
     }
@@ -221,7 +232,7 @@ class ObjTouch {
     /// チャットリストからランダムで1個返す
     /// </summary>
     /// <returns></returns>
-    func getChat()->String
+    internal func getChat()->String
     {
         if (chatList.count  > 0)
         {

@@ -1,6 +1,13 @@
 //
-//  LiplisWidgetSkelton.swift
+//  LiplisSkinData.swift
 //  Liplis
+//
+//  スキンデータのインスタンス
+//
+//アップデート履歴
+//   2015/05/03 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/14 ver1.3.0 ディスポーズ処理追加(キャラクターデータリロード対応)
 //
 //  Created by sachin on 2015/05/03.
 //  Copyright (c) 2015年 sachin. All rights reserved.
@@ -11,30 +18,33 @@ class LiplisSkinData
 {
     //=================================
     //キャラクター名
-    var charDefine : String = ""
-    var charName : String = ""
-    var charDescription : String = ""
-    var flgDefautlt : Bool! = false
+    internal var charDefine : String = ""
+    internal var charName : String = ""
+    internal var charDescription : String = ""
+    internal var flgDefautlt : Bool! = false
     
     //=================================
     //ディレクトリ
-    var pathBase : String! = ""         //ベースのパス
-    var pathBody: String! = ""          //ボディのパス
-    var pathWindow : String! = ""       //ウインドウのパス
+    internal var pathBase : String! = ""         //ベースのパス
+    internal var pathBody: String! = ""          //ボディのパス
+    internal var pathWindow : String! = ""       //ウインドウのパス
     
-    var urlBase : NSURL!                //ベースのパス
-    var xmlSkin : NSURL!                //skin.xmlのURL
-    var xmlBody : NSURL!                //body.xmlのURL
-    var xmlChat : NSURL!                //char.xmlのURL
-    var xmlTouch : NSURL!               //touch.xmlのURL
-    var xmlVersion : NSURL!             //version.xmlのURL
+    internal var urlBase : NSURL!                //ベースのパス
+    internal var xmlSkin : NSURL!                //skin.xmlのURL
+    internal var xmlBody : NSURL!                //body.xmlのURL
+    internal var xmlChat : NSURL!                //char.xmlのURL
+    internal var xmlTouch : NSURL!               //touch.xmlのURL
+    internal var xmlVersion : NSURL!             //version.xmlのURL
     
-    var lpsSkin : ObjLiplisSkin!        //スキンファイルオブジェクト
-    var lpsBody : ObjLiplisBody!        //ボディオブジェクト
+    internal var lpsSkin : ObjLiplisSkin!        //スキンファイルオブジェクト
+    internal var lpsBody : ObjLiplisBody!        //ボディオブジェクト
 
-    var imgIco : UIImage!               //アイコンイメージ
+    internal var imgIco : UIImage!               //アイコンイメージ
     
-    init(charName : String)
+    /**
+    イニシャライザ
+    */
+    internal init(charName : String)
     {
         //キャラクター名
         self.charName = charName
@@ -68,7 +78,11 @@ class LiplisSkinData
         self.imgIco = UIImage(contentsOfFile: pathWindow + "/icon.png")
     }
     
-    init()
+    /**
+    デフォルトイニシャライザ
+    デフォリリのスキンデータ作成
+    */
+    internal init()
     {
         //キャラクター名
         self.charName = "LiliRenew"
@@ -97,4 +111,13 @@ class LiplisSkinData
         self.imgIco = UIImage(named: "liliIcon.png")!
     }
     
+    /**
+    破棄
+    */
+    internal func dispose()
+    {
+        self.lpsSkin = nil
+        self.lpsBody = nil
+        self.imgIco = nil
+    }
 }

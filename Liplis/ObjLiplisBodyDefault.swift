@@ -2,12 +2,19 @@
 //  ObjLiplisBodyChar.swift
 //  Liplis
 //
+//  立ち絵管理クラス(デフォリリバージョン)
+//  body.xmlのインスタンス
+//
+//アップデート履歴
+//   2015/05/05 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0 swift1.2対応
+//
 //  Created by sachin on 2015/05/05.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
-
 import UIKit
-import Foundation
+
 class ObjLiplisBodyDefault : ObjLiplisBody {
 
     //============================================================
@@ -24,19 +31,19 @@ class ObjLiplisBodyDefault : ObjLiplisBody {
         super.init()
         
         //リストの初期化
-        initList()
+        self.initList()
         
         //スリープ画像の初期化
-        initSleep()
+        self.initSleep()
         
         //プロパティの初期化
-        initProperty()
+        self.initProperty()
         
         //ロードXML
-        loadXml(url)
+        self.loadXml(url)
         
         //アスペクト比算出
-        culcAspectRatio()
+        self.culcAspectRatio()
     }
     
     /**
@@ -44,7 +51,7 @@ class ObjLiplisBodyDefault : ObjLiplisBody {
     */
     override func initSleep()
     {
-        sleep = UIImage(named: SLEEP_FILE_NAME)
+        self.sleep = UIImage(named: self.SLEEP_FILE_NAME)
     }
     
     /**
@@ -52,39 +59,44 @@ class ObjLiplisBodyDefault : ObjLiplisBody {
     */
     override func getNormalGraphic()->UIImage
     {
-        return normalList[0].getLiplisBodyImgIdInsDefault(0,mouthState: 0)
+        return self.normalList[0].getLiplisBodyImgIdInsDefault(0,mouthState: 0)
     }
     
     /**
     タグの読み始めに呼ばれる
     */
-    override func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: NSDictionary!)
+    override func parser(parser: NSXMLParser,
+        didStartElement elementName: String,
+        namespaceURI : String?,
+        qualifiedName qName: String?,
+        attributes attributeDict: [NSObject : AnyObject])
+
     {
         _ParseKey = elementName
         
-        if elementName == "normal" {_body = ObjBody()}
-        else if elementName == "joy_p" {_body = ObjBody()}
-        else if elementName == "joy_m" {_body = ObjBody()}
-        else if elementName == "admiration_p" {_body = ObjBody()}
-        else if elementName == "admiration_m" {_body = ObjBody()}
-        else if elementName == "peace_p" {_body = ObjBody()}
-        else if elementName == "peace_m" {_body = ObjBody()}
-        else if elementName == "ecstasy_p" {_body = ObjBody()}
-        else if elementName == "ecstasy_m" {_body = ObjBody()}
-        else if elementName == "amazement_p" {_body = ObjBody()}
-        else if elementName == "amazement_m" {_body = ObjBody()}
-        else if elementName == "rage_p" {_body = ObjBody()}
-        else if elementName == "rage_m" {_body = ObjBody()}
-        else if elementName == "interest_p" {_body = ObjBody()}
-        else if elementName == "interest_m" {_body = ObjBody()}
-        else if elementName == "respect_p" {_body = ObjBody()}
-        else if elementName == "respect_m" {_body = ObjBody()}
-        else if elementName == "calmly_p" {_body = ObjBody()}
-        else if elementName == "calmly_m" {_body = ObjBody()}
-        else if elementName == "proud_p" {_body = ObjBody()}
-        else if elementName == "proud_m" {_body = ObjBody()}
-        else if elementName == "batteryHi" {_body = ObjBody()}
-        else if elementName == "batteryMid" {_body = ObjBody()}
-        else if elementName == "batteryLow" {_body = ObjBody()}
+        if elementName == "normal"              {self._body = ObjBody()}
+        else if elementName == "joy_p"          {self._body = ObjBody()}
+        else if elementName == "joy_m"          {self._body = ObjBody()}
+        else if elementName == "admiration_p"   {self._body = ObjBody()}
+        else if elementName == "admiration_m"   {self._body = ObjBody()}
+        else if elementName == "peace_p"        {self._body = ObjBody()}
+        else if elementName == "peace_m"        {self._body = ObjBody()}
+        else if elementName == "ecstasy_p"      {self._body = ObjBody()}
+        else if elementName == "ecstasy_m"      {self._body = ObjBody()}
+        else if elementName == "amazement_p"    {self._body = ObjBody()}
+        else if elementName == "amazement_m"    {self._body = ObjBody()}
+        else if elementName == "rage_p"         {self._body = ObjBody()}
+        else if elementName == "rage_m"         {self._body = ObjBody()}
+        else if elementName == "interest_p"     {self._body = ObjBody()}
+        else if elementName == "interest_m"     {self._body = ObjBody()}
+        else if elementName == "respect_p"      {self._body = ObjBody()}
+        else if elementName == "respect_m"      {self._body = ObjBody()}
+        else if elementName == "calmly_p"       {self._body = ObjBody()}
+        else if elementName == "calmly_m"       {self._body = ObjBody()}
+        else if elementName == "proud_p"        {self._body = ObjBody()}
+        else if elementName == "proud_m"        {self._body = ObjBody()}
+        else if elementName == "batteryHi"      {self._body = ObjBody()}
+        else if elementName == "batteryMid"     {self._body = ObjBody()}
+        else if elementName == "batteryLow"     {self._body = ObjBody()}
     }
 }

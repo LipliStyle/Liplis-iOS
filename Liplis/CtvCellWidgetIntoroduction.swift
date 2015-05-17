@@ -41,7 +41,7 @@ class CtvCellWidgetIntoroduction: UITableViewCell
     /*
     イメージを設定する
     */
-    func setImage(img : UIImage)
+    func sSetImage(img : UIImage)
     {
         imgChar.image = img
     }

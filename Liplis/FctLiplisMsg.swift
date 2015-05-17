@@ -8,7 +8,7 @@
 
 import Foundation
 struct FctLiplisMsg {
-    static func createMsgMassageDlFaild()->MsgShortNews
+    internal static func createMsgMassageDlFaild()->MsgShortNews
     {
         var msg : MsgShortNews = MsgShortNews()
         
@@ -40,6 +40,5 @@ struct FctLiplisMsg {
         msg.pointList.append(-1);
                     
         return msg;
-    
     }
 }

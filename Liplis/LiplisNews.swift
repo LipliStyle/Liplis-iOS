@@ -2,6 +2,13 @@
 //  LiplisNews.swift
 //  Liplis
 //
+//  Liplisのニュースを取得、管理するクラス
+//
+//アップデート履歴
+//   2015/04/11 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/14 ver1.3.0　リファクタリング
+//
 //  Created by sachin on 2015/04/11.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -10,15 +17,15 @@ import Foundation
 class LiplisNews {
     //=================================
     //プロパティ
-    var newsQueue : Array<MsgShortNews>? = []
-    var prvTime : Int = 0
+    internal var newsQueue : Array<MsgShortNews>? = []
+    internal var prvTime : Int = 0
     
     //=================================
     //定数
-    let UPDATE_INTERVAL : Int = 60000       //連続実行防止のためのニュースのキュー取得待機インターバル
-    let REFLESH_INTERVAL : Int = 1200000    //ニュースキューのリフレッシュ判定インターバル
-    let LPS_NEWS_QUEUE_HOLD_CNT : Int = 25   //ニュースキューの最低保持件数
-    let LPS_NEWS_QUEUE_GET_CNT : Int = 50   //ニュースキューの取得件数
+    private let UPDATE_INTERVAL : Int = 60000       //連続実行防止のためのニュースのキュー取得待機インターバル
+    private let REFLESH_INTERVAL : Int = 1200000    //ニュースキューのリフレッシュ判定インターバル
+    private let LPS_NEWS_QUEUE_HOLD_CNT : Int = 25   //ニュースキューの最低保持件数
+    private let LPS_NEWS_QUEUE_GET_CNT : Int = 50   //ニュースキューの取得件数
     
     //============================================================
     //
@@ -28,10 +35,10 @@ class LiplisNews {
     /**
     デフォルトイニシャライザ
     */
-    init()
+    internal init()
     {
-        newsQueue = Array<MsgShortNews>()
-        prvTime = 0
+        self.newsQueue = Array<MsgShortNews>()
+        self.prvTime = 0
     }
     
     
@@ -43,23 +50,23 @@ class LiplisNews {
     /**
         ニュースを一件取得する
     */
-    func getShortNews(postData : NSData!)->MsgShortNews!
+    internal func getShortNews(postData : NSData!)->MsgShortNews!
     {
         var result : MsgShortNews = MsgShortNews()
         
         //キューチェック
-        if(newsQueue?.count > 0)
+        if(self.newsQueue?.count > 0)
         {
             //メッセージ出力
-            println("LiplisNews getShortNews" + String(newsQueue!.count))
+            println("LiplisNews getShortNews" + String(self.newsQueue!.count))
             
             //１件のデータを返す
-            return newsQueue!.dequeue()
+            return self.newsQueue!.dequeue()
         }
         else
         {
             //メッセージ出力
-            println("LiplisNews getShortNews キューが枯渇" + String(newsQueue!.count))
+            println("LiplisNews getShortNews キューが枯渇" + String(self.newsQueue!.count))
             
             //非同期処理実行
             AsyncGetNewsTask(postData)
@@ -73,11 +80,11 @@ class LiplisNews {
     /**
         ニュースキューチェック
     */
-    func checkNewsQueue(postData : NSData!)
+    internal func checkNewsQueue(postData : NSData!)
     {
-        if(newsQueue?.count < LPS_NEWS_QUEUE_HOLD_CNT)
+        if(self.newsQueue?.count < LPS_NEWS_QUEUE_HOLD_CNT)
         {
-            if(Int(CFAbsoluteTimeGetCurrent())-prvTime > UPDATE_INTERVAL)
+            if(Int(CFAbsoluteTimeGetCurrent()) - self.prvTime > UPDATE_INTERVAL)
             {
                 AsyncGetNewsTask(postData)
             }
@@ -88,9 +95,9 @@ class LiplisNews {
         ニュースキューのカウントチェック
         キューに残量があればtrueを返す
     */
-    func checkNewsQueueCount(postData : NSData!)->Bool
+    internal func checkNewsQueueCount(postData : NSData!)->Bool
     {
-        checkNewsQueue(postData)
+        self.checkNewsQueue(postData)
         return newsQueue?.count > 0
     }
     
@@ -102,15 +109,13 @@ class LiplisNews {
     /**
     ニュースリスト取得する
     */
-    func AsyncGetNewsTask(postData : NSData!)
+    internal func AsyncGetNewsTask(postData : NSData!)
     {
         var URL = NSURL(string: LiplisDefine.API_SHORT_NEWS_URL_LSIT)!
         var request = NSMutableURLRequest(URL: URL)
         request.HTTPMethod = "POST"
         request.HTTPBody = postData
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), callBackGetNewsList)
-
-        //newsQueue?.addRange(LiplisApi.getShortNewsList(postData))
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: callBackGetNewsList)
     }
     
     //============================================================
@@ -121,13 +126,13 @@ class LiplisNews {
     /**
     ニュースリスト取得のコールバック
     */
-    func callBackGetNewsList(res: NSURLResponse!, data: NSData!, error: NSError!) {
+    internal func callBackGetNewsList(res: NSURLResponse!, data: NSData!, error: NSError!) {
         //UIの更新
         if error == nil {
             //取得したニュースデータをキューに入れる
             for newsData : MsgShortNews in LiplisShortNewsJpJson.getShortNewsList(JSON(data:data))
             {
-                newsQueue?.enqueue(newsData)
+                self.newsQueue?.enqueue(newsData)
             }
             
         } else {

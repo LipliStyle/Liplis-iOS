@@ -1,7 +1,13 @@
 //
 //  ObjPreference.swift
 //  Liplis
+//
 //  キャラクターごとの設定クラス
+//
+//アップデート履歴
+//   2015/04/17 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0 リファクタリング
 //
 //  Created by sachin on 2015/04/17.
 //  Copyright (c) 2015年 sachin. All rights reserved.
@@ -11,38 +17,38 @@ import Foundation
 class ObjPreference {
     ///=============================
     /// JSON管理
-    var jman : JsonManager!
-    var key : String!
-    var keyList : Array<String> = []
+    internal var jman : JsonManager!
+    internal var key : String!
+    internal var keyList : Array<String> = []
     
     ///=============================
     /// プロパティ
-    var charName : String!;          let KEY_CHAR_NAME  : String = "charName";                          //0
-    var locationX : Int! = 300;      let KEY_LOCATION_X : String = "locationX";                         //1
-    var locationY : Int! = 200;      let KEY_LOCATION_Y  : String = "locationY";                        //2
-    var lpsMode : Int! = 0;          let KEY_LPSMODE : String = "lpsMode";                              //3
+    internal var charName               : String!;      internal let KEY_CHAR_NAME              : String = "charName";               //0
+    internal var locationX              : Int! = 300;   internal let KEY_LOCATION_X             : String = "locationX";              //1
+    internal var locationY              : Int! = 200;   internal let KEY_LOCATION_Y             : String = "locationY";              //2
+    internal var lpsMode                : Int! = 0;     internal let KEY_LPSMODE                : String = "lpsMode";                //3
     //4は　けつばん
-    var lpsSpeed : Int!;             let KEY_LPSSPEED : String = "lpsSpeed";                            //5
-    var lpsWindow : Int!;            let KEY_LPSWINDOW : String = "lpsWindow";                          //6
-    var lpsDisplayIcon : Int!;       let KEY_LPSDISPLAYICON : String = "lpsDisplayIcon";                //7
-    var lpsHealth : Int!;            let KEY_LPSHELTH : String = "lpsHealth";                           //8
+    internal var lpsSpeed               : Int!;         internal let KEY_LPSSPEED               : String = "lpsSpeed";               //5
+    internal var lpsWindow              : Int!;         internal let KEY_LPSWINDOW              : String = "lpsWindow";              //6
+    internal var lpsDisplayIcon         : Int!;         internal let KEY_LPSDISPLAYICON         : String = "lpsDisplayIcon";         //7
+    internal var lpsHealth              : Int!;         internal let KEY_LPSHELTH               : String = "lpsHealth";              //8
     
-    var lpsNewsRange : Int!;         let KEY_LPSNEWSRANGE : String = "lpsNewsRange";                    //9
-    var lpsNewsAlready : Int!;       let KEY_LPSNEWSALREADY : String = "lpsNewsAlready";                //10
-    var lpsNewsRunOut : Int!;        let KEY_LPSNEWSRUNOUT : String = "lpsNewsRunOut";                  //11
+    internal var lpsNewsRange           : Int!;         internal let KEY_LPSNEWSRANGE           : String = "lpsNewsRange";           //9
+    internal var lpsNewsAlready         : Int!;         internal let KEY_LPSNEWSALREADY         : String = "lpsNewsAlready";         //10
+    internal var lpsNewsRunOut          : Int!;         internal let KEY_LPSNEWSRUNOUT          : String = "lpsNewsRunOut";          //11
     
-    var lpsTopicNews : Int!;         let KEY_LPSTOPIC_NEWS : String = "lpsTopicNews";                   //12
-    var lpsTopic2ch : Int!;          let KEY_LPSTOPIC_2CH : String = "lpsTopic2ch";                     //13
-    var lpsTopicNico : Int!;         let KEY_LPSTOPIC_NICO : String = "lpsTopicNico";                   //14
-    var lpsTopicRss : Int!;          let KEY_LPSTOPIC_RSS : String = "lpsTopicRss";                     //15
-    var lpsTopicTwitter : Int!;      let KEY_LPSTOPIC_TWITTER : String = "lpsTopicTwitter";             //16
-    var lpsTopicTwitterPu : Int!;    let KEY_LPSTOPIC_TWITTERPU : String = "lpsTopicTwitterPu";         //17
-    var lpsTopicTwitterMy : Int!;    let KEY_LPSTOPIC_TWITTERMY : String = "lpsTopicTwitterMy";         //18
-    var lpsTopicTwitterMode : Int!;  let KEY_LPSTOPIC_TWITTERMODE : String = "lpsTopicTwitterMode";     //19
-    var lpsTopicCharMsg : Int!;      let KEY_LPSTOPIC_TOPICCHARMSG : String = "lpsTopicCharMsg";        //20
+    internal var lpsTopicNews           : Int!;         internal let KEY_LPSTOPIC_NEWS          : String = "lpsTopicNews";           //12
+    internal var lpsTopic2ch            : Int!;         internal let KEY_LPSTOPIC_2CH           : String = "lpsTopic2ch";            //13
+    internal var lpsTopicNico           : Int!;         internal let KEY_LPSTOPIC_NICO          : String = "lpsTopicNico";           //14
+    internal var lpsTopicRss            : Int!;         internal let KEY_LPSTOPIC_RSS           : String = "lpsTopicRss";            //15
+    internal var lpsTopicTwitter        : Int!;         internal let KEY_LPSTOPIC_TWITTER       : String = "lpsTopicTwitter";        //16
+    internal var lpsTopicTwitterPu      : Int!;         internal let KEY_LPSTOPIC_TWITTERPU     : String = "lpsTopicTwitterPu";      //17
+    internal var lpsTopicTwitterMy      : Int!;         internal let KEY_LPSTOPIC_TWITTERMY     : String = "lpsTopicTwitterMy";      //18
+    internal var lpsTopicTwitterMode    : Int!;         internal let KEY_LPSTOPIC_TWITTERMODE   : String = "lpsTopicTwitterMode";    //19
+    internal var lpsTopicCharMsg        : Int!;         internal let KEY_LPSTOPIC_TOPICCHARMSG  : String = "lpsTopicCharMsg";        //20
     
-    var lpsWindowColor : String!;
-    var lpsInterval : Double!
+    internal var lpsWindowColor         : String!;
+    internal var lpsInterval            : Double!
     
     //============================================================
     //
@@ -52,7 +58,7 @@ class ObjPreference {
     /**
     初期化処理　キーが存在した場合（既存データの読み出し）
     */
-    init(key : String)
+    internal init(key : String)
     {
         //キー取得
         self.key = key
@@ -61,19 +67,22 @@ class ObjPreference {
         self.keyList = createKeyList()
         
         //JSONロード
-        jman = JsonManager(key: self.key, valueKeyList: keyList)
+        self.jman = JsonManager(key: self.key, valueKeyList: keyList)
         
         //データ取得
-        setData()
+        self.setData()
         
-        setMode()
-        setWindow()
+        //モード設定
+        self.setMode()
+        
+        //ウインドウ設定
+        self.setWindow()
     }
     
     /**
     初期化処理　キーが存在しない場合（新規データ作成）
     */
-    init()
+    internal init()
     {
         //キー生成
         self.key = LiplisUtil.getRandormString(20)
@@ -82,50 +91,53 @@ class ObjPreference {
         self.keyList = createKeyList()
         
         //JSONロード
-        jman = JsonManager(key: self.key, valueKeyList: keyList)
+        self.jman = JsonManager(key: self.key, valueKeyList: keyList)
         
         //初期値セット
-        setInitData()
+        self.setInitData()
         
         //JSONを保存する
-        saveSetting()
+        self.saveSetting()
 
-        setMode()
-        setWindow()
+        //モード設定
+        self.setMode()
+        
+        //ウインドウ設定
+        self.setWindow()
     }
     
     /**
     初期値セット
     */
-    func setInitData()
+    internal func setInitData()
     {
-        charName = ""
-        locationX = 0
-        locationY = 0
-        lpsMode = 0
-        lpsSpeed = 0
-        lpsWindow = 0
-        lpsDisplayIcon = 1
-        lpsNewsRange = 2
-        lpsNewsAlready = 0
-        lpsNewsRunOut = 0
-        lpsHealth = 1
+        self.charName = ""
+        self.locationX = 0
+        self.locationY = 0
+        self.lpsMode = 0
+        self.lpsSpeed = 0
+        self.lpsWindow = 0
+        self.lpsDisplayIcon = 1
+        self.lpsNewsRange = 2
+        self.lpsNewsAlready = 0
+        self.lpsNewsRunOut = 0
+        self.lpsHealth = 1
         
-        lpsTopicNews = 1
-        lpsTopic2ch = 1
-        lpsTopicNico = 1
-        lpsTopicRss = 0
-        lpsTopicTwitter = 0
-        lpsTopicTwitterPu = 0
-        lpsTopicTwitterMy = 0
-        lpsTopicTwitterMode = 0
-        lpsTopicCharMsg = 0
+        self.lpsTopicNews = 1
+        self.lpsTopic2ch = 1
+        self.lpsTopicNico = 1
+        self.lpsTopicRss = 0
+        self.lpsTopicTwitter = 0
+        self.lpsTopicTwitterPu = 0
+        self.lpsTopicTwitterMy = 0
+        self.lpsTopicTwitterMode = 0
+        self.lpsTopicCharMsg = 0
     }
     
     /**
     データ取得
     */
-    func setData()
+    internal func setData()
     {
         self.charName = jman.getData(KEY_CHAR_NAME)
         self.locationX = jman.getDataInt(KEY_LOCATION_X)
@@ -154,7 +166,7 @@ class ObjPreference {
     /**
     キーリストを生成する
     */
-    func createKeyList()->Array<String>
+    internal func createKeyList()->Array<String>
     {
         keyList = Array<String>()
         
@@ -187,7 +199,7 @@ class ObjPreference {
     /**
     JSONを削除する
     */
-    func delPreference()
+    internal func delPreference()
     {
         self.jman.delJson()
     }
@@ -198,38 +210,38 @@ class ObjPreference {
     //設定保存
     //
     //============================================================
-    func saveSetting()
+    internal func saveSetting()
     {
-        jman.setStr(KEY_CHAR_NAME, value: charName)
-        jman.setInt(KEY_LOCATION_X,value: locationX)
-        jman.setInt(KEY_LOCATION_Y,value: locationY)
-        jman.setInt(KEY_LPSMODE,value: lpsMode)
-        jman.setInt(KEY_LPSSPEED,value: lpsSpeed)
-        jman.setInt(KEY_LPSWINDOW,value: lpsWindow)
-        jman.setInt(KEY_LPSDISPLAYICON,value: lpsDisplayIcon)
-        jman.setInt((KEY_LPSHELTH),value: lpsHealth)
+        self.jman.setStr(KEY_CHAR_NAME, value: charName)
+        self.jman.setInt(KEY_LOCATION_X,value: locationX)
+        self.jman.setInt(KEY_LOCATION_Y,value: locationY)
+        self.jman.setInt(KEY_LPSMODE,value: lpsMode)
+        self.jman.setInt(KEY_LPSSPEED,value: lpsSpeed)
+        self.jman.setInt(KEY_LPSWINDOW,value: lpsWindow)
+        self.jman.setInt(KEY_LPSDISPLAYICON,value: lpsDisplayIcon)
+        self.jman.setInt((KEY_LPSHELTH),value: lpsHealth)
              
-        jman.setInt(KEY_LPSNEWSRANGE,value: lpsNewsRange)
-        jman.setInt(KEY_LPSNEWSALREADY,value: lpsNewsAlready)
-        jman.setInt(KEY_LPSNEWSRUNOUT,value: lpsNewsRunOut)
+        self.jman.setInt(KEY_LPSNEWSRANGE,value: lpsNewsRange)
+        self.jman.setInt(KEY_LPSNEWSALREADY,value: lpsNewsAlready)
+        self.jman.setInt(KEY_LPSNEWSRUNOUT,value: lpsNewsRunOut)
 
-        jman.setInt(KEY_LPSTOPIC_NEWS,value: lpsTopicNews)
-        jman.setInt(KEY_LPSTOPIC_2CH,value: lpsTopic2ch)
-        jman.setInt(KEY_LPSTOPIC_NICO,value: lpsTopicNico)
-        jman.setInt(KEY_LPSTOPIC_RSS,value: lpsTopicRss)
-        jman.setInt(KEY_LPSTOPIC_TWITTER,value: lpsTopicTwitter)
-        jman.setInt(KEY_LPSTOPIC_TWITTERPU,value: lpsTopicTwitterPu)
-        jman.setInt(KEY_LPSTOPIC_TWITTERMY,value: lpsTopicTwitterMy)
-        jman.setInt(KEY_LPSTOPIC_TWITTERMODE,value: lpsTopicTwitterMode)
-        jman.setInt(KEY_LPSTOPIC_TOPICCHARMSG,value: lpsTopicCharMsg)
+        self.jman.setInt(KEY_LPSTOPIC_NEWS,value: lpsTopicNews)
+        self.jman.setInt(KEY_LPSTOPIC_2CH,value: lpsTopic2ch)
+        self.jman.setInt(KEY_LPSTOPIC_NICO,value: lpsTopicNico)
+        self.jman.setInt(KEY_LPSTOPIC_RSS,value: lpsTopicRss)
+        self.jman.setInt(KEY_LPSTOPIC_TWITTER,value: lpsTopicTwitter)
+        self.jman.setInt(KEY_LPSTOPIC_TWITTERPU,value: lpsTopicTwitterPu)
+        self.jman.setInt(KEY_LPSTOPIC_TWITTERMY,value: lpsTopicTwitterMy)
+        self.jman.setInt(KEY_LPSTOPIC_TWITTERMODE,value: lpsTopicTwitterMode)
+        self.jman.setInt(KEY_LPSTOPIC_TOPICCHARMSG,value: lpsTopicCharMsg)
         
-        jman.saveSetting()
+        self.jman.saveSetting()
     }
     
-    func saveDataFromIdx(idx : Int, val : Int)
+    internal func saveDataFromIdx(idx : Int, val : Int)
     {
-        setDataFromIdx(idx,val: val)
-        saveSetting()
+        self.setDataFromIdx(idx,val: val)
+        self.saveSetting()
     }
     
     //============================================================
@@ -241,7 +253,7 @@ class ObjPreference {
     /**
         モードとインターバルの設定
     */
-    func setMode()
+    internal func setMode()
     {
         if(self.lpsMode == 0)
         {
@@ -264,7 +276,7 @@ class ObjPreference {
     /**
         ウインドウカラーを設定する
     */
-    func setWindow()
+    internal func setWindow()
     {
         switch(lpsWindow)
         {
@@ -290,7 +302,7 @@ class ObjPreference {
     /**
         ニュースフラグを取得する
     */
-    func getNewsFlg()->String
+    internal func getNewsFlg()->String
     {
         var result : String = ""
         
@@ -308,7 +320,7 @@ class ObjPreference {
     /**
         ニュース範囲文字列を取得する
     */
-    func getLpsNewsRangeStr()->String
+    internal func getLpsNewsRangeStr()->String
     {
         switch(lpsNewsRange)
         {
@@ -335,7 +347,7 @@ class ObjPreference {
     /**
     インデックスから値を設定する
     */
-    func setDataFromIdx(idx : Int, val : Int)
+    internal func setDataFromIdx(idx : Int, val : Int)
     {
         switch(idx)
         {

@@ -513,7 +513,7 @@ class LiplisWidget : NSObject {
         var frameImgBody: CGRect = self.imgBody.frame
         
         // タッチイベントを取得.
-        let aTouch = touches.anyObject() as UITouch
+        let aTouch = touches.anyObject() as! UITouch
         
         // タッチ位置の取得
         let location = aTouch.locationInView(self.imgBody)
@@ -567,7 +567,7 @@ class LiplisWidget : NSObject {
         if(desk.flgMoving)
         {
             // タッチイベントを取得.
-            let aTouch = touches.anyObject() as UITouch
+            let aTouch = touches.anyObject() as! UITouch
             
             //ボディフレーム
             var frameImgBody : CGRect = imgBody.frame
@@ -606,7 +606,7 @@ class LiplisWidget : NSObject {
         var frameImgBody : CGRect = imgBody.frame
             
         //タッチイベントを取得.
-        let aTouch = touches.anyObject() as UITouch
+        let aTouch = touches.anyObject() as! UITouch
             
         //タッチ位置取得
         let location = aTouch.locationInView(imgBody)
@@ -1392,7 +1392,7 @@ class LiplisWidget : NSObject {
                             //終了チェック
                             if(self.liplisNowTopic.nameList.count < idx)
                             {
-                                if(idx > self.liplisNowTopic.nameList[idx].utf16Count){break}
+                                if(idx > count(self.liplisNowTopic.nameList[idx].utf16)){break}
                                 
                                 //ナウワードの初期化
                                 self.liplisNowWord = self.liplisNowTopic.nameList[idx]
@@ -1407,13 +1407,13 @@ class LiplisWidget : NSObject {
                     
                 }
                 
-                for(var kdx : Int = 0, n = self.liplisNowWord.utf16Count; kdx<n; kdx++)
+                for(var kdx : Int = 0, n = count(self.liplisNowWord.utf16); kdx<n; kdx++)
                 {
                     self.liplisChatText = self.liplisChatText + (self.liplisNowWord as NSString).substringWithRange(NSRange(location : kdx,length : 1))
                 }
                 
                 self.cntLnw = self.liplisNowTopic.nameList.count
-                self.cntLct = self.liplisNowWord.utf16Count
+                self.cntLct = count(self.liplisNowWord.utf16)
             }
             return true
         }
@@ -1461,7 +1461,7 @@ class LiplisWidget : NSObject {
         //送りワード文字数チェック
         if(self.cntLnw != 0)
         {
-            if(self.cntLct >= self.liplisNowWord.utf16Count)
+            if(self.cntLct >= count(self.liplisNowWord.utf16))
             {
                 //終了チェック
                 if(self.checkEnd()){return true}
@@ -1512,7 +1512,7 @@ class LiplisWidget : NSObject {
                     checkEnd()
                     
                     //終了チェック
-                    if(self.cntLnw>self.liplisNowTopic.nameList[cntLnw].utf16Count){break}
+                    if(self.cntLnw > count(self.liplisNowTopic.nameList[cntLnw].utf16)){break}
                     
                     //ナウワードの初期化
                     self.liplisNowWord = self.liplisNowTopic.nameList[self.cntLnw]

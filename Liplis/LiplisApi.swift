@@ -2,6 +2,13 @@
 //  LiplisApi.swift
 //  Liplis
 //
+//  LiplisのAPIにアクセスする
+//
+//アップデート履歴
+//   2015/04/11 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/14 ver1.3.0　リファクタリング
+//
 //  Created by sachin on 2015/04/11.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -30,7 +37,7 @@ struct LiplisApi
     /**
         ニュースを一件取得する
     */
-    static func getShortNews(postData : NSData!)->MsgShortNews
+    internal static func getShortNews(postData : NSData!)->MsgShortNews
     {
         return LiplisShortNewsJpJson.getShortNews(self.postJson(LiplisDefine.API_SHORT_NEWS_URL_NEW, postData: postData))
     }
@@ -38,7 +45,7 @@ struct LiplisApi
     /**
         ニュースリストを一件取得する
     */
-    static func getShortNewsList(postData : NSData!)->Array<MsgShortNews>
+    internal static func getShortNewsList(postData : NSData!)->Array<MsgShortNews>
     {
         return LiplisShortNewsJpJson.getShortNewsList(self.postJson(LiplisDefine.API_SHORT_NEWS_URL_LSIT, postData: postData))
     }
@@ -71,7 +78,7 @@ struct LiplisApi
         HTTP通信(同期)
         completionHandlerにはコールバック関数を指定する。
     */
-    static func post(url: String,postData : NSData!)->NSString{
+    internal static func post(url: String,postData : NSData!)->NSString{
         let URL = NSURL(string: url)!
         let request = NSMutableURLRequest(URL: URL, cachePolicy:NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
         request.HTTPMethod = "POST"
@@ -85,7 +92,7 @@ struct LiplisApi
         HTTP通信(同期)
         completionHandlerにはコールバック関数を指定する。
     */
-    static func postData(url: String,postData : NSData!)->NSData{
+    internal static func postData(url: String,postData : NSData!)->NSData{
         let URL = NSURL(string: url)!
         let request = NSMutableURLRequest(URL: URL, cachePolicy:NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
         
@@ -100,7 +107,7 @@ struct LiplisApi
         HTTP通信(同期JSON)
         completionHandlerにはコールバック関数を指定する。
     */
-    static func postJson(url: String,postData : NSData!)->JSON{
+    internal static func postJson(url: String,postData : NSData!)->JSON{
         let URL = NSURL(string: url)!
         var request = NSMutableURLRequest(URL: URL)
         request.HTTPMethod = "POST"
@@ -122,7 +129,7 @@ struct LiplisApi
     /**
         NSDataをストリングに変換する
     */
-    static func data2str(data: NSData?) -> NSString {
+    internal static func data2str(data: NSData?) -> NSString {
         return NSString(data: data!, encoding: NSUTF8StringEncoding)!
     }
     

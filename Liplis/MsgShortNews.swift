@@ -2,6 +2,13 @@
 //  MsgShortNews.swift
 //  Liplis
 //
+//  ニュースメッセージ
+//  Liplisはこのフォーマットを使っておしゃべりする
+//
+//アップデート履歴
+//   2015/04/11 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//
 //  Created by sachin on 2015/04/11.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -32,9 +39,9 @@ class MsgShortNews
         self.nameList = Array<String>()
         self.emotionList = Array<Int>()
         self.pointList = Array<Int>()
-        flgSuccess = false
-        url = ""
-        title = ""
+        self.flgSuccess = false
+        self.url = ""
+        self.title = ""
     }
     
     /**
@@ -45,9 +52,9 @@ class MsgShortNews
         self.nameList = Array<String>()
         self.emotionList = Array<Int>()
         self.pointList = Array<Int>()
-        flgSuccess = false
-        url = ""
-        title = ""
+        self.flgSuccess = false
+        self.url = ""
+        self.title = ""
         
         self.nameList.append(name)
         self.emotionList.append(emotion)

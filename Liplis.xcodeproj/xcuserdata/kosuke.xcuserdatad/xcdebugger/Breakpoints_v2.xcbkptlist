@@ -54,6 +54,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.LiplisWidget.touchesBegan (Liplis.LiplisWidget)(ObjectiveC.NSSet) -&gt; ()"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/LiplisWidget.swift"
                   timestampString = "450429344.455938"
                   startingColumnNumber = "9223372036854775807"
@@ -68,6 +69,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.LiplisWidget.(touchesBegan (Liplis.LiplisWidget) -&gt; (ObjectiveC.NSSet) -&gt; ()).(closure #1)"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/LiplisWidget.swift"
                   timestampString = "450429344.456255"
                   startingColumnNumber = "9223372036854775807"
@@ -86,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "ViewDeskTop"
             landmarkType = "3">
          </BreakpointContent>
@@ -102,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "450426707.709128"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "10"
-            endingLineNumber = "10"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "ViewDeskTop"
             landmarkType = "3">
             <Locations>
@@ -116,6 +118,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.ViewDeskTop.lblPointX.getter : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UILabel&gt;"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/ViewDeskTop.swift"
                   timestampString = "450428956.638002"
                   startingColumnNumber = "9223372036854775807"
@@ -130,6 +133,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.ViewDeskTop.lblPointX.setter : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UILabel&gt;"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/ViewDeskTop.swift"
                   timestampString = "450428956.63823"
                   startingColumnNumber = "9223372036854775807"
@@ -144,6 +148,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.ViewDeskTop.lblPointX.materializeForSet : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UILabel&gt;"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/ViewDeskTop.swift"
                   timestampString = "450428956.63839"
                   startingColumnNumber = "9223372036854775807"
@@ -158,6 +163,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.ViewDeskTop.init (Liplis.ViewDeskTop.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;ObjectiveC.NSBundle&gt;) -&gt; Liplis.ViewDeskTop"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/ViewDeskTop.swift"
                   timestampString = "450428956.638578"
                   startingColumnNumber = "9223372036854775807"
@@ -172,6 +178,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.ViewDeskTop.init (Liplis.ViewDeskTop.Type)() -&gt; Liplis.ViewDeskTop"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/ViewDeskTop.swift"
                   timestampString = "450428956.638768"
                   startingColumnNumber = "9223372036854775807"
@@ -186,6 +193,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.ViewDeskTop.init (Liplis.ViewDeskTop.Type)(coder : ObjectiveC.NSCoder) -&gt; Liplis.ViewDeskTop"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/ViewDeskTop.swift"
                   timestampString = "450428956.638947"
                   startingColumnNumber = "9223372036854775807"
@@ -236,11 +244,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisBody.swift"
-            timestampString = "452575952.030843"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "parser(_:didStartElement:namespaceURI:qualifiedName:attributes:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -252,11 +260,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisBody.swift"
-            timestampString = "452575952.030843"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
             landmarkName = "parser(_:foundCharacters:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -268,11 +276,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisBody.swift"
-            timestampString = "452564639.067702"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "init(url:bodyPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -284,11 +292,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisBody.swift"
-            timestampString = "452575952.030843"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "parser(_:didStartElement:namespaceURI:qualifiedName:attributes:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -300,11 +308,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisBody.swift"
-            timestampString = "452575952.030843"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "parser(_:foundCharacters:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -316,11 +324,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisDate.swift"
-            timestampString = "450859137.519203"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "getNormalFormatDate()"
             landmarkType = "5">
          </BreakpointContent>
@@ -348,11 +356,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisDate.swift"
-            timestampString = "450858936.042023"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "getNormalFormatDate()"
             landmarkType = "5">
          </BreakpointContent>
@@ -364,11 +372,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisDate.swift"
-            timestampString = "450858967.490231"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "getNormalFormatDate()"
             landmarkType = "5">
          </BreakpointContent>
@@ -412,11 +420,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisBody.swift"
-            timestampString = "452564639.067702"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "init(url:bodyPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -428,11 +436,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "init(url:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -444,11 +452,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "parser(_:didEndElement:namespaceURI:qualifiedName:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -460,11 +468,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "parser(_:didStartElement:namespaceURI:qualifiedName:attributes:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -476,11 +484,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "parser(_:didEndElement:namespaceURI:qualifiedName:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -492,11 +500,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "init(url:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -508,11 +516,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "parser(_:didStartElement:namespaceURI:qualifiedName:attributes:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -524,11 +532,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "parser(_:didEndElement:namespaceURI:qualifiedName:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -556,11 +564,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "parser(_:didEndElement:namespaceURI:qualifiedName:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -572,11 +580,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "parser(_:didStartElement:namespaceURI:qualifiedName:attributes:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -588,11 +596,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "loadXml(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -604,11 +612,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "loadXml(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -620,43 +628,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisChat.swift"
-            timestampString = "450868558.170726"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "parser(_:foundCharacters:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Liplis/ObjLiplisChat.swift"
-            timestampString = "450868558.170726"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "parser(_:didEndElement:namespaceURI:qualifiedName:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Liplis/ObjLiplisChat.swift"
-            timestampString = "450868558.170726"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "parser(_:didStartElement:namespaceURI:qualifiedName:attributes:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -668,11 +644,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "initLiplis()"
             landmarkType = "5">
          </BreakpointContent>
@@ -684,11 +660,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "parser(_:didEndElement:namespaceURI:qualifiedName:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -699,12 +675,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Liplis/ExArrayStackQueue.swift"
-            timestampString = "451068801.761817"
+            filePath = "Liplis/ExArray.swift"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "init(lst:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -716,11 +692,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ExRectContains.swift"
-            timestampString = "450892278.106761"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
             landmarkName = "contains(_:y:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -732,11 +708,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjTouch.swift"
-            timestampString = "450892278.106761"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "checkTouch(_:y:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -748,11 +724,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjTouch.swift"
-            timestampString = "450892278.106761"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "Contains(_:y:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -764,11 +740,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisTouch.swift"
-            timestampString = "450888981.367577"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "checkTouch(_:y:checkList:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -780,11 +756,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisTouch.swift"
-            timestampString = "450889632.422069"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "checkClick(_:y:checkList:mode:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -796,11 +772,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisTouch.swift"
-            timestampString = "450892278.106761"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "checkListContains(_:checkList:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -908,11 +884,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisBody.swift"
-            timestampString = "452700221.135213"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
+            startingLineNumber = "460"
+            endingLineNumber = "460"
             landmarkName = "getLiplisBodyId(_:point:eyeState:mouthState:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -924,11 +900,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisBody.swift"
-            timestampString = "452700221.135213"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
+            startingLineNumber = "461"
+            endingLineNumber = "461"
             landmarkName = "getLiplisBodyId(_:point:eyeState:mouthState:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -940,11 +916,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisBody.swift"
-            timestampString = "452700221.135213"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "458"
-            endingLineNumber = "458"
+            startingLineNumber = "474"
+            endingLineNumber = "474"
             landmarkName = "getLiplisBodyByEmotionList(_:pointList:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -988,11 +964,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisChat.swift"
-            timestampString = "451013942.698255"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "getGreet()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1004,11 +980,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisChat.swift"
-            timestampString = "451014054.099429"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "getGreet()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1020,11 +996,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisChat.swift"
-            timestampString = "451014099.248741"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "getGreet()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1324,11 +1300,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjBattery.swift"
-            timestampString = "451742625.014461"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "batteryCheck()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1457,8 +1433,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
             endingLineNumber = "113"
-            landmarkName = "AsyncGetNewsTask(_:)"
-            landmarkType = "5">
+            landmarkName = "LiplisNews"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1482,6 +1458,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.LiplisApi.postJson (Liplis.LiplisApi.Type)(Swift.String, postData : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSData&gt;) -&gt; Liplis.JSON"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/LiplisApi.swift"
                   timestampString = "451710978.256947"
                   startingColumnNumber = "9223372036854775807"
@@ -1496,6 +1473,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.LiplisApi.postJson (Liplis.LiplisApi.Type)(Swift.String, postData : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSData&gt;) -&gt; Liplis.JSON"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/LiplisApi.swift"
                   timestampString = "451710978.258858"
                   startingColumnNumber = "9223372036854775807"
@@ -1546,11 +1524,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisUtil.swift"
-            timestampString = "451956887.095909"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "bit2Int(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1562,11 +1540,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisUtil.swift"
-            timestampString = "451956887.095909"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "bit2Int(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1578,28 +1556,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisUtil.swift"
-            timestampString = "451956887.095909"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "bit2Int(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Liplis/ViewLog.swift"
-            timestampString = "453217945.57093"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "init(app:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1658,11 +1620,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "350"
-            endingLineNumber = "350"
+            startingLineNumber = "398"
+            endingLineNumber = "398"
             landmarkName = "onDragTrashEnd(_:touches:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1674,11 +1636,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "603"
-            endingLineNumber = "603"
+            startingLineNumber = "664"
+            endingLineNumber = "664"
             landmarkName = "delWidget(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1690,11 +1652,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjBody.swift"
-            timestampString = "452385212.415152"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "12"
-            endingLineNumber = "12"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
             landmarkName = "ObjBody"
             landmarkType = "3">
          </BreakpointContent>
@@ -1722,11 +1684,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisShortNewsListJpJson.swift"
-            timestampString = "451649497.830564"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "getShortNewsList(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1763,11 +1725,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisShortNewsListJpJson.swift"
-            timestampString = "451657861.089206"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "json2MsgShortNewsList(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1779,11 +1741,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisShortNewsListJpJson.swift"
-            timestampString = "451657861.089206"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "json2MsgShortNewsList(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1795,11 +1757,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisShortNewsListJpJson.swift"
-            timestampString = "451657861.089206"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "json2MsgShortNewsList(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1811,11 +1773,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisShortNewsListJpJson.swift"
-            timestampString = "451657861.089206"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "json2MsgShortNews(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1827,11 +1789,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisShortNewsListJpJson.swift"
-            timestampString = "451649647.160249"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "json2MsgShortNews(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1843,11 +1805,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisShortNewsListJpJson.swift"
-            timestampString = "451657861.089206"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "json2MsgShortNews(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1859,11 +1821,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisShortNewsListJpJson.swift"
-            timestampString = "451657861.089206"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "json2MsgShortNews(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1923,11 +1885,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
             landmarkName = "onDragTrashEnd(_:touches:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1955,11 +1917,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisShortNewsListJpJson.swift"
-            timestampString = "451703204.554546"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "json2MsgShortNewsList(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1987,11 +1949,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisSkin.swift"
-            timestampString = "452381456.580705"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "loadXml(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2115,11 +2077,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisChat.swift"
-            timestampString = "451731516.957814"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "348"
-            endingLineNumber = "348"
+            startingLineNumber = "361"
+            endingLineNumber = "361"
             landmarkName = "getBatteryInfo(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2131,11 +2093,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisChat.swift"
-            timestampString = "451732038.987779"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
             landmarkName = "getBatteryInfo(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2195,11 +2157,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjBattery.swift"
-            timestampString = "451742625.014461"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "getBatteryImage()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2243,11 +2205,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisUtil.swift"
-            timestampString = "451956887.095909"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "getAppVersion()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2259,11 +2221,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisChat.swift"
-            timestampString = "451753900.250169"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "json2MsgShortNews(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2275,11 +2237,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisKeyManager.swift"
-            timestampString = "452694910.385105"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "saveKeyList()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2291,11 +2253,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreferenceBase.swift"
-            timestampString = "451983430.479582"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "ObjPreferenceBase"
             landmarkType = "3">
          </BreakpointContent>
@@ -2307,11 +2269,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreference.swift"
-            timestampString = "452244763.131564"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "init()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2323,11 +2285,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreference.swift"
-            timestampString = "452244763.131564"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "init(key:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2339,11 +2301,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "478"
-            endingLineNumber = "478"
+            startingLineNumber = "526"
+            endingLineNumber = "526"
             landmarkName = "addNewWidget(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2355,11 +2317,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/JsonManager.swift"
-            timestampString = "451983430.479582"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "getJson()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2371,11 +2333,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/JsonManager.swift"
-            timestampString = "451983430.479582"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "getJson()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2387,11 +2349,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreference.swift"
-            timestampString = "452244763.131564"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "saveSetting()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2403,11 +2365,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreference.swift"
-            timestampString = "452244763.131564"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "init(key:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2419,11 +2381,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "initClass()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2435,11 +2397,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisKeyManager.swift"
-            timestampString = "451967667.777615"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "init()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2451,11 +2413,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisKeyManager.swift"
-            timestampString = "452694910.385105"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "getKeyList()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2467,11 +2429,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisKeyManager.swift"
-            timestampString = "452694910.385105"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "saveKeyList()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2483,11 +2445,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "480"
-            endingLineNumber = "480"
+            startingLineNumber = "531"
+            endingLineNumber = "531"
             landmarkName = "addNewWidget(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2499,11 +2461,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisKeyManager.swift"
-            timestampString = "452694910.385105"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "getKeyList()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2515,11 +2477,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreferenceBase.swift"
-            timestampString = "451974026.548438"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11"
-            endingLineNumber = "11"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "ObjPreferenceBase"
             landmarkType = "3">
          </BreakpointContent>
@@ -2531,11 +2493,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/JsonManager.swift"
-            timestampString = "451980599.72367"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "loadJson()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2547,11 +2509,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/JsonManager.swift"
-            timestampString = "451980599.72367"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "loadJson()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2563,11 +2525,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/JsonManager.swift"
-            timestampString = "451983430.479582"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "getJson()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2579,11 +2541,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisKeyManager.swift"
-            timestampString = "451974985.980455"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "addKey(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2595,11 +2557,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreference.swift"
-            timestampString = "452244763.131564"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "saveSetting()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2611,11 +2573,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/JsonManager.swift"
-            timestampString = "451983430.479582"
+            timestampString = "453528713.607214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "getJson()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2627,11 +2589,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreference.swift"
-            timestampString = "452244763.131564"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "init(key:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2643,11 +2605,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/JsonManager.swift"
-            timestampString = "451980585.723746"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "init(key:valueKeyList:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2659,11 +2621,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/JsonManager.swift"
-            timestampString = "451980697.320377"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "loadJson()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2675,11 +2637,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/JsonManager.swift"
-            timestampString = "451983430.479582"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "JsonManager"
             landmarkType = "3">
          </BreakpointContent>
@@ -2691,11 +2653,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreferenceBase.swift"
-            timestampString = "451983430.479582"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "getJsonFromString(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2723,11 +2685,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "initLiplis()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2739,11 +2701,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreference.swift"
-            timestampString = "452244763.131564"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "init(key:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2755,11 +2717,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/JsonManager.swift"
-            timestampString = "451984257.75694"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "init(key:valueKeyList:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2803,11 +2765,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisKeyManager.swift"
-            timestampString = "451984515.185429"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "delKey(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2819,11 +2781,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/JsonManager.swift"
-            timestampString = "451984575.244281"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "init(key:valueKeyList:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2835,11 +2797,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "initLiplis()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2867,28 +2829,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "702"
-            endingLineNumber = "702"
+            startingLineNumber = "763"
+            endingLineNumber = "763"
             landmarkName = "desktopWebSetUrl(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Liplis/ViewWidgetSetting.swift"
-            timestampString = "452222981.508916"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "init(widget:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2915,11 +2861,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewWidgetSetting.swift"
-            timestampString = "452471545.937223"
+            timestampString = "453517832.322039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "513"
+            endingLineNumber = "513"
             landmarkName = "tableView(_:estimatedHeightForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2931,11 +2877,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewWidgetSetting.swift"
-            timestampString = "452471545.937223"
+            timestampString = "453517832.322039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "519"
+            endingLineNumber = "519"
             landmarkName = "tableView(_:heightForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2947,11 +2893,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewWidgetSetting.swift"
-            timestampString = "452471545.937223"
+            timestampString = "453517832.322039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "viewWillAppear(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2963,11 +2909,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewWidgetSetting.swift"
-            timestampString = "452471545.937223"
+            timestampString = "453517832.322039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "356"
-            endingLineNumber = "356"
+            startingLineNumber = "528"
+            endingLineNumber = "528"
             landmarkName = "selectCheck(_:val:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2979,11 +2925,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewWidgetSetting.swift"
-            timestampString = "452471545.937223"
+            timestampString = "453517832.322039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
+            startingLineNumber = "533"
+            endingLineNumber = "533"
             landmarkName = "selectVal(_:val:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2995,11 +2941,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreference.swift"
-            timestampString = "452244763.131564"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
             landmarkName = "setDataFromIdx(_:val:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3043,11 +2989,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewWidgetSetting.swift"
-            timestampString = "452471545.937223"
+            timestampString = "453517832.322039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
+            startingLineNumber = "495"
+            endingLineNumber = "495"
             landmarkName = "settingCell(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3235,11 +3181,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "init(app:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3251,11 +3197,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "onClock(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3267,11 +3213,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewSetting.swift"
-            timestampString = "452700055.100781"
+            timestampString = "453480826.013239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
+            startingLineNumber = "374"
+            endingLineNumber = "374"
             landmarkName = "settingCell(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3299,11 +3245,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewSetting.swift"
-            timestampString = "452700055.100781"
+            timestampString = "453480826.013239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "415"
+            endingLineNumber = "415"
             landmarkName = "selectCheck(_:val:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3346,22 +3292,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Liplis/ViewSetting.swift"
-            timestampString = "452437464.120171"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "initView()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreferenceLiplis.swift"
             timestampString = "452263041.18969"
             startingColumnNumber = "9223372036854775807"
@@ -3379,11 +3309,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisCharDataManager.swift"
-            timestampString = "452503517.311229"
+            timestampString = "453334546.498562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "initSkinDataList()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3395,11 +3325,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisCharDataManager.swift"
-            timestampString = "452503517.311229"
+            timestampString = "453334546.498562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "initSkinDataList()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3411,11 +3341,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisSkinData.swift"
-            timestampString = "452519254.973643"
+            timestampString = "453334546.498562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "init(charName:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3554,58 +3484,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Liplis/ViewWidgetSetting.swift"
-            timestampString = "452471545.937223"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
-            landmarkName = "setSize()"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Liplis.ViewWidgetSetting.setSize (Liplis.ViewWidgetSetting)() -&gt; ()"
-                  moduleName = "Liplis"
-                  urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/ViewWidgetSetting.swift"
-                  timestampString = "452445407.208328"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "391"
-                  endingLineNumber = "391"
-                  offsetFromSymbolStart = "2680">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Liplis.ViewWidgetSetting.setSize (Liplis.ViewWidgetSetting)() -&gt; ()"
-                  moduleName = "Liplis"
-                  urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/ViewWidgetSetting.swift"
-                  timestampString = "452445407.208529"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "391"
-                  endingLineNumber = "391"
-                  offsetFromSymbolStart = "3480">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Liplis/ViewWidgetMenu.swift"
-            timestampString = "452565252.399015"
+            timestampString = "453517832.322039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
             landmarkName = "settingCell(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3617,11 +3501,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewWidgetMenu.swift"
-            timestampString = "452565252.399015"
+            timestampString = "453517832.322039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
             landmarkName = "settingCell(_:)"
             landmarkType = "5">
             <Locations>
@@ -3631,6 +3515,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.ViewWidgetMenu.settingCell (Liplis.ViewWidgetMenu)(ObjectiveC.NSIndexPath) -&gt; Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UITableViewCell&gt;"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/ViewWidgetMenu.swift"
                   timestampString = "452453801.071225"
                   startingColumnNumber = "9223372036854775807"
@@ -3645,6 +3530,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Liplis.ViewWidgetMenu.settingCell (Liplis.ViewWidgetMenu)(ObjectiveC.NSIndexPath) -&gt; Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UITableViewCell&gt;"
                   moduleName = "Liplis"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kosuke/Documents/Liplis/Liplis/ViewWidgetMenu.swift"
                   timestampString = "452453801.071431"
                   startingColumnNumber = "9223372036854775807"
@@ -3663,11 +3549,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
+            startingLineNumber = "516"
+            endingLineNumber = "516"
             landmarkName = "addNewWidget(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3684,8 +3570,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "24"
             endingLineNumber = "24"
-            landmarkName = "init(desk:os:lpsSkinData:)"
-            landmarkType = "5">
+            landmarkName = "LiplisWidgetDefault"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3695,11 +3581,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjLiplisBody.swift"
-            timestampString = "452526356.921715"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "ObjLiplisBody"
             landmarkType = "3">
          </BreakpointContent>
@@ -3743,11 +3629,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewLog.swift"
-            timestampString = "453217945.57093"
+            timestampString = "453510768.120864"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "moveLowerMostPart()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3775,11 +3661,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjPreference.swift"
-            timestampString = "452567673.480689"
+            timestampString = "453534585.871587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
             landmarkName = "getNewsFlg()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3823,11 +3709,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ObjBattery.swift"
-            timestampString = "452602004.11993"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "batteryCheck()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3855,11 +3741,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/LiplisKeyManager.swift"
-            timestampString = "452694553.323143"
+            timestampString = "453530141.474877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "delKey(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3871,11 +3757,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "617"
-            endingLineNumber = "617"
+            startingLineNumber = "678"
+            endingLineNumber = "678"
             landmarkName = "delWidgetAll()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3919,11 +3805,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewDeskTop.swift"
-            timestampString = "452701467.568022"
+            timestampString = "453480644.480241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "touchesEnded(_:withEvent:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3935,11 +3821,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liplis/ViewLog.swift"
-            timestampString = "453217945.57093"
+            timestampString = "453509903.657072"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3950,13 +3836,45 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Liplis/ViewWeb.swift"
-            timestampString = "452821130.501559"
+            filePath = "Liplis/ViewSetting.swift"
+            timestampString = "453480826.013239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "initView()"
+            startingLineNumber = "365"
+            endingLineNumber = "365"
+            landmarkName = "settingCell(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Liplis/ViewSettingMenu.swift"
+            timestampString = "453526271.602099"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "ViewSettingMenu"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Liplis/ObjTouch.swift"
+            timestampString = "453534585.871587"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "getChat()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

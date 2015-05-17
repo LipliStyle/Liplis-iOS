@@ -2,17 +2,24 @@
 //  LiplisFileManager.swift
 //  Liplis
 //
+//  iOSのファイルにアクセスするためのクラス
+//
+//アップデート履歴
+//   2015/05/03 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0　リファクタリング
+//
 //  Created by sachin on 2015/05/03.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
-
 import Foundation
+
 struct LiplisFileManager
 {
     /**
     指定のフォルダにある全てのファイルを取得する
     */
-    static func getAllFileNamesFromDocumentPath(path: String) -> Array<String>
+    internal static func getAllFileNamesFromDocumentPath(path: String) -> Array<String>
     {
         //初期リスト
         var resList : Array<String> = []
@@ -20,7 +27,7 @@ struct LiplisFileManager
         //結果を返す
         return getAllFileNamesFromTargetPath(path,inList: resList)
     }
-    static func getAllFileNamesFromTargetPath(path: String, inList : Array<String>) -> Array<String>
+    internal static func getAllFileNamesFromTargetPath(path: String, inList : Array<String>) -> Array<String>
     {
         //指定パスのファイル/ディレクトリのリスト
         var contents : Array<String>! = contentsOfDirectoryAtPath(path)
@@ -53,7 +60,7 @@ struct LiplisFileManager
     /**
     ドキュメントパスにある全てのファイルを取得する(サブフォルダも含めて全て取得)
     */
-    static func getAllFileNamesFromDocumentPath() -> Array<String>
+    internal static func getAllFileNamesFromDocumentPath() -> Array<String>
     {
         //ドキュメントパスの取得
         let documentsPath = getDocumentRoot()
@@ -64,7 +71,7 @@ struct LiplisFileManager
     /**
     ドキュメントパスにある全てのファイルを取得する フォルダ上のみ
     */
-    static func getFileNamesDocumentPath() -> Array<String>!
+    internal static func getFileNamesDocumentPath() -> Array<String>!
     {
         return contentsOfDirectoryAtPath(getDocumentRoot())
     }
@@ -73,7 +80,7 @@ struct LiplisFileManager
     指定のフォルダにある全てのファイルを取得する
     (最もプリミティブな処理)
     */
-    static func contentsOfDirectoryAtPath(path: String) -> Array<String>!{
+    internal static func contentsOfDirectoryAtPath(path: String) -> Array<String>!{
         var error: NSError? = nil
         let fileManager = NSFileManager.defaultManager()
         let contents = fileManager.contentsOfDirectoryAtPath(path, error: &error)
@@ -81,7 +88,7 @@ struct LiplisFileManager
             return nil
         }
         else {
-            let filenames = contents as Array<String>
+            let filenames = contents as! Array<String>
             return filenames
         }
     }
@@ -89,19 +96,19 @@ struct LiplisFileManager
     /**
     共有フォルダのパスを返す
     */
-    static func getDocumentRoot()->String
+    internal static func getDocumentRoot()->String
     {
-        return NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        return NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
 
     }
     
     /**
     共有フォルダのURLを返す
     */
-    static func getDocumentRootUrl()->NSURL
+    internal static func getDocumentRootUrl()->NSURL
     {
         let fileManager = NSFileManager.defaultManager()
-        return fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as NSURL
+        return fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]as! NSURL
         
         //配下フォルダへのアクセス例
         //url2 = url.URLByAppendingPathComponent("LiliRenew/skin.xml")

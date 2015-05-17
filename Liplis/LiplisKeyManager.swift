@@ -2,6 +2,13 @@
 //  JsonListManager.swift
 //  Liplis
 //
+//  Liplisウィジェットの保存キーの管理を行うクラス
+//
+//アップデート履歴
+//   2015/04/27 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0　リファクタリング
+//
 //  Created by sachin on 2015/04/27.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -13,33 +20,33 @@ class LiplisKeyManager : ObjPreferenceBase
 {
     ///=============================
     /// キーリスト
-    var keyList : Array<String> = []
+    internal var keyList : Array<String> = []
     
     ///=============================
     /// 書き込みキー
-    let JSON_KEY = "keylist"
+    internal let JSON_KEY = "keylist"
     
     /**
     コンストラクター
     */
-    override init()
+    internal override init()
     {
         //親の初期化
         super.init()
         
         //復活させる
-        getKeyList()
+        self.getKeyList()
     }
     
     /**
     キーを追加する
     */
-    func addKey(key : String)
+    internal func addKey(key : String)
     {
         var flgHit : Bool = false
         
         //キーの存在チェック
-        for str in keyList
+        for str in self.keyList
         {
             if str == key
             {
@@ -50,8 +57,8 @@ class LiplisKeyManager : ObjPreferenceBase
         //該当キーがなければ追加する
         if !flgHit
         {
-            keyList.append(key)
-            saveKeyList()
+            self.keyList.append(key)
+            self.saveKeyList()
         }
 
     }
@@ -59,16 +66,16 @@ class LiplisKeyManager : ObjPreferenceBase
     /**
     キーを削除する
     */
-    func delKey(pKey : String)
+    internal func delKey(pKey : String)
     {
         var idx : Int = 0
         
-        for key in keyList
+        for key in self.keyList
         {
             if(key == pKey)
             {
-                keyList.removeAtIndex(idx)
-                saveKeyList()
+                self.keyList.removeAtIndex(idx)
+                self.saveKeyList()
                 return
             }
             
@@ -79,16 +86,16 @@ class LiplisKeyManager : ObjPreferenceBase
     /**
     キーを削除する
     */
-    func delAllKey()
+    internal func delAllKey()
     {
-        keyList.removeAll(keepCapacity: false)
-        saveKeyList()
+        self.keyList.removeAll(keepCapacity: false)
+        self.saveKeyList()
     }
     
     /**
     キーリストを保存する
     */
-    func saveKeyList()
+    internal func saveKeyList()
     {
         var jsonStr : StringBuilder = StringBuilder()
         
@@ -97,21 +104,21 @@ class LiplisKeyManager : ObjPreferenceBase
         jsonStr.append(JSON_KEY)
         jsonStr.append("\":[")
         
-        if keyList.count >= 2
+        if self.keyList.count >= 2
         {
             //最後の1個以外全部入れる
             for idx in 0...keyList.count-2
             {
-                jsonStr.append("\"" + keyList[idx] + "\",")
+                jsonStr.append("\"" + self.keyList[idx] + "\",")
             }
             
             //最後の1個を入れる
-            jsonStr.append("\"" + keyList[keyList.count-1] + "\"")
+            jsonStr.append("\"" + self.keyList[keyList.count-1] + "\"")
         }
         else if keyList.count == 1
         {
             //要素が1個の場合
-            jsonStr.append("\"" + keyList[0] + "\"")
+            jsonStr.append("\"" + self.keyList[0] + "\"")
         }
         else
         {
@@ -128,7 +135,7 @@ class LiplisKeyManager : ObjPreferenceBase
     /**
     キーリストをプリファレンスから復元し、取得する
     */
-    func getKeyList()
+    internal func getKeyList()
     {
         //キーリストの初期化
         keyList = []
@@ -144,7 +151,7 @@ class LiplisKeyManager : ObjPreferenceBase
             //回して復元
             for (idx:String,subJson : JSON) in json[JSON_KEY]
             {
-                keyList.append(subJson.description)
+                self.keyList.append(subJson.description)
             }
         }
 

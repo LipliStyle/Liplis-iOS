@@ -2,6 +2,13 @@
 //  LiplisApiChat.swift
 //  Liplis
 //
+//  LiplisのチャットAPIにアクセスする
+//
+//アップデート履歴
+//   2015/04/26 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/14 ver1.3.0　リファクタリング
+//
 //  Created by sachin on 2015/04/26.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -11,15 +18,15 @@ class LiplisApiChat
 {
     ///=============================
     /// プロパティ
-    var mode : String! = ""
-    var context : String! = ""
+    internal var mode : String! = ""
+    internal var context : String! = ""
     
     //============================================================
     //
     //初期化処理
     //
     //============================================================
-    init()
+    internal init()
     {
         mode = ""
         context = ""
@@ -30,7 +37,7 @@ class LiplisApiChat
     //送受信処理
     //
     //============================================================
-    func apiPost(uid : String, toneUrl : String, version : String, sentence : String)->MsgShortNews
+    internal func apiPost(uid : String, toneUrl : String, version : String, sentence : String)->MsgShortNews
     {
         var result : MsgShortNews = MsgShortNews()
         var nameValuePair : NameValuePair = NameValuePair()

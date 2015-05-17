@@ -2,6 +2,13 @@
 //  ObjBody.swift
 //  Liplis
 //
+//  一つの立ち絵インスタンス(6つの画像セット)
+//
+//アップデート履歴
+//   2015/04/12 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0 リファクタリング
+//
 //  Created by sachin on 2015/04/12.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -9,14 +16,14 @@ import UIKit
 class ObjBody {
     //=================================
     //プロパティ
-    var emotion : String
-    var eye_1_o : String
-    var eye_1_c : String
-    var eye_2_o : String
-    var eye_2_c : String
-    var eye_3_o : String
-    var eye_3_c : String
-    var bodyPath : String
+    internal var emotion : String
+    internal var eye_1_o : String
+    internal var eye_1_c : String
+    internal var eye_2_o : String
+    internal var eye_2_c : String
+    internal var eye_3_o : String
+    internal var eye_3_c : String
+    internal var bodyPath : String
 
     
     //============================================================
@@ -27,7 +34,7 @@ class ObjBody {
     /**
     デフォルトイニシャライザ
     */
-    init()
+    internal init()
     {
         self.emotion = ""
         self.eye_1_o = ""
@@ -42,7 +49,7 @@ class ObjBody {
     /**
     イニシャライザ
     */
-    init(bodyPath : String)
+    internal init(bodyPath : String)
     {
         self.emotion = ""
         self.eye_1_o = ""
@@ -59,7 +66,7 @@ class ObjBody {
     //一般処理
     //
     //============================================================
-    func getLiplisBodyId(eyeState : Int, mouthState : Int)->String
+    internal func getLiplisBodyId(eyeState : Int, mouthState : Int)->String
     {
         if(mouthState == 2)
         {
@@ -95,7 +102,7 @@ class ObjBody {
     
     
     
-    func getLiplisBodyImgIdIns(eyeState : Int, mouthState : Int)->UIImage
+    internal func getLiplisBodyImgIdIns(eyeState : Int, mouthState : Int)->UIImage
     {
         if(mouthState == 2)
         {
@@ -129,7 +136,7 @@ class ObjBody {
         }
     }
     
-    func getLiplisBodyImgIdInsDefault(eyeState : Int, mouthState : Int)->UIImage
+    internal func getLiplisBodyImgIdInsDefault(eyeState : Int, mouthState : Int)->UIImage
     {
         if(mouthState == 2)
         {

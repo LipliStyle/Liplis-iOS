@@ -2,6 +2,17 @@
 //  ViewCharacter.swift
 //  Liplis
 //
+//  キャラクター選択画面
+//
+//アップデート履歴
+//   2015/04/20 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/14 ver1.3.0　キャラクター画面切り替え時、再ロードするように修正
+//                        タグの文字を変更
+//                        画面回転時の処理変更
+//   2015/05/16 ver1.4.0　swift1.2対応
+//
+//
 //  Created by sachin on 2015/04/20.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -10,22 +21,22 @@ import UIKit
 class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSource {
     ///=============================
     ///アプリケーションデリゲート
-    var app : AppDelegate!
+    private var app : AppDelegate!
     
     ///=============================
     ///ビュータイトル
-    var viewTitle = "Liplisキャラクター"
-    var tagTitle = "キャラクター"
+    private var viewTitle = "Liplisキャラクター"
+    private var tagTitle = "キャラクター"
     
     ///=============================
     ///画面要素
-    var lblTitle : UILabel!
-    var tblCharList: UITableView!
+    private var lblTitle : UILabel!
+    private var tblCharList: UITableView!
     
     ///=============================
     ///オフセット定数
-    let labelHight : CGFloat = 60.0
-    let headerHight : CGFloat = 25.0
+    private let labelHight : CGFloat = 60.0
+    private let headerHight : CGFloat = 25.0
     
     //============================================================
     //
@@ -35,11 +46,11 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
     /*
     コンストラクター
     */
-    init(app : AppDelegate) {
-        super.init()
+    internal convenience init(app : AppDelegate) {
+        self.init(nibName: nil, bundle: nil)
         self.app = app
-        initClass()
-        initView()
+        self.initClass()
+        self.initView()
     }
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -53,7 +64,7 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
     /*
     クラスの初期化
     */
-    func initClass()
+    private func initClass()
     {
         
     }
@@ -61,59 +72,50 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
     /*
     アクティビティの初期化
     */
-    func initView()
+    private func initView()
     {
-        self.view.opaque = true
-        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)
-        var img : UIImage = UIImage(named : "sel_char.png")!
-        self.tabBarItem = UITabBarItem(title: "Character",image: img, tag: 3)
+        //ビューの初期化
+        var img : UIImage = UIImage(named : ObjR.imgIconChar)!                   //アイコン取得
+        self.view.opaque = true                                                     //背景透過許可
+        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)   //白透明背景
+        self.tabBarItem = UITabBarItem(title: self.tagTitle,image: img, tag: 3)     //タブ設定
         
-        // Viewの高さと幅を取得する.
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
+        //タイトルラベルの作成
+        self.createLblTitle()
         
+        //テーブル作成
+        self.createTableView()
+        
+        //サイズ調整
+        self.setSize()
+    }
+    
+    /*
+    タイトルラベルの初期化
+    */
+    private func createLblTitle()
+    {
         // Labelを作成.
-        lblTitle = UILabel(frame: CGRectMake(0,0,displayWidth,labelHight))
-        lblTitle.backgroundColor = UIColor.hexStr("ffa500", alpha: 255)
-        lblTitle.text = viewTitle
-        lblTitle.textColor = UIColor.whiteColor()
-        lblTitle.shadowColor = UIColor.grayColor()
-        lblTitle.textAlignment = NSTextAlignment.Center
-        lblTitle.layer.position = CGPoint(x: self.view.bounds.width/2,y: headerHight)
-        self.view.addSubview(lblTitle)
-        
-        // TableViewの生成する(status barの高さ分ずらして表示).
-        tblCharList = UITableView(frame: CGRect(x: 0, y: 0, width: displayWidth, height: displayHeight))
-        tblCharList.registerClass(UITableViewCell.self, forCellReuseIdentifier: "CharCell")
-        tblCharList.dataSource = self
-        tblCharList.delegate = self
-        self.view.addSubview(tblCharList)
-        
-        setSize()
+        self.lblTitle = UILabel(frame: CGRectMake(0,0,0,0))
+        self.lblTitle.backgroundColor = UIColor.hexStr("ffa500", alpha: 255)
+        self.lblTitle.text = self.viewTitle
+        self.lblTitle.textColor = UIColor.whiteColor()
+        self.lblTitle.shadowColor = UIColor.grayColor()
+        self.lblTitle.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(self.lblTitle)
     }
     
-    func loadCharList()
+    /*
+    キャラクター要素テーブルの初期化
+    */
+    private func createTableView()
     {
-        let width = self.view.frame.maxX, height = self.view.frame.maxY
-        
-        
-        // 表示する画像を設定する.
-        let myImage = UIImage(named: "normal_1_1_1")
-        var myImageView: UIImageView! = UIImageView(frame: CGRectMake(0,0,240,300))
-        myImageView.image = myImage
-        myImageView.frame = CGRectMake(CGFloat(0) * width + width/2 - myImageView.frame.width/2, height/2 - myImageView.frame.height/2, myImageView.frame.width, myImageView.frame.height)
-        myImageView.userInteractionEnabled = true
-        
-        // 表示する画像を設定する.
-        let myImage2 = UIImage(named: "normal_4_1_1")
-        var myImageView2 : UIImageView! = UIImageView(frame: CGRectMake(0,0,240,300))
-        myImageView2.image = myImage2
-        myImageView2.frame = CGRectMake(CGFloat(1) * width + width/2 - myImageView2.frame.width/2, height/2 - myImageView2.frame.height/2, myImageView2.frame.width, myImageView2.frame.height)
-        myImageView2.userInteractionEnabled = true
-        
-
+        self.tblCharList = UITableView(frame: CGRectMake(0,0,0,0))
+        self.tblCharList.registerClass(UITableViewCell.self, forCellReuseIdentifier: "CharCell")
+        self.tblCharList.dataSource = self
+        self.tblCharList.delegate = self
+        self.view.addSubview(tblCharList)
     }
-    
     
     //============================================================
     //
@@ -124,61 +126,65 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
     /*
     ロードイベント
     */
-    override func viewDidLoad() {
+    internal override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     /*
     ビュー呼び出し時
     */
-    override func viewWillAppear(animated: Bool) {
+    internal override func viewWillAppear(animated: Bool) {
         //リスト再読み込み
-        app.cman.skinDataListReload()
+        self.app.cman.skinDataListReload()
+        self.tblCharList.reloadData()
         
         //サイズ設定
-        setSize()
+        self.setSize()
     }
     
     /*
     メモリーワーニング
     */
-    override func didReceiveMemoryWarning() {
+    internal override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     /*
     Cellが選択された際に呼び出されるデリゲートメソッド.
     */
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    internal func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("Num: \(indexPath.row)")
-        println("Value: \(app.cman.skinDataList[indexPath.row].charName)")
+        println("Value: \(self.app.cman.skinDataList[indexPath.row].charName)")
         
+        //デスクトップに移動し、洗濯したウィジェットを追加する
         self.tabBarController?.selectedIndex=0
-        self.app.activityDeskTop.addNewWidget(app.cman.skinDataList[indexPath.row])
+        self.app.activityDeskTop.addNewWidget(self.app.cman.skinDataList[indexPath.row])
     }
     
     /*
     Cellの総数を返すデータソースメソッド.
     (実装必須)
     */
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return app.cman.skinDataList.count
+    internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.app.cman.skinDataList.count
     }
     
     /*
     Cellに値を設定するデータソースメソッド.
     (実装必須)
     */
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.Subtitle,reuseIdentifier:"CharCell")
-        cell.textLabel!.text = app.cman.skinDataList[indexPath.row].charName
-        cell.detailTextLabel!.text = app.cman.skinDataList[indexPath.row].charDescription
-        cell.imageView!.image = app.cman.skinDataList[indexPath.row].imgIco
+        cell.textLabel!.text = self.app.cman.skinDataList[indexPath.row].charName
+        cell.detailTextLabel!.text = self.app.cman.skinDataList[indexPath.row].charDescription
+        cell.imageView!.image = self.app.cman.skinDataList[indexPath.row].imgIco
         return cell;
-        
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    /*
+    テーブルビュー高さ設定
+    */
+    internal func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 80
     }
     
@@ -191,7 +197,7 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
     /*
     サイズ設定
     */
-    func setSize()
+    private func setSize()
     {
         // 現在のデバイスの向きを取得.
         let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
@@ -199,36 +205,21 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // 向きの判定.
         if UIDeviceOrientationIsLandscape(deviceOrientation) {
-            
             //横向きの判定.
-            let displayWidth: CGFloat = self.view.frame.width
-            let displayHeight: CGFloat = self.view.frame.height
-            let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-            self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: labelHight)
-            
-            // スクロールの画面サイズを指定する.
-            let width = self.view.frame.maxX
-            let height = self.view.frame.maxY
-
-            
-            self.tblCharList.frame = CGRect(x: 0, y: self.lblTitle.frame.height, width: displayWidth, height: displayHeight - self.lblTitle.frame.height)
    
         } else if UIDeviceOrientationIsPortrait(deviceOrientation){
-            
             //縦向きの判定.
-            let displayWidth: CGFloat = self.view.frame.width
-            let displayHeight: CGFloat = self.view.frame.height
-            let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-            self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: labelHight)
-            
-            // スクロールの画面サイズを指定する.
-            let width = self.view.frame.maxX
-            let height = self.view.frame.maxY
-
-            self.tblCharList.frame = CGRect(x: 0, y: self.lblTitle.frame.height, width: displayWidth, height: displayHeight - self.lblTitle.frame.height)
-            
-            
         }
+        
+        //サイズ設定
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        self.lblTitle.frame = CGRectMake(0, 0, displayWidth, self.labelHight)
+        self.tblCharList.frame = CGRectMake(0, self.lblTitle.frame.height, displayWidth, displayHeight - self.lblTitle.frame.height - LiplisDefine.futterHight)
+        
+        //テーブルのリロード
+        self.tblCharList.reloadData()
     }
     
     
@@ -242,11 +233,10 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
     画面の向き変更時イベント
     */
     override func viewDidAppear(animated: Bool) {
-        
         // 端末の向きがかわったらNotificationを呼ばす設定.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOrientationChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
-    func onOrientationChange(notification: NSNotification){
-        setSize()
+    internal func onOrientationChange(notification: NSNotification){
+        self.setSize()
     }
 }

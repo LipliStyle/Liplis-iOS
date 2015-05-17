@@ -2,6 +2,12 @@
 //  UIColorExHexStr.swift
 //  Liplis
 //
+//  UIColorの拡張
+//
+//アップデート履歴
+//   2015/04/22 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//
 //  Created by sachin on 2015/04/22.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //

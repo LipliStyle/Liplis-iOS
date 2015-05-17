@@ -2,6 +2,11 @@
 //  CtvCellWidgetTopicRadio.swift
 //  Liplis
 //
+//アップデート履歴
+//   2015/05/05 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0　リファクタリング
+//
 //  Created by sachin on 2015/05/05.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -11,26 +16,26 @@ class CtvCellWidgetTopicRadio : UITableViewCell
 {
     ///=============================
     ///カスタムセル要素
-    var parView : ViewWidgetTopicSetting!
-    var childList : Array<MsgSettingViewCell>! = []
+    internal var parView : ViewWidgetTopicSetting!
+    internal var childList : Array<MsgSettingViewCell>! = []
     
     ///=============================
     ///イメージ
-    let imgOn : UIImage!
-    let imgOff : UIImage!
+    internal var imgOn : UIImage!
+    internal var imgOff : UIImage!
     
     ///=============================
     ///レイアウト情報
-    var viewWidth : CGFloat! = 0
-    var flgInit : Bool = false
+    internal var viewWidth : CGFloat! = 0
+    internal var flgInit : Bool = false
     
     ///=============================
     ///設定インデックス
-    var settingIdx : Int! = -1
+    internal var settingIdx : Int! = -1
     
     ///=============================
     ///設定値
-    var val : Int! = 0
+    internal var val : Int! = 0
     
     //============================================================
     //
@@ -42,8 +47,8 @@ class CtvCellWidgetTopicRadio : UITableViewCell
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        imgOn = UIImage(named: "radioOn.png")!
-        imgOff = UIImage(named: "radioOff.png")!
+        self.imgOn = UIImage(named: ObjR.imgRadioOn)!
+        self.imgOff = UIImage(named: ObjR.imgRadioOff)!
     }
     
     required init(coder aDecoder: NSCoder)
@@ -55,15 +60,15 @@ class CtvCellWidgetTopicRadio : UITableViewCell
     /*
     ビューを設定する
     */
-    func setView(parView : ViewWidgetTopicSetting)
+    internal func setView(parView : ViewWidgetTopicSetting)
     {
         self.parView = parView
     }
-    
+
     /*
     要素の位置を調整する
     */
-    func setRadio(viewWidth : CGFloat, childList : Array<MsgSettingViewCell>)
+    internal func setRadio(viewWidth : CGFloat, childList : Array<MsgSettingViewCell>)
     {
         self.viewWidth = viewWidth
         
@@ -84,7 +89,7 @@ class CtvCellWidgetTopicRadio : UITableViewCell
             baseLocationY = CGFloat(5 + idx * 45)
             
             let views = self.subviews
-            for (parts: UIView) in views as [UIView]
+            for (parts: UIView) in views as! [UIView]
             {
                 //対象ウィジェットのパーツだった場合、位置調整する
                 if(parts.hash == hashVal.hash)
@@ -99,7 +104,7 @@ class CtvCellWidgetTopicRadio : UITableViewCell
     /*
     セルの初期化
     */
-    func initCell()
+    internal func initCell()
     {
         var baseLocationY : CGFloat = 5
         var checkBoxLocationX : CGFloat = CGFloat(self.viewWidth - 50 - 9)
@@ -129,7 +134,7 @@ class CtvCellWidgetTopicRadio : UITableViewCell
             btnCheckBox.layer.masksToBounds = true
             btnCheckBox.setTitle("", forState: UIControlState.Normal)
             btnCheckBox.addTarget(self, action: "onClickCheck:", forControlEvents: .TouchDown)
-            btnCheckBox.setImage(UIImage(named: "radioOff.png"), forState: UIControlState.Normal)
+            btnCheckBox.setImage(UIImage(named: ObjR.imgRadioOff), forState: UIControlState.Normal)
             btnCheckBox.layer.cornerRadius = 3.0
             childList[idx].hash = btnCheckBox.hash
             self.contentView.addSubview(btnCheckBox)
@@ -143,7 +148,7 @@ class CtvCellWidgetTopicRadio : UITableViewCell
     /*
     ラジオボタンに値を設定する
     */
-    func setVal(settingIdx : Int,val : Int)
+    internal func setVal(settingIdx : Int,val : Int)
     {
         self.val = val
         self.settingIdx = settingIdx
@@ -153,11 +158,11 @@ class CtvCellWidgetTopicRadio : UITableViewCell
         for hashVal in childList
         {
             let views = self.contentView.subviews
-            for (parts: UIView) in views as [UIView]
+            for (parts: UIView) in views as! [UIView]
             {
                 if(parts.hash == hashVal.hash)
                 {
-                    var uiv = parts as UIButton
+                    var uiv = parts as! UIButton
                     if hashVal.trueValue == val
                     {
                         uiv.setImage(self.imgOn, forState: UIControlState.Normal)
@@ -180,7 +185,7 @@ class CtvCellWidgetTopicRadio : UITableViewCell
     /*
     クリックイベント
     */
-    func onClickCheck(sender: UIButton) {
+    internal func onClickCheck(sender: UIButton) {
         println("チェックボックスON")
         var idx : Int = 0
         
@@ -188,11 +193,11 @@ class CtvCellWidgetTopicRadio : UITableViewCell
         for hashVal in childList
         {
             let views = self.contentView.subviews
-            for (parts: UIView) in views as [UIView]
+            for (parts: UIView) in views as! [UIView]
             {
                 if(parts.hash == hashVal.hash)
                 {
-                    var uiv = parts as UIButton
+                    var uiv = parts as! UIButton
                     
                     //選択ボタンの場合
                     if parts.hash == sender.hash

@@ -2,6 +2,15 @@
 //  ViewSetting.swift
 //  Liplis
 //
+//  Liplisの全体にかかわる設定を行う画面
+//
+//
+//アップデート履歴
+//   2015/04/19 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/14 ver1.3.0　リファクタリング
+//   2015/05/16 ver1.4.0　swift1.2対応
+//
 //  Created by sachin on 2015/04/19.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -9,36 +18,23 @@
 import UIKit
 
 class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSource{
-    // Tabelで使用する配列.
-    var tblItems : Array<MsgSettingViewCell>! = []
+    ///=============================
+    ///テーブル要素
+    private var tblItems : Array<MsgSettingViewCell>! = []
     
     //=================================
     //リプリスベース設定
-    var baseSetting : LiplisPreference!
+    private var baseSetting : LiplisPreference!
     
     ///=============================
     ///ビュータイトル
-    var viewTitle = "Liplis設定"
+    private var viewTitle = "Liplis設定"
     
     ///=============================
     ///画面要素
-    var lblTitle : UILabel!
-    var btnBack : UIButton!
-    var tblSetting: UITableView!
-    
-    ///=============================
-    ///オフセット定数
-    let labelHight : CGFloat = 60.0
-    let headerHight : CGFloat = 25.0
-    
-    ///=============================
-    ///UI定数
-    let PARTS_TYPE_TITLE = 0
-    let PARTS_TYPE_CHECK = 1
-    let PARTS_TYPE_SWITCH = 2
-    let PARTS_TYPE_RADIO = 3
-    let PARTS_TYPE_RADIO_CHILD = 4
-    
+    private var lblTitle : UILabel!
+    private var btnBack : UIButton!
+    private var tblSetting: UITableView!
     
     //============================================================
     //
@@ -49,106 +45,236 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
     /*
     コンストラクター
     */
-    override init() {
-        super.init()
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+        //クラスの初期化
+        self.initClass()
         
-        tblSetting = UITableView()
-        
-        initClass()
-        initView()
+        //ビューの初期化
+        self.initView()
+    }
+    
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    required override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
     /*
         クラスの初期化
     */
-    func initClass()
+    private func initClass()
     {
-        baseSetting = LiplisPreference.SharedInstance
+        self.baseSetting = LiplisPreference.SharedInstance
     }
     
     /*
     アクティビティの初期化
     */
-    func initView()
+    private func initView()
     {
-        self.view.opaque = true
-        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)
-        var img : UIImage = UIImage(named : "sel_setting.png")!
-        self.tabBarItem = UITabBarItem(title: "設定",image: img, tag: 2)
+        //ビューの初期化
+        self.view.opaque = true                                                     //背景透過許可
+        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)   //白透明背景
+        
+        //タイトルラベルの作成
+        self.createLblTitle()
+        
+        //閉じるボタン作成
+        self.createBtnClose()
+        
+        //テーブル作成
+        self.createTableView()
+        
+        //サイズ調整
+        self.setSize()
+    }
     
-        // Viewの高さと幅を取得する.
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
-        
-        // Labelを作成.
-        lblTitle = UILabel(frame: CGRectMake(0,0,displayWidth,labelHight))
-        lblTitle.backgroundColor = UIColor.hexStr("ffa500", alpha: 255)
-        lblTitle.text = viewTitle
-        lblTitle.textColor = UIColor.whiteColor()
-        lblTitle.shadowColor = UIColor.grayColor()
-        lblTitle.textAlignment = NSTextAlignment.Center
-        lblTitle.layer.position = CGPoint(x: self.view.bounds.width/2,y: headerHight)
-        self.view.addSubview(lblTitle)
-        
-        
-        // TableViewの生成( status barの高さ分ずらして表示 ).
-        tblSetting.frame = CGRect(x: 0, y: self.lblTitle.frame.height, width: displayWidth, height: displayHeight - self.lblTitle.frame.height)
-        tblSetting.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
-        tblSetting.dataSource = self
-        tblSetting.delegate = self
-        tblSetting.allowsSelection = false
-        tblSetting.rowHeight = 20
-        tblSetting.registerClass(CtvCellGeneralSettingTitle.self, forCellReuseIdentifier: "CtvCellGeneralSettingTitle")
-        tblSetting.registerClass(CtvCellGeneralSettingSwitch.self, forCellReuseIdentifier: "CtvCellGeneralSettingSwitch")
-        tblSetting.registerClass(CtvCellGeneralSettingCheck.self, forCellReuseIdentifier: "CtvCellGeneralSettingCheck")
-        tblSetting.registerClass(CtvCellGeneralSettingRadio.self, forCellReuseIdentifier: "CtvCellGeneralSettingRadio")
-        self.view.addSubview(tblSetting)
+    /*
+    タイトルラベルの初期化
+    */
+    private func createLblTitle()
+    {
+        self.lblTitle = UILabel(frame: CGRectMake(0,0,0,0))
+        self.lblTitle.backgroundColor = UIColor.hexStr("ffa500", alpha: 255)
+        self.lblTitle.text = self.viewTitle
+        self.lblTitle.textColor = UIColor.whiteColor()
+        self.lblTitle.shadowColor = UIColor.grayColor()
+        self.lblTitle.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(self.lblTitle)
+    }
+    
+    /*
+    閉じるボタンの初期化
+    */
+    private func createBtnClose()
+    {
+        //戻るボタン
+        self.btnBack = UIButton()
+        self.btnBack.titleLabel?.font = UIFont.systemFontOfSize(12)
+        self.btnBack.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
+        self.btnBack.layer.masksToBounds = true
+        self.btnBack.setTitle("閉じる", forState: UIControlState.Normal)
+        self.btnBack.addTarget(self, action: "closeMe:", forControlEvents: .TouchDown)
+        self.btnBack.layer.cornerRadius = 3.0
+        self.view.addSubview(btnBack)
+    }
+    
+    /*
+    設定要素テーブルの初期化
+    */
+    private func createTableView()
+    {
+        //TableViewの生成
+        self.tblSetting = UITableView()
+        self.tblSetting.frame = CGRectMake(0,0,0,0)
+        self.tblSetting.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        self.tblSetting.dataSource = self
+        self.tblSetting.delegate = self
+        self.tblSetting.allowsSelection = false
+        self.tblSetting.rowHeight = 20
+        self.tblSetting.registerClass(CtvCellGeneralSettingTitle.self, forCellReuseIdentifier: "CtvCellGeneralSettingTitle")
+        self.tblSetting.registerClass(CtvCellGeneralSettingSwitch.self, forCellReuseIdentifier: "CtvCellGeneralSettingSwitch")
+        self.tblSetting.registerClass(CtvCellGeneralSettingCheck.self, forCellReuseIdentifier: "CtvCellGeneralSettingCheck")
+        self.tblSetting.registerClass(CtvCellGeneralSettingRadio.self, forCellReuseIdentifier: "CtvCellGeneralSettingRadio")
+        self.view.addSubview(self.tblSetting)
         
         //テーブルビューアイテム作成
-        tblItems = Array<MsgSettingViewCell>()
+        self.tblItems = Array<MsgSettingViewCell>()
         
-        tblItems.append(MsgSettingViewCell(title: "オートスリープ",content: "",partsType: PARTS_TYPE_TITLE,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(26)))
-        tblItems.append(MsgSettingViewCell(title: "画面OFF時、自動的におやすみする",content: "",partsType: PARTS_TYPE_CHECK,settingIdx: 1, initValue : baseSetting.lpsAutoSleep,trueValue: 1, rowHeight: CGFloat(45)))
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "オートスリープ",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_TITLE,
+                settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(26)
+            )
+        )
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "画面OFF時、自動的におやすみする",content: "",
+                partsType: LiplisDefine.PARTS_TYPE_CHECK,
+                settingIdx: 1,
+                initValue : baseSetting.lpsAutoSleep,
+                trueValue: 1,
+                rowHeight: CGFloat(45)
+            )
+        )
         
-        tblItems.append(MsgSettingViewCell(title: "オートウェイクアップ",content: "",partsType: PARTS_TYPE_TITLE,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(26)))
-        tblItems.append(MsgSettingViewCell(title: "画面ON時、自動的におきる",content: "",partsType: PARTS_TYPE_CHECK,settingIdx: 2, initValue : baseSetting.lpsAutoWakeup,trueValue: 1, rowHeight: CGFloat(45)))
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "オートウェイクアップ",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_TITLE,
+                settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(26)
+            )
+        )
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "画面ON時、自動的におきる",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_CHECK,settingIdx: 2,
+                initValue : baseSetting.lpsAutoWakeup,
+                trueValue: 1,
+                rowHeight: CGFloat(45)
+            )
+        )
         
-        tblItems.append(MsgSettingViewCell(title: "移動範囲設定",content: "",partsType: PARTS_TYPE_TITLE,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(26)))
-        tblItems.append(MsgSettingViewCell(title: "画面外に出た時自動的に戻す",content: "",partsType: PARTS_TYPE_CHECK,settingIdx: 3, initValue : baseSetting.lpsAutoRescue,trueValue: 1, rowHeight: CGFloat(45)))
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "移動範囲設定",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_TITLE,
+                settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(26)
+            )
+        )
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "画面外に出た時自動的に戻す",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_CHECK,
+                settingIdx: 3,
+                initValue : baseSetting.lpsAutoRescue,
+                trueValue: 1,
+                rowHeight: CGFloat(45)
+            )
+        )
         
-        tblItems.append(MsgSettingViewCell(title: "トークウインドウモード",content: "",partsType: PARTS_TYPE_TITLE,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(26)))
-        tblItems.append(MsgSettingViewCell(title: "トークウインドウクリック時、記事にジャンプする",content: "",partsType: PARTS_TYPE_CHECK,settingIdx: 4, initValue : baseSetting.lpsTalkWindowClickMode,trueValue: 1, rowHeight: CGFloat(45)))
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "トークウインドウモード",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_TITLE,
+                settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(26)
+            )
+        )
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "トークウインドウクリック時、記事にジャンプする",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_CHECK,settingIdx: 4,
+                initValue : baseSetting.lpsTalkWindowClickMode,
+                trueValue: 1,
+                rowHeight: CGFloat(45)
+            )
+        )
         
-        tblItems.append(MsgSettingViewCell(title: "ブラウザモード",content: "",partsType: PARTS_TYPE_TITLE,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(26)))
-        var lpsBrowserMode : MsgSettingViewCell = MsgSettingViewCell(title: "",content: "",partsType: PARTS_TYPE_RADIO,settingIdx: 5,initValue : baseSetting.lpsBrowserMode, trueValue: 0, rowHeight: CGFloat(0))
-        lpsBrowserMode.appendChild(MsgSettingViewCell(title: "Liplisブラウザ",content: "アプリ内ブラウザで記事を開きます。",partsType: PARTS_TYPE_RADIO_CHILD,settingIdx: 5,initValue : 0, trueValue: 0, rowHeight: CGFloat(45)))
-        lpsBrowserMode.appendChild(MsgSettingViewCell(title: "Safari",content: "サファリで開きます。",partsType: PARTS_TYPE_RADIO_CHILD,settingIdx: 5,initValue : 0, trueValue: 1, rowHeight: CGFloat(45)))
-        tblItems.append(lpsBrowserMode)
-        
-        //戻るボタン
-        btnBack = UIButton()
-        btnBack.titleLabel?.font = UIFont.systemFontOfSize(12)
-        btnBack.frame = CGRectMake(0,0,displayWidth/6,30)
-        btnBack.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
-        btnBack.layer.masksToBounds = true
-        btnBack.setTitle("閉じる", forState: UIControlState.Normal)
-        btnBack.addTarget(self, action: "closeMe:", forControlEvents: .TouchDown)
-        btnBack.layer.cornerRadius = 3.0
-        self.btnBack.frame = CGRect(x: self.lblTitle.frame.origin.x + 5, y: self.lblTitle.frame.origin.y + 25, width: btnBack.frame.width, height: btnBack.frame.height)
-        
-
-        
-        self.view.addSubview(btnBack)
-        
-        setSize()
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "ブラウザモード",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_TITLE,
+                settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(26)
+            )
+        )
+        var lpsBrowserMode : MsgSettingViewCell = MsgSettingViewCell(
+            title: "",
+            content: "",
+            partsType: LiplisDefine.PARTS_TYPE_RADIO,
+            settingIdx: 5,
+            initValue : baseSetting.lpsBrowserMode,
+            trueValue: 0,
+            rowHeight: CGFloat(0)
+        )
+        lpsBrowserMode.appendChild(
+            MsgSettingViewCell(
+                title: "Liplisブラウザ",
+                content: "アプリ内ブラウザで記事を開きます。",
+                partsType: LiplisDefine.PARTS_TYPE_RADIO_CHILD,
+                settingIdx: 5,initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(45)
+            )
+        )
+        lpsBrowserMode.appendChild(
+            MsgSettingViewCell(
+                title: "Safari",
+                content: "サファリで開きます。",
+                partsType: LiplisDefine.PARTS_TYPE_RADIO_CHILD,
+                settingIdx: 5,
+                initValue : 0,
+                trueValue: 1,
+                rowHeight: CGFloat(45)
+            )
+        )
+        self.tblItems.append(lpsBrowserMode)
     }
     
     //============================================================
@@ -158,19 +284,19 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
     //============================================================
     
     
-    override func viewDidLoad() {
+    internal override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     
-    override func didReceiveMemoryWarning() {
+    internal override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     /*
     ビュー呼び出し時
     */
-    override func viewWillAppear(animated: Bool) {
+    internal override func viewWillAppear(animated: Bool) {
         //サイズ設定
         setSize()
     }
@@ -179,14 +305,14 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
     /*
     画面を閉じる
     */
-    func closeMe(sender: AnyObject) {
+    internal func closeMe(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     /*
     Cellが選択された際に呼び出される.
     */
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)->NSIndexPath? {
+    internal func tableView(tableView: UITableView, indexPath: NSIndexPath)->NSIndexPath? {
         println("Num: \(indexPath.row)")
         println("Value: \(tblItems[indexPath.row].title)")
         
@@ -196,7 +322,7 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
     /*
     Cellの総数を返す.
     */
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         println("numberOfRowsInSection")
         return tblItems.count
     }
@@ -204,7 +330,7 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
     /*
     Editableの状態にする.
     */
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    internal func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         println("canEditRowAtIndexPath")
         
         return true
@@ -213,14 +339,14 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
     /*
     特定の行のボタン操作を有効にする.
     */
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    internal func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         println("commitEdittingStyle:\(editingStyle)")
     }
     
     /*
     Cellに値を設定する.
     */
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         println("cellForRowAtIndexPath")
         return settingCell(indexPath)
     }
@@ -229,18 +355,18 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
     /*
     セル設定
     */
-    func settingCell(indexPath : NSIndexPath) -> UITableViewCell!
+    internal func settingCell(indexPath : NSIndexPath) -> UITableViewCell!
     {
         var cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
         
         switch(cellSetting.partsType)
         {
         case 0://タイトル
-            let cell : CtvCellGeneralSettingTitle = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellGeneralSettingTitle", forIndexPath: indexPath) as CtvCellGeneralSettingTitle
+            let cell : CtvCellGeneralSettingTitle = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellGeneralSettingTitle", forIndexPath: indexPath) as! CtvCellGeneralSettingTitle
             cell.lblTitle.text = cellSetting.title
             return cell
         case 1://チェックボタン
-            let cell : CtvCellGeneralSettingCheck = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellGeneralSettingCheck", forIndexPath: indexPath) as CtvCellGeneralSettingCheck
+            let cell : CtvCellGeneralSettingCheck = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellGeneralSettingCheck", forIndexPath: indexPath) as!CtvCellGeneralSettingCheck
             cell.setView(self)
             cell.lblTitle.text = cellSetting.title
             cell.lblContent.text = cellSetting.content
@@ -248,7 +374,7 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.setVal(cellSetting.settingIdx,val: cellSetting.initValue)
             return cell
         case 2://スイッチ
-            let cell : CtvCellGeneralSettingSwitch = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellGeneralSettingSwitch", forIndexPath: indexPath) as CtvCellGeneralSettingSwitch
+            let cell : CtvCellGeneralSettingSwitch = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellGeneralSettingSwitch", forIndexPath: indexPath) as!CtvCellGeneralSettingSwitch
             cell.setView(self)
             cell.lblTitle.text = cellSetting.title
             cell.lblContent.text = cellSetting.content
@@ -256,27 +382,24 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.setVal(cellSetting.settingIdx,val: cellSetting.initValue)
             return cell
         case 3://ラジオボタン
-            let cell : CtvCellGeneralSettingRadio = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellGeneralSettingRadio", forIndexPath: indexPath) as CtvCellGeneralSettingRadio
+            let cell : CtvCellGeneralSettingRadio = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellGeneralSettingRadio", forIndexPath: indexPath) as!CtvCellGeneralSettingRadio
             cell.setView(self)
             cell.setRadio(self.view.frame.width, childList: cellSetting.childList)
             cell.setVal(cellSetting.settingIdx,val: cellSetting.initValue)
             
             return cell
         default:
-            let cell = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellSettingCheck", forIndexPath: indexPath) as CtvCellSettingCheck
+            let cell : CtvCellGeneralSettingTitle = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellGeneralSettingTitle", forIndexPath: indexPath) as! CtvCellGeneralSettingTitle
             cell.lblTitle.text = cellSetting.title
-            cell.lblContent.text = cellSetting.content
-            cell.setVal(1,val: 1)
-            cell.setSize(self.view.frame.width)
             return cell
         }
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    internal func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         println("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
         return CGFloat(30)
     }
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    internal func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         println("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
         var cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
         
@@ -286,20 +409,19 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
     /*
     チェックとスイッチの操作
     */
-    func selectCheck(settingIdx : Int, val : Bool)
+    internal func selectCheck(settingIdx : Int, val : Bool)
     {
         println("チェック選択 idx:" + String(settingIdx) + " val:" + String(LiplisUtil.bit2Int(val)))
         baseSetting.saveDataFromIdx(settingIdx, val: LiplisUtil.bit2Int(val))
         setTblItems(settingIdx, val: LiplisUtil.bit2Int(val))
     }
-    func selectVal(settingIdx : Int, val : Int)
+    internal func selectVal(settingIdx : Int, val : Int)
     {
         println("ラジオ選択 idx:" + String(settingIdx) + " val:" + String(val))
         baseSetting.saveDataFromIdx(settingIdx, val: val)
         setTblItems(settingIdx, val: val)
     }
-    
-    func setTblItems(settingIdx : Int, val : Int)
+    internal func setTblItems(settingIdx : Int, val : Int)
     {
         for msg : MsgSettingViewCell in tblItems
         {
@@ -320,36 +442,26 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
     /*
     サイズ設定
     */
-    func setSize()
+    private func setSize()
     {
-        var baseHeight : CGFloat = 0
-        
-        // 現在のデバイスの向きを取得.
+        // 現在のデバイスの向きを取得
         let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
         
-        // 向きの判定.
+        //方向別の処理
         if UIDeviceOrientationIsLandscape(deviceOrientation) {
-            
-            //横向きの判定.
-            let displayWidth: CGFloat = self.view.frame.width
-            let displayHeight: CGFloat = self.view.frame.height
-            let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-            self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: labelHight)
-            self.btnBack.frame = CGRect(x: self.lblTitle.frame.origin.x + 5, y: self.lblTitle.frame.origin.y + 25, width: btnBack.frame.width, height: btnBack.frame.height)
-            self.tblSetting.frame = CGRect(x: 0, y: self.lblTitle.frame.height, width: displayWidth, height: displayHeight - self.lblTitle.frame.height)
-            
-            
+            //横向きの判定
         } else if UIDeviceOrientationIsPortrait(deviceOrientation){
-            
-            //縦向きの判定.
-            let displayWidth: CGFloat = self.view.frame.width
-            let displayHeight: CGFloat = self.view.frame.height
-            let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-            self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: labelHight)
-            self.btnBack.frame = CGRect(x: self.lblTitle.frame.origin.x + 5, y: self.lblTitle.frame.origin.y + 25, width: btnBack.frame.width, height: btnBack.frame.height)
-            self.tblSetting.frame = CGRect(x: 0, y: self.lblTitle.frame.height, width: displayWidth, height: displayHeight - self.lblTitle.frame.height)
+            //縦向きの判定
         }
         
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        self.lblTitle.frame = CGRectMake(0, 0, displayWidth, LiplisDefine.labelHight)
+        self.btnBack.frame = CGRectMake(self.lblTitle.frame.origin.x + 5,self.lblTitle.frame.origin.y + 25, displayWidth/6, 30)
+        self.tblSetting.frame = CGRectMake(0, self.lblTitle.frame.height, displayWidth, displayHeight - self.lblTitle.frame.height)
+        
+        //テーブルのリロード
         self.tblSetting.reloadData()
     }
     
@@ -368,7 +480,7 @@ class ViewSetting :  UIViewController, UITableViewDelegate, UITableViewDataSourc
         // 端末の向きがかわったらNotificationを呼ばす設定.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOrientationChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
-    func onOrientationChange(notification: NSNotification){
+    internal func onOrientationChange(notification: NSNotification){
         setSize()
     }
     

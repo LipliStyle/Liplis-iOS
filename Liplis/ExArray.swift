@@ -2,6 +2,13 @@
 //  ArrayStackQueueExtensions.swift
 //  Liplis
 //
+//  Arrayのエクステンション
+//
+//アップデート履歴
+//   2015/04/27 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0　ファイル名変更
+//
 //  Created by sachin on 2015/04/11.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //

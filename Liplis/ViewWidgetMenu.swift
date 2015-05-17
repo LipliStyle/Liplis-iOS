@@ -2,6 +2,14 @@
 //  ViewWidgetMenu.swift
 //  Liplis
 //
+//  Liplis ウィジェット設定メニュー
+//
+//アップデート履歴
+//   2015/05/05 ver0.1.0 作成
+//   2015/05/13 ver1.2.0 ログの送りバグ修正
+//   2015/05/16 ver1.4.0　swift1.2対応
+//                        リファクタリング
+//
 //  Created by sachin on 2015/05/05.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -11,34 +19,21 @@ import UIKit
 class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSource{
     ///=============================
     ///ウィジェットインスタンス
-    var widget : LiplisWidget!
+    internal var widget : LiplisWidget!
     
-    // Tabelで使用する配列.
-    var tblItems : Array<MsgSettingViewCell>! = []
+    ///=============================
+    ///テーブル要素
+    private var tblItems : Array<MsgSettingViewCell>! = []
     
     ///=============================
     ///ビュータイトル
-    var viewTitle = "Liplisウィジェットメニュー"
+    private var viewTitle = "Liplisウィジェットメニュー"
     
     ///=============================
     ///画面要素
-    var lblTitle : UILabel!
-    var btnBack : UIButton!
-    var tblSetting: UITableView!
-    
-    ///=============================
-    ///オフセット定数
-    let labelHight : CGFloat = 60.0
-    let headerHight : CGFloat = 25.0
-    
-    ///=============================
-    ///UI定数
-    let PARTS_TYPE_TITLE = 0
-    let PARTS_TYPE_CHECK = 1
-    let PARTS_TYPE_SWITCH = 2
-    let PARTS_TYPE_RADIO = 3
-    let PARTS_TYPE_RADIO_CHILD = 4
-    
+    private var lblTitle : UILabel!
+    private var btnBack : UIButton!
+    private var tblSetting: UITableView!
     
     //============================================================
     //
@@ -49,14 +44,11 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     /*
     コンストラクター
     */
-    init(widget : LiplisWidget) {
-        super.init()
+    convenience init(widget : LiplisWidget) {
+        self.init(nibName: nil, bundle: nil)
         self.widget = widget
-        
-        tblSetting = UITableView()
-        
-        initClass()
-        initView()
+        self.initClass()
+        self.initView()
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -70,7 +62,7 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     /*
     クラスの初期化
     */
-    func initClass()
+    private func initClass()
     {
         
     }
@@ -78,71 +70,162 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     /*
     アクティビティの初期化
     */
-    func initView()
+    private func initView()
     {
-        self.view.opaque = true
-        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)
-        var img : UIImage = UIImage(named : "sel_setting.png")!
-        self.tabBarItem = UITabBarItem(title: "設定",image: img, tag: 2)
+        //ビューの初期化
+        self.view.opaque = true                                                     //背景透過許可
+        self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)   //白透明背景
         
-        // Viewの高さと幅を取得する.
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
+        //タイトルラベルの作成
+        self.createLblTitle()
         
-        // Labelを作成.
-        lblTitle = UILabel(frame: CGRectMake(0,0,displayWidth,labelHight))
-        lblTitle.backgroundColor = UIColor.hexStr("ffa500", alpha: 255)
-        lblTitle.text = viewTitle
-        lblTitle.textColor = UIColor.whiteColor()
-        lblTitle.shadowColor = UIColor.grayColor()
-        lblTitle.textAlignment = NSTextAlignment.Center
-        lblTitle.layer.position = CGPoint(x: self.view.bounds.width/2,y: headerHight)
-        self.view.addSubview(lblTitle)
+        //閉じるボタン作成
+        self.createBtnClose()
         
+        //テーブル作成
+        self.createTableView()
         
-        // TableViewの生成( status barの高さ分ずらして表示 ).
-        tblSetting.frame = CGRect(x: 0, y: self.lblTitle.frame.height, width: displayWidth, height: displayHeight - self.lblTitle.frame.height)
-        tblSetting.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
-        tblSetting.dataSource = self
-        tblSetting.delegate = self
-        tblSetting.allowsSelection = false
-        tblSetting.rowHeight = 20
-        tblSetting.registerClass(CtvCellWidgetMenuTitle.self, forCellReuseIdentifier: "CtvCellWidgetMenuTitle")
-        tblSetting.registerClass(CtvCellWidgetIntoroduction.self, forCellReuseIdentifier: "CtvCellWidgetIntoroduction")
-        tblSetting.registerClass(CtvCellWidgetController.self, forCellReuseIdentifier: "CtvCellWidgetController")
-        tblSetting.registerClass(CtvCellWidgetSetting.self, forCellReuseIdentifier: "CtvCellWidgetSetting")
-        tblSetting.registerClass(CtvCellWidgetTopicSetting.self, forCellReuseIdentifier: "CtvCellWidgetTopicSetting")
-        
-
-        self.view.addSubview(tblSetting)
+        //サイズ調整
+        self.setSize()
+    }
+    
+    /*
+    タイトルラベルの初期化
+    */
+    private func createLblTitle()
+    {
+        self.lblTitle = UILabel(frame: CGRectMake(0,0,0,0))
+        self.lblTitle.backgroundColor = UIColor.hexStr("ffa500", alpha: 255)
+        self.lblTitle.text = self.viewTitle
+        self.lblTitle.textColor = UIColor.whiteColor()
+        self.lblTitle.shadowColor = UIColor.grayColor()
+        self.lblTitle.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(self.lblTitle)
+    }
+    
+    /*
+    閉じるボタンの初期化
+    */
+    private func createBtnClose()
+    {
+        self.btnBack = UIButton()
+        self.btnBack.titleLabel?.font = UIFont.systemFontOfSize(12)
+        self.btnBack.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
+        self.btnBack.layer.masksToBounds = true
+        self.btnBack.setTitle("閉じる", forState: UIControlState.Normal)
+        self.btnBack.addTarget(self, action: "closeMe:", forControlEvents: .TouchDown)
+        self.btnBack.layer.cornerRadius = 3.0
+        self.view.addSubview(btnBack)
+    }
+    
+    /*
+    設定要素テーブルの初期化
+    */
+    private func createTableView()
+    {
+        self.tblSetting = UITableView()
+        self.tblSetting.frame = CGRectMake(0,0,0,0)
+        self.tblSetting.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        self.tblSetting.dataSource = self
+        self.tblSetting.delegate = self
+        self.tblSetting.allowsSelection = false
+        self.tblSetting.rowHeight = 20
+        self.tblSetting.registerClass(CtvCellWidgetMenuTitle.self, forCellReuseIdentifier: "CtvCellWidgetMenuTitle")
+        self.tblSetting.registerClass(CtvCellWidgetIntoroduction.self, forCellReuseIdentifier: "CtvCellWidgetIntoroduction")
+        self.tblSetting.registerClass(CtvCellWidgetController.self, forCellReuseIdentifier: "CtvCellWidgetController")
+        self.tblSetting.registerClass(CtvCellWidgetSetting.self, forCellReuseIdentifier: "CtvCellWidgetSetting")
+        self.tblSetting.registerClass(CtvCellWidgetTopicSetting.self, forCellReuseIdentifier: "CtvCellWidgetTopicSetting")
+        self.view.addSubview(self.tblSetting)
         
         //テーブルビューアイテム作成
-        tblItems = Array<MsgSettingViewCell>()
-        tblItems.append(MsgSettingViewCell(title: "リプリスウィジェット設定",content: "",partsType: PARTS_TYPE_TITLE,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(26)))
-        tblItems.append(MsgSettingViewCell(title: "",content: "",partsType: 1,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(100)))
-        tblItems.append(MsgSettingViewCell(title: "ウィジェット操作",content: "",partsType: PARTS_TYPE_TITLE,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(26)))
-        tblItems.append(MsgSettingViewCell(title: "",content: "",partsType: 2,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(60)))
-        tblItems.append(MsgSettingViewCell(title: "ウィジェット動作設定",content: "",partsType: PARTS_TYPE_TITLE,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(26)))
-        tblItems.append(MsgSettingViewCell(title: "",content: "",partsType: 3,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(60)))
-        tblItems.append(MsgSettingViewCell(title: "話題設定",content: "",partsType: PARTS_TYPE_TITLE,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(26)))
-        tblItems.append(MsgSettingViewCell(title: "",content: "",partsType: 4,settingIdx: -1,initValue : 0, trueValue: 0, rowHeight: CGFloat(60)))
+        self.tblItems = Array<MsgSettingViewCell>()
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "リプリスウィジェット設定",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_TITLE,
+                settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(26)
+            )
+        )
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "",
+                content: "",
+                partsType: 1,
+                settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(100)
+            )
+        )
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "ウィジェット操作",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_TITLE,
+                settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(26)
+            )
+        )
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "",
+                content: "",
+                partsType: 2,
+                settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(60)
+            )
+        )
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "ウィジェット動作設定",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_TITLE,settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(26)
+            )
+        )
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "",
+                content: "",
+                partsType: 3,
+                settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(60)
+            )
+        )
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "話題設定",
+                content: "",
+                partsType: LiplisDefine.PARTS_TYPE_TITLE,settingIdx: -1
+                ,initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(26)
+            )
+        )
+        self.tblItems.append(
+            MsgSettingViewCell(
+                title: "",
+                content: "",
+                partsType: 4,
+                settingIdx: -1,
+                initValue : 0,
+                trueValue: 0,
+                rowHeight: CGFloat(60)
+            )
+        )
 
-        //戻るボタン
-        btnBack = UIButton()
-        btnBack.titleLabel?.font = UIFont.systemFontOfSize(12)
-        btnBack.frame = CGRectMake(0,0,displayWidth/6,30)
-        btnBack.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
-        btnBack.layer.masksToBounds = true
-        btnBack.setTitle("閉じる", forState: UIControlState.Normal)
-        btnBack.addTarget(self, action: "closeMe:", forControlEvents: .TouchDown)
-        btnBack.layer.cornerRadius = 3.0
-        self.btnBack.frame = CGRect(x: self.lblTitle.frame.origin.x + 5, y: self.lblTitle.frame.origin.y + 25, width: btnBack.frame.width, height: btnBack.frame.height)
-        
-        
-        
-        self.view.addSubview(btnBack)
-        
-        setSize()
     }
     
     //============================================================
@@ -165,8 +248,7 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     ビュー呼び出し時
     */
     override func viewWillAppear(animated: Bool) {
-        //サイズ設定
-        setSize()
+        self.setSize()
     }
     
     
@@ -180,7 +262,7 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     /*
     Cellが選択された際に呼び出される.
     */
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)->NSIndexPath? {
+    func tableView(tableView: UITableView, indexPath: NSIndexPath)->NSIndexPath? {
         println("Num: \(indexPath.row)")
         println("Value: \(tblItems[indexPath.row].title)")
         
@@ -192,7 +274,7 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     */
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         println("numberOfRowsInSection")
-        return tblItems.count
+        return self.tblItems.count
     }
     
     /*
@@ -216,7 +298,7 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     */
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         println("cellForRowAtIndexPath")
-        return settingCell(indexPath)
+        return self.settingCell(indexPath)
     }
     
     
@@ -230,30 +312,30 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
         switch(cellSetting.partsType)
         {
         case 0://タイトル
-            let cell : CtvCellWidgetMenuTitle = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellWidgetMenuTitle", forIndexPath: indexPath) as CtvCellWidgetMenuTitle
+            let cell : CtvCellWidgetMenuTitle = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellWidgetMenuTitle", forIndexPath: indexPath) as! CtvCellWidgetMenuTitle
             cell.lblTitle.text = cellSetting.title
             return cell
         case 1://説明セクション
-            let cell : CtvCellWidgetIntoroduction = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellWidgetIntoroduction", forIndexPath: indexPath) as CtvCellWidgetIntoroduction
-            cell.setImage(widget.lpsSkinData.imgIco)
+            let cell : CtvCellWidgetIntoroduction = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellWidgetIntoroduction", forIndexPath: indexPath)as! CtvCellWidgetIntoroduction
+            cell.sSetImage(widget.lpsSkinData.imgIco)
             return cell
         case 2://ウィジェット操作画面
-            let cell : CtvCellWidgetController = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellWidgetController", forIndexPath: indexPath) as CtvCellWidgetController
+            let cell : CtvCellWidgetController = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellWidgetController", forIndexPath: indexPath) as! CtvCellWidgetController
             cell.setView(self)
             cell.setSize(self.view.frame.width)
             return cell
         case 3://動作設定
-            let cell : CtvCellWidgetSetting = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellWidgetSetting", forIndexPath: indexPath) as CtvCellWidgetSetting
+            let cell : CtvCellWidgetSetting = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellWidgetSetting", forIndexPath: indexPath) as! CtvCellWidgetSetting
             cell.setView(self, widget: widget)
             cell.setSize(self.view.frame.width)
             return cell
         case 4://話題画面
-            let cell : CtvCellWidgetTopicSetting = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellWidgetTopicSetting", forIndexPath: indexPath) as CtvCellWidgetTopicSetting
+            let cell : CtvCellWidgetTopicSetting = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellWidgetTopicSetting", forIndexPath: indexPath) as! CtvCellWidgetTopicSetting
             cell.setView(self)
             cell.setSize(self.view.frame.width)
             return cell
         default:
-            let cell : CtvCellMenuTitle = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellMenuTitle", forIndexPath: indexPath) as CtvCellMenuTitle
+            let cell : CtvCellMenuTitle = self.tblSetting.dequeueReusableCellWithIdentifier("CtvCellMenuTitle", forIndexPath: indexPath) as! CtvCellMenuTitle
             cell.lblTitle.text = cellSetting.title
             return cell
         }
@@ -265,7 +347,7 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         println("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
-        var cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
+        var cellSetting : MsgSettingViewCell = self.tblItems[indexPath.row]
         
         return cellSetting.rowHeight
     }
@@ -275,22 +357,22 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     */
     func widgetNext()
     {
-        widget.onClickBody()
+        self.widget.onClickBody()
         dismissViewControllerAnimated(true, completion: nil)
     }
     func widgetBattery()
     {
-        widget.batteryInfo()
+        self.widget.batteryInfo()
         dismissViewControllerAnimated(true, completion: nil)
     }
     func widgetClock()
     {
-        widget.clockInfo()
+        self.widget.clockInfo()
         dismissViewControllerAnimated(true, completion: nil)
     }
     func widgetSleep()
     {
-        widget.onClickSleep()
+        self.widget.onClickSleep()
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -304,40 +386,27 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     /*
     サイズ設定
     */
-    func setSize()
+    private func setSize()
     {
-        var baseHeight : CGFloat = 0
-        
         // 現在のデバイスの向きを取得.
         let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
         
         // 向きの判定.
         if UIDeviceOrientationIsLandscape(deviceOrientation) {
-            
-            //横向きの判定.
-            let displayWidth: CGFloat = self.view.frame.width
-            let displayHeight: CGFloat = self.view.frame.height
-            let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-            self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: labelHight)
-            self.btnBack.frame = CGRect(x: self.lblTitle.frame.origin.x + 5, y: self.lblTitle.frame.origin.y + 25, width: btnBack.frame.width, height: btnBack.frame.height)
-            self.tblSetting.frame = CGRect(x: 0, y: self.lblTitle.frame.height, width: displayWidth, height: displayHeight - self.lblTitle.frame.height)
-            
-            
+            //横向きの判定
         } else if UIDeviceOrientationIsPortrait(deviceOrientation){
-            
-            //縦向きの判定.
-            let displayWidth: CGFloat = self.view.frame.width
-            let displayHeight: CGFloat = self.view.frame.height
-            let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-            self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: labelHight)
-            self.btnBack.frame = CGRect(x: self.lblTitle.frame.origin.x + 5, y: self.lblTitle.frame.origin.y + 25, width: btnBack.frame.width, height: btnBack.frame.height)
-            self.tblSetting.frame = CGRect(x: 0, y: self.lblTitle.frame.height, width: displayWidth, height: displayHeight - self.lblTitle.frame.height)
+            //縦向きの判定
         }
+        
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        self.lblTitle.frame = CGRectMake(0, 0, displayWidth, LiplisDefine.labelHight)
+        self.btnBack.frame = CGRectMake(self.lblTitle.frame.origin.x + 5,self.lblTitle.frame.origin.y + 25, displayWidth/6, 30)
+        self.tblSetting.frame = CGRectMake(0, self.lblTitle.frame.height, displayWidth, displayHeight - self.lblTitle.frame.height)
         
         self.tblSetting.reloadData()
     }
-    
-    
     
     //============================================================
     //
@@ -347,12 +416,12 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     /*
     画面の向き変更時イベント
     */
-    override func viewDidAppear(animated: Bool) {
+    internal override func viewDidAppear(animated: Bool) {
         
         // 端末の向きがかわったらNotificationを呼ばす設定.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOrientationChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
-    func onOrientationChange(notification: NSNotification){
-        setSize()
+    internal func onOrientationChange(notification: NSNotification){
+        self.setSize()
     }
 }

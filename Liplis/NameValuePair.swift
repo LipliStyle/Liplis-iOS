@@ -2,18 +2,24 @@
 //  NameValuePair.swift
 //  Liplis
 //
+//  C#のNameValuePairエミュレート
+//
+//アップデート履歴
+//   2015/04/17 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//
 //  Created by sachin on 2015/04/18.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
 
 import Foundation
 class NameValuePair {
-    var nvp : Dictionary<String,String>!
+    internal var nvp : Dictionary<String,String>!
     
     /**
         コンストラクター
     */
-    init()
+    internal init()
     {
         nvp = Dictionary<String,String>()
     }
@@ -21,7 +27,7 @@ class NameValuePair {
     /**
         要素追加
     */
-    func add(bnv : BasicNameValuePair)
+    internal func add(bnv : BasicNameValuePair)
     {
         nvp[bnv.key] = bnv.value
     }
@@ -29,7 +35,7 @@ class NameValuePair {
     /**
         ポストデータを取得する
     */
-    func getPostData()->NSData
+    internal func getPostData()->NSData
     {
         var postStr : String = ""
         for(key,value) in nvp

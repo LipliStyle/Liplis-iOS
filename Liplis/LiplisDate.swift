@@ -2,6 +2,12 @@
 //  LiplisDate.swift
 //  Liplis
 //
+//  日付を取得するクラス
+//
+//アップデート履歴
+//   2015/05/05 ver0.1.0 作成
+//   2015/05/16 ver1.4.0　カレンダーの表記をSwift1.2対応
+//
 //  Created by sachin on 2015/04/16.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -42,7 +48,7 @@ class LiplisDate {
     {
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
-        var comps:NSDateComponents = calendar.components(NSCalendarUnit.YearCalendarUnit|NSCalendarUnit.MonthCalendarUnit|NSCalendarUnit.DayCalendarUnit|NSCalendarUnit.HourCalendarUnit|NSCalendarUnit.MinuteCalendarUnit|NSCalendarUnit.SecondCalendarUnit,fromDate: date)
+        var comps:NSDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond,fromDate: date)
         
         self.year = comps.year
         self.month = comps.month
