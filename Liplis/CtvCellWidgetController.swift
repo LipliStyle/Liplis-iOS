@@ -2,6 +2,13 @@
 //  CtvCellWidgetController.swift
 //  Liplis
 //
+//ウィジェットメニュー画面 要素 ウィジェット操作
+//
+//アップデート履歴
+//   2015/05/05 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0　リファクタリング
+//
 //  Created by sachin on 2015/05/05.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -11,18 +18,18 @@ class CtvCellWidgetController : UITableViewCell
 {
     ///=============================
     ///親画面インスタンス
-    var parView : ViewWidgetMenu!
+    internal var parView : ViewWidgetMenu!
     
     ///=============================
     ///カスタムセル要素
-    var btnNext : UIButton!
-    var btnSleep : UIButton!
-    var btnBattery : UIButton!
-    var btnClock : UIButton!
+    internal var btnNext : UIButton!
+    internal var btnSleep : UIButton!
+    internal var btnBattery : UIButton!
+    internal var btnClock : UIButton!
     
     ///=============================
     ///レイアウト情報
-    var viewWidth : CGFloat! = 0
+    internal var viewWidth : CGFloat! = 0
     
     //============================================================
     //
@@ -30,46 +37,46 @@ class CtvCellWidgetController : UITableViewCell
     //
     //============================================================
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
+    internal override init(style: UITableViewCellStyle, reuseIdentifier: String!)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         //ボタン
-        btnNext = UIButton()
-        btnNext.titleLabel?.font = UIFont.systemFontOfSize(16)
-        btnNext.frame = CGRectMake(0,5,70,50)
-        btnNext.layer.masksToBounds = true
-        btnNext.setTitle("次の話題", forState: UIControlState.Normal)
-        btnNext.addTarget(self, action: "onClickNext:", forControlEvents: .TouchDown)
-        btnNext.layer.cornerRadius = 3.0
-        btnNext.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
+        self.btnNext = UIButton()
+        self.btnNext.titleLabel?.font = UIFont.systemFontOfSize(16)
+        self.btnNext.frame = CGRectMake(0,5,70,50)
+        self.btnNext.layer.masksToBounds = true
+        self.btnNext.setTitle("次の話題", forState: UIControlState.Normal)
+        self.btnNext.addTarget(self, action: "onClickNext:", forControlEvents: .TouchDown)
+        self.btnNext.layer.cornerRadius = 3.0
+        self.btnNext.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
         
-        btnSleep = UIButton()
-        btnSleep.titleLabel?.font = UIFont.systemFontOfSize(16)
-        btnSleep.frame = CGRectMake(0,5,70,50)
-        btnSleep.layer.masksToBounds = true
-        btnSleep.setTitle("おやすみ", forState: UIControlState.Normal)
-        btnSleep.addTarget(self, action: "onClickSleep:", forControlEvents: .TouchDown)
-        btnSleep.layer.cornerRadius = 3.0
-        btnSleep.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
+        self.btnSleep = UIButton()
+        self.btnSleep.titleLabel?.font = UIFont.systemFontOfSize(16)
+        self.btnSleep.frame = CGRectMake(0,5,70,50)
+        self.btnSleep.layer.masksToBounds = true
+        self.btnSleep.setTitle("おやすみ", forState: UIControlState.Normal)
+        self.btnSleep.addTarget(self, action: "onClickSleep:", forControlEvents: .TouchDown)
+        self.btnSleep.layer.cornerRadius = 3.0
+        self.btnSleep.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
         
-        btnBattery = UIButton()
-        btnBattery.titleLabel?.font = UIFont.systemFontOfSize(16)
-        btnBattery.frame = CGRectMake(0,5,70,50)
-        btnBattery.layer.masksToBounds = true
-        btnBattery.setTitle("電池", forState: UIControlState.Normal)
-        btnBattery.addTarget(self, action: "onClickBattery:", forControlEvents: .TouchDown)
-        btnBattery.layer.cornerRadius = 3.0
-        btnBattery.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
+        self.btnBattery = UIButton()
+        self.btnBattery.titleLabel?.font = UIFont.systemFontOfSize(16)
+        self.btnBattery.frame = CGRectMake(0,5,70,50)
+        self.btnBattery.layer.masksToBounds = true
+        self.btnBattery.setTitle("電池", forState: UIControlState.Normal)
+        self.btnBattery.addTarget(self, action: "onClickBattery:", forControlEvents: .TouchDown)
+        self.btnBattery.layer.cornerRadius = 3.0
+        self.btnBattery.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
         
-        btnClock = UIButton()
-        btnClock.titleLabel?.font = UIFont.systemFontOfSize(16)
-        btnClock.frame = CGRectMake(0,5,70,50)
-        btnClock.layer.masksToBounds = true
-        btnClock.setTitle("時計", forState: UIControlState.Normal)
-        btnClock.addTarget(self, action: "onClickClock:", forControlEvents: .TouchDown)
-        btnClock.layer.cornerRadius = 3.0
-        btnClock.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
+        self.btnClock = UIButton()
+        self.btnClock.titleLabel?.font = UIFont.systemFontOfSize(16)
+        self.btnClock.frame = CGRectMake(0,5,70,50)
+        self.btnClock.layer.masksToBounds = true
+        self.btnClock.setTitle("時計", forState: UIControlState.Normal)
+        self.btnClock.addTarget(self, action: "onClickClock:", forControlEvents: .TouchDown)
+        self.btnClock.layer.cornerRadius = 3.0
+        self.btnClock.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
         
         
         
@@ -82,7 +89,7 @@ class CtvCellWidgetController : UITableViewCell
     /*
     ビューを設定する
     */
-    func setView(parView : ViewWidgetMenu)
+    internal func setView(parView : ViewWidgetMenu)
     {
         self.parView = parView
     }
@@ -95,13 +102,13 @@ class CtvCellWidgetController : UITableViewCell
     /*
     要素の位置を調整する
     */
-    func setSize(viewWidth : CGFloat)
+    internal func setSize(viewWidth : CGFloat)
     {
         self.viewWidth = viewWidth
-        btnNext.frame = CGRectMake(viewWidth/128, 5,viewWidth/4 - viewWidth/64 ,50)
-        btnSleep.frame = CGRectMake(btnNext.frame.origin.x + btnNext.frame.width + viewWidth/64, 5,viewWidth/4 - viewWidth/64,50)
-        btnBattery.frame = CGRectMake(btnSleep.frame.origin.x + btnSleep.frame.width + viewWidth/64, 5,viewWidth/4 - viewWidth/64,50)
-        btnClock.frame = CGRectMake(btnBattery.frame.origin.x + btnBattery.frame.width + viewWidth/64, 5,viewWidth/4 - viewWidth/64,50)
+        self.btnNext.frame = CGRectMake(viewWidth/128, 5,viewWidth/4 - viewWidth/64 ,50)
+        self.btnSleep.frame = CGRectMake(self.btnNext.frame.origin.x + self.btnNext.frame.width + viewWidth/64, 5,viewWidth/4 - viewWidth/64,50)
+        self.btnBattery.frame = CGRectMake(self.btnSleep.frame.origin.x + self.btnSleep.frame.width + viewWidth/64, 5,viewWidth/4 - viewWidth/64,50)
+        self.btnClock.frame = CGRectMake(self.btnBattery.frame.origin.x + self.btnBattery.frame.width + viewWidth/64, 5,viewWidth/4 - viewWidth/64,50)
     }
     
     //============================================================
@@ -113,28 +120,28 @@ class CtvCellWidgetController : UITableViewCell
     /*
     次の話題
     */
-    func onClickNext(sender: UIButton) {
-        parView.widgetNext()
+    internal func onClickNext(sender: UIButton) {
+        self.parView.widgetNext()
     }
     
     /*
     おやすみ
     */
-    func onClickSleep(sender: UIButton) {
-        parView.widgetSleep()
+    internal func onClickSleep(sender: UIButton) {
+        self.parView.widgetSleep()
     }
     
     /*
     バッテリー
     */
-    func onClickBattery(sender: UIButton) {
-        parView.widgetBattery()
+    internal func onClickBattery(sender: UIButton) {
+        self.parView.widgetBattery()
     }
     
     /*
     時刻
     */
-    func onClickClock(sender: UIButton) {
-        parView.widgetClock()
+    internal func onClickClock(sender: UIButton) {
+        self.parView.widgetClock()
     }
 }

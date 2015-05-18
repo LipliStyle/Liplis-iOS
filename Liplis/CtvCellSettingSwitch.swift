@@ -2,6 +2,13 @@
 //  CtvCellSettingSwitch.swift
 //  Liplis
 //
+//ウィジェット設定画面 要素 スイッチ
+//
+//アップデート履歴
+//   2015/05/01 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0　リファクタリング
+//
 //  Created by sachin on 2015/05/01.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -11,21 +18,21 @@ class CtvCellSettingSwitch: UITableViewCell
 {
     ///=============================
     ///カスタムセル要素
-    var parView : ViewWidgetSetting!
+    internal var parView : ViewWidgetSetting!
 
     ///=============================
     ///カスタムセル要素
-    var lblTitle = UILabel();
-    var lblContent = UILabel();
-    var switchSelect = UISwitch();
+    internal var lblTitle = UILabel();
+    internal var lblContent = UILabel();
+    internal var switchSelect = UISwitch();
     
     ///=============================
     ///レイアウト情報
-    var viewWidth : CGFloat! = 0
+    internal var viewWidth : CGFloat! = 0
     
     ///=============================
     ///設定インデックス
-    var settingIdx : Int! = 0
+    internal var settingIdx : Int! = 0
     
     //============================================================
     //
@@ -33,33 +40,33 @@ class CtvCellSettingSwitch: UITableViewCell
     //
     //============================================================
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
+    internal override init(style: UITableViewCellStyle, reuseIdentifier: String!)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        lblTitle = UILabel(frame: CGRectMake(20, 5, 300, 15));
-        lblTitle.text = "";
-        lblTitle.font = UIFont.systemFontOfSize(20)
-        self.addSubview(lblTitle);
+        self.lblTitle = UILabel(frame: CGRectMake(20, 5, 300, 15));
+        self.lblTitle.text = "";
+        self.lblTitle.font = UIFont.systemFontOfSize(20)
+        self.addSubview(self.lblTitle);
         
-        lblContent = UILabel(frame: CGRectMake(20, 22, 300, 15));
-        lblContent.text = "";
-        lblContent.font = UIFont.systemFontOfSize(10)
-        self.addSubview(lblContent);
+        self.lblContent = UILabel(frame: CGRectMake(20, 22, 300, 15));
+        self.lblContent.text = "";
+        self.lblContent.font = UIFont.systemFontOfSize(10)
+        self.addSubview(self.lblContent);
         
         //スイッチ
-        switchSelect = UISwitch()
-        switchSelect.frame = CGRectMake(200, 6, 50, 15)
-        switchSelect.tintColor = UIColor.blackColor()
-        switchSelect.on = LiplisUtil.int2Bit(1)
-        switchSelect.addTarget(self, action: "onClickSelectSwitc:", forControlEvents: UIControlEvents.ValueChanged)
-        self.addSubview(switchSelect)
+        self.switchSelect = UISwitch()
+        self.switchSelect.frame = CGRectMake(200, 6, 50, 15)
+        self.switchSelect.tintColor = UIColor.blackColor()
+        self.switchSelect.on = LiplisUtil.int2Bit(1)
+        self.switchSelect.addTarget(self, action: "onClickSelectSwitc:", forControlEvents: UIControlEvents.ValueChanged)
+        self.addSubview(self.switchSelect)
     }
     
     /*
     ビューを設定する
     */
-    func setView(parView : ViewWidgetSetting)
+    internal func setView(parView : ViewWidgetSetting)
     {
         self.parView = parView
     }
@@ -67,17 +74,17 @@ class CtvCellSettingSwitch: UITableViewCell
     /*
     要素の位置を調整する
     */
-    func setSize(viewWidth : CGFloat)
+    internal func setSize(viewWidth : CGFloat)
     {
         self.viewWidth = viewWidth
         var locationY : CGFloat = CGFloat(viewWidth - 50 - 20)
-        switchSelect.frame = CGRectMake(locationY, 6, 50, 15)
+        self.switchSelect.frame = CGRectMake(locationY, 6, 50, 15)
     }
     
     /*
     値をセットする
     */
-    func setVal(settingIdx : Int, val : Int)
+    internal func setVal(settingIdx : Int, val : Int)
     {
         self.switchSelect.on = LiplisUtil.int2Bit(val)
         self.settingIdx = settingIdx
@@ -96,7 +103,7 @@ class CtvCellSettingSwitch: UITableViewCell
     /*
     スイッチ選択
     */
-    func onClickSelectSwitc(sender: UISwitch) {
+    internal func onClickSelectSwitc(sender: UISwitch) {
         self.parView.selectCheck(settingIdx, val: self.switchSelect.on)
     }
 }

@@ -2,6 +2,13 @@
 //  CtvCellMenuHelpSite.swift
 //  Liplis
 //
+//設定メニュー画面 要素 ヘルプ
+//
+//アップデート履歴
+//   2015/05/04 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0　リファクタリング
+//
 //  Created by sachin on 2015/05/04.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -11,16 +18,16 @@ class CtvCellMenuHelpSite : UITableViewCell
 {
     ///=============================
     ///カスタムセル要素
-    var parView : ViewSettingMenu!
+    internal var parView : ViewSettingMenu!
     
     ///=============================
     ///カスタムセル要素
-    var lblTitle = UILabel();
-    var btnHelp = UIButton();
+    internal var lblTitle = UILabel();
+    internal var btnHelp = UIButton();
     
     ///=============================
     ///レイアウト情報
-    var viewWidth : CGFloat! = 0
+    internal var viewWidth : CGFloat! = 0
     
     //============================================================
     //
@@ -28,33 +35,33 @@ class CtvCellMenuHelpSite : UITableViewCell
     //
     //============================================================
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
+    internal override init(style: UITableViewCellStyle, reuseIdentifier: String!)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        lblTitle = UILabel(frame: CGRectMake(10, 23, 300, 15));
-        lblTitle.text = "Liplisのヘルプを内部ブラウザで開きます。";
-        lblTitle.numberOfLines = 2
-        lblTitle.font = UIFont.systemFontOfSize(15)
-        self.addSubview(lblTitle);
+        self.lblTitle = UILabel(frame: CGRectMake(10, 23, 300, 15));
+        self.lblTitle.text = "Liplisのヘルプを内部ブラウザで開きます。";
+        self.lblTitle.numberOfLines = 2
+        self.lblTitle.font = UIFont.systemFontOfSize(15)
+        self.addSubview(self.lblTitle);
 
         //ボタン
-        btnHelp = UIButton()
-        btnHelp.titleLabel?.font = UIFont.systemFontOfSize(16)
-        btnHelp.frame = CGRectMake(0,5,40,48)
-        btnHelp.layer.masksToBounds = true
-        btnHelp.setTitle("Liplis ヘルプ", forState: UIControlState.Normal)
-        btnHelp.addTarget(self, action: "onClick:", forControlEvents: .TouchDown)
-        btnHelp.layer.cornerRadius = 3.0
-        btnHelp.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
+        self.btnHelp = UIButton()
+        self.btnHelp.titleLabel?.font = UIFont.systemFontOfSize(16)
+        self.btnHelp.frame = CGRectMake(0,5,40,48)
+        self.btnHelp.layer.masksToBounds = true
+        self.btnHelp.setTitle("Liplis ヘルプ", forState: UIControlState.Normal)
+        self.btnHelp.addTarget(self, action: "onClick:", forControlEvents: .TouchDown)
+        self.btnHelp.layer.cornerRadius = 3.0
+        self.btnHelp.backgroundColor = UIColor.hexStr("DF7401", alpha: 255)
         
-        self.addSubview(btnHelp)
+        self.addSubview(self.btnHelp)
     }
     
     /*
     ビューを設定する
     */
-    func setView(parView : ViewSettingMenu)
+    internal func setView(parView : ViewSettingMenu)
     {
         self.parView = parView
     }
@@ -67,12 +74,12 @@ class CtvCellMenuHelpSite : UITableViewCell
     /*
     要素の位置を調整する
     */
-    func setSize(viewWidth : CGFloat)
+    internal func setSize(viewWidth : CGFloat)
     {
         self.viewWidth = viewWidth
         var locationX : CGFloat = CGFloat(viewWidth - viewWidth/4 - 5)
-        btnHelp.frame = CGRectMake(locationX, 5,viewWidth/4,60)
-        lblTitle.frame = CGRectMake(10, 5,viewWidth * 3/4 - 20,50)
+        self.btnHelp.frame = CGRectMake(locationX, 5,viewWidth/4,60)
+        self.lblTitle.frame = CGRectMake(10, 5,viewWidth * 3/4 - 20,50)
     }
     
     
@@ -86,8 +93,8 @@ class CtvCellMenuHelpSite : UITableViewCell
     /*
     スイッチ選択
     */
-    func onClick(sender: UIButton) {
-        parView.app.activityWeb.url = NSURL(string: LiplisDefine.SITE_LIPLIS_HELP)!
-        parView.tabBarController?.selectedIndex=4
+    internal func onClick(sender: UIButton) {
+        self.parView.app.activityWeb.url = NSURL(string: LiplisDefine.SITE_LIPLIS_HELP)!
+        self.parView.tabBarController?.selectedIndex=4
     }
 }

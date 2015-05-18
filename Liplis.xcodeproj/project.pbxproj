@@ -693,11 +693,11 @@
 		2110D5741AD8A3F500840FA9 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
-				21F8D43A1AF8254100D46859 /* ViewWidgetTopicSetting */,
 				21F8D42D1AF7D83E00D46859 /* ViewWidgetMenuCustomCell */,
+				21D375361AF34E5400D5C559 /* ViewWidgetSettingCustomCell */,
+				21F8D43A1AF8254100D46859 /* ViewWidgetTopicSetting */,
 				21F8D41E1AF7941500D46859 /* ViewSettingMenuCustomCell */,
 				21D375591AF4F33600D5C559 /* ViewSettingCustomCell */,
-				21D375361AF34E5400D5C559 /* ViewWidgetSettingCustomCell */,
 				21E76D401AFB7ED000C97649 /* ViewWidgetCtrl */,
 				21CF94B31A595C44000F84E4 /* ViewDeskTop.swift */,
 				21F8D41C1AF793C200D46859 /* ViewSettingMenu.swift */,
@@ -1018,10 +1018,10 @@
 		21D375591AF4F33600D5C559 /* ViewSettingCustomCell */ = {
 			isa = PBXGroup;
 			children = (
+				21D375601AF4F4A800D5C559 /* CtvCellGeneralSettingTitle.swift */,
 				21D3755A1AF4F37500D5C559 /* CtvCellGeneralSettingSwitch.swift */,
 				21D3755C1AF4F3AA00D5C559 /* CtvCellGeneralSettingCheck.swift */,
 				21D3755E1AF4F3E000D5C559 /* CtvCellGeneralSettingRadio.swift */,
-				21D375601AF4F4A800D5C559 /* CtvCellGeneralSettingTitle.swift */,
 			);
 			name = ViewSettingCustomCell;
 			sourceTree = "<group>";

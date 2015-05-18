@@ -2,6 +2,13 @@
 //  CtvCellGeneralSettingRadio.swift
 //  Liplis
 //
+//設定画面 要素 ラジオボタン
+//
+//アップデート履歴
+//   2015/05/02 ver0.1.0 作成
+//   2015/05/09 ver1.0.0 リリース
+//   2015/05/16 ver1.4.0　リファクタリング
+//
 //  Created by sachin on 2015/05/02.
 //  Copyright (c) 2015年 sachin. All rights reserved.
 //
@@ -11,26 +18,26 @@ class CtvCellGeneralSettingRadio : UITableViewCell
 {
     ///=============================
     ///カスタムセル要素
-    var parView : ViewSetting!
-    var childList : Array<MsgSettingViewCell>! = []
+    internal var parView : ViewSetting!
+    internal var childList : Array<MsgSettingViewCell>! = []
     
     ///=============================
     ///イメージ
-    var imgOn : UIImage!
-    var imgOff : UIImage!
+    internal var imgOn : UIImage!
+    internal var imgOff : UIImage!
     
     ///=============================
     ///レイアウト情報
-    var viewWidth : CGFloat! = 0
-    var flgInit : Bool = false
+    internal var viewWidth : CGFloat! = 0
+    internal var flgInit : Bool = false
     
     ///=============================
     ///設定インデックス
-    var settingIdx : Int! = -1
+    internal var settingIdx : Int! = -1
     
     ///=============================
     ///設定値
-    var val : Int! = 0
+    internal var val : Int! = 0
     
     //============================================================
     //
@@ -38,12 +45,12 @@ class CtvCellGeneralSettingRadio : UITableViewCell
     //
     //============================================================
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
+    internal override init(style: UITableViewCellStyle, reuseIdentifier: String!)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        imgOn = UIImage(named: "radioOn.png")!
-        imgOff = UIImage(named: "radioOff.png")!
+        self.imgOn = UIImage(named: "radioOn.png")!
+        self.imgOff = UIImage(named: "radioOff.png")!
     }
     
     required init(coder aDecoder: NSCoder)
@@ -55,7 +62,7 @@ class CtvCellGeneralSettingRadio : UITableViewCell
     /*
     ビューを設定する
     */
-    func setView(parView : ViewSetting)
+    internal func setView(parView : ViewSetting)
     {
         self.parView = parView
     }
@@ -63,7 +70,7 @@ class CtvCellGeneralSettingRadio : UITableViewCell
     /*
     要素の位置を調整する
     */
-    func setRadio(viewWidth : CGFloat, childList : Array<MsgSettingViewCell>)
+    internal func setRadio(viewWidth : CGFloat, childList : Array<MsgSettingViewCell>)
     {
         self.viewWidth = viewWidth
         
@@ -75,7 +82,7 @@ class CtvCellGeneralSettingRadio : UITableViewCell
         if(!flgInit)
         {
             self.childList = childList
-            initCell()
+            self.initCell()
         }
         
         //位置調整
@@ -99,7 +106,7 @@ class CtvCellGeneralSettingRadio : UITableViewCell
     /*
     セルの初期化
     */
-    func initCell()
+    internal func initCell()
     {
         var baseLocationY : CGFloat = 5
         var checkBoxLocationX : CGFloat = CGFloat(self.viewWidth - 50 - 9)
@@ -143,7 +150,7 @@ class CtvCellGeneralSettingRadio : UITableViewCell
     /*
     ラジオボタンに値を設定する
     */
-    func setVal(settingIdx : Int,val : Int)
+    internal func setVal(settingIdx : Int,val : Int)
     {
         self.val = val
         self.settingIdx = settingIdx
@@ -180,7 +187,7 @@ class CtvCellGeneralSettingRadio : UITableViewCell
     /*
     クリックイベント
     */
-    func onClickCheck(sender: UIButton) {
+    internal func onClickCheck(sender: UIButton) {
         println("チェックボックスON")
         var idx : Int = 0
         

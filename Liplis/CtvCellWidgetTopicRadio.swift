@@ -2,6 +2,8 @@
 //  CtvCellWidgetTopicRadio.swift
 //  Liplis
 //
+//ウィジェット話題設定画面 要素 ラジオボタン
+//
 //アップデート履歴
 //   2015/05/05 ver0.1.0 作成
 //   2015/05/09 ver1.0.0 リリース
@@ -43,7 +45,7 @@ class CtvCellWidgetTopicRadio : UITableViewCell
     //
     //============================================================
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
+    internal override init(style: UITableViewCellStyle, reuseIdentifier: String!)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
