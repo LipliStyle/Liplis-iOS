@@ -9,6 +9,7 @@
 //   2015/05/13 ver1.2.0 ログの送りバグ修正
 //   2015/05/16 ver1.4.0　swift1.2対応
 //                        リファクタリング
+//   2015/05/19 ver1.4.1　話題2ch１を凍結
 //
 //  Created by sachin on 2015/05/05.
 //  Copyright (c) 2015年 sachin. All rights reserved.
@@ -150,17 +151,18 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
                 rowHeight: CGFloat(45)
             )
         )
-        self.tblItems.append(
-            MsgSettingViewCell(
-                title: "2ch",
-                content: "",
-                partsType: LiplisDefine.PARTS_TYPE_CHECK,
-                settingIdx: 13,
-                initValue : widget.os.lpsTopic2ch,
-                trueValue: 1,
-                rowHeight: CGFloat(45)
-            )
-        )
+        //1.4.1  2chは一時的に凍結
+//        self.tblItems.append(
+//            MsgSettingViewCell(
+//                title: "2ch",
+//                content: "",
+//                partsType: LiplisDefine.PARTS_TYPE_CHECK,
+//                settingIdx: 13,
+//                initValue : widget.os.lpsTopic2ch,
+//                trueValue: 1,
+//                rowHeight: CGFloat(45)
+//            )
+//        )
         self.tblItems.append(
             MsgSettingViewCell(
                 title: "ニコニコ",

@@ -8,6 +8,7 @@
 //   2015/04/17 ver0.1.0 作成
 //   2015/05/09 ver1.0.0 リリース
 //   2015/05/16 ver1.4.0 リファクタリング
+//   2015/05/19 ver1.4.1 デフォルト設定話題をニュースのみに変更
 //
 //  Created by sachin on 2015/04/17.
 //  Copyright (c) 2015年 sachin. All rights reserved.
@@ -124,8 +125,8 @@ class ObjPreference {
         self.lpsHealth = 1
         
         self.lpsTopicNews = 1
-        self.lpsTopic2ch = 1
-        self.lpsTopicNico = 1
+        self.lpsTopic2ch = 0
+        self.lpsTopicNico = 0
         self.lpsTopicRss = 0
         self.lpsTopicTwitter = 0
         self.lpsTopicTwitterPu = 0

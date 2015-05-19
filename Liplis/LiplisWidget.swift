@@ -10,6 +10,8 @@
 //   2015/04/11 ver0.1.0 作成
 //   2015/05/09 ver1.0.0 リリース
 //   2015/05/12 ver1.1.0 リファクタリング
+//   2015/05/19 ver1.4.0 Swift1.2対応
+//   2015/05/19 ver1.4.1 会話中にすぐに通常おしゃべりに戻るバグ修正
 //
 //  Created by sachin on 2015/04/11.
 //  Copyright (c) 2015年 sachin. All rights reserved.
@@ -1086,6 +1088,8 @@ class LiplisWidget : NSObject {
     {
         //座り中なら回避
         if(self.flgSitdown){return}
+        
+        self.flgChatTalk = true
         
         //挨拶の選定
         self.liplisNowTopic = lpsChatTalk.apiPost(self.desk.baseSetting.lpsUid, toneUrl: self.lpsSkin.tone,version: "I" + LiplisUtil.getAppVersion(),sentence: chatText)
