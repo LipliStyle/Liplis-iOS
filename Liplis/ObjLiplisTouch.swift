@@ -75,7 +75,7 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     */
     internal func loadXml(url : NSURL)
     {
-        var parser : NSXMLParser? = NSXMLParser(contentsOfURL: url)
+        let parser : NSXMLParser? = NSXMLParser(contentsOfURL: url)
         if parser != nil
         {
             parser!.delegate = self
@@ -109,7 +109,7 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
         didStartElement elementName: String,
         namespaceURI : String?,
         qualifiedName qName: String?,
-        attributes attributeDict: [NSObject : AnyObject])
+        attributes attributeDict: [String : String])
     {
         _ParseKey = elementName
         if elementName == "touchDiscription" {_touch = ObjTouch()}
@@ -127,24 +127,24 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     /**
     パースする。
     */
-    internal func parser(parser: NSXMLParser, foundCharacters value: String?)
+    internal func parser(parser: NSXMLParser, foundCharacters value: String)
     {
         if (self._ParseKey == "name") {
-            self._touch!.name = value!
+            self._touch!.name = value
         } else if (self._ParseKey == "type") {
-            self._touch!.type = value!.toInt()
+            self._touch!.type = Int(value)
         } else if (self._ParseKey == "sens") {
-            self._touch!.sens = value!.toInt()
+            self._touch!.sens = Int(value)
         } else if (self._ParseKey == "top") {
-            self._touch!.top = value!.toInt()
+            self._touch!.top = Int(value)
         } else if (self._ParseKey == "left") {
-            self._touch!.left = value!.toInt()
+            self._touch!.left = Int(value)
         } else if (self._ParseKey == "bottom") {
-            self._touch!.bottom = value!.toInt()
+            self._touch!.bottom = Int(value)
         } else if (self._ParseKey == "right") {
-            self._touch!.right = value!.toInt()
+            self._touch!.right = Int(value)
         } else if (self._ParseKey == "chat") {
-            self._touch!.setChat(value!)
+            self._touch!.setChat(value)
         } else {
             // nop
         }
@@ -156,7 +156,7 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     /// <returns></returns>
     internal func checkTouch(x : Int, y : Int, checkList : Array<String> )->ObjTouchResult
     {
-        var result : ObjTouchResult = ObjTouchResult(obj: nil)
+        let result : ObjTouchResult = ObjTouchResult(obj: nil)
         
         for msg in self.touchDefList
         {
@@ -170,7 +170,7 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
                 continue
             }
         
-            var res : Int = msg.checkTouch(x, y: y)
+            let res : Int = msg.checkTouch(x, y: y)
         
             if (res == 2)
             {
@@ -194,7 +194,7 @@ class ObjLiplisTouch : NSObject, NSXMLParserDelegate {
     /// <returns></returns>
     internal func checkClick(x : Int, y : Int, checkList : Array<String>, mode : Int)->ObjTouchResult
     {
-        var result : ObjTouchResult = ObjTouchResult(obj: nil)
+        let result : ObjTouchResult = ObjTouchResult(obj: nil)
         
         for msg in self.touchDefList
         {

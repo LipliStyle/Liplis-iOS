@@ -22,7 +22,7 @@ public class StringBuilder {
     /**
     Construct with initial String contents
     
-    :param: string Initial value; defaults to empty string
+    - parameter string: Initial value; defaults to empty string
     */
     public init(string: String = "") {
         self.stringValue = string
@@ -41,13 +41,13 @@ public class StringBuilder {
     Return the current length of the String object
     */
     public var length: Int {
-        return count(stringValue)
+        return stringValue.characters.count
     }
     
     /**
     Append a String to the object
     
-    :param: string String
+    - parameter string: String
     
     :return: reference to this StringBuilder instance
     */
@@ -59,11 +59,11 @@ public class StringBuilder {
     /**
     Append a Printable to the object
     
-    :param: value a value supporting the Printable protocol
+    - parameter value: a value supporting the Printable protocol
     
     :return: reference to this StringBuilder instance
     */
-    public func append<T: Printable>(value: T) -> StringBuilder {
+    public func append<T: CustomStringConvertible>(value: T) -> StringBuilder {
         stringValue += value.description
         return self
     }
@@ -71,7 +71,7 @@ public class StringBuilder {
     /**
     Append a String and a newline to the object
     
-    :param: string String
+    - parameter string: String
     
     :return: reference to this StringBuilder instance
     */
@@ -83,11 +83,11 @@ public class StringBuilder {
     /**
     Append a Printable and a newline to the object
     
-    :param: value a value supporting the Printable protocol
+    - parameter value: a value supporting the Printable protocol
     
     :return: reference to this StringBuilder instance
     */
-    public func appendLine<T: Printable>(value: T) -> StringBuilder {
+    public func appendLine<T: CustomStringConvertible>(value: T) -> StringBuilder {
         stringValue += value.description + "\n"
         return self
     }

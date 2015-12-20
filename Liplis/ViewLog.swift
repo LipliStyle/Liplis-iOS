@@ -48,7 +48,7 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.initClass()
         self.initView()
     }
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -70,7 +70,7 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     private func initView()
     {
         //ビューの初期化
-        var img : UIImage = UIImage(named : ObjR.imgIconIntoro)!                   //アイコン取得
+        let img : UIImage = UIImage(named : ObjR.imgIconIntoro)!                   //アイコン取得
         self.view.opaque = true                                                     //背景透過許可
         self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)   //白透明背景
         self.tabBarItem = UITabBarItem(title: self.tagTitle,image: img, tag: 4)     //タブ設定
@@ -152,12 +152,12 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     internal func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(self.logList[indexPath.row].url != "")
         {
-            println("Num: \(indexPath.row)")
-            println("Value: \(self.logList[indexPath.row].log)")
-            println("Value: \(self.logList[indexPath.row].url)")
+            print("Num: \(indexPath.row)")
+            print("Value: \(self.logList[indexPath.row].log)")
+            print("Value: \(self.logList[indexPath.row].url)")
             
             //ベース設定の取得
-            var baseSetting : LiplisPreference = LiplisPreference.SharedInstance
+            let baseSetting : LiplisPreference = LiplisPreference.SharedInstance
             
             
             //ブラウザモードチェック
@@ -197,7 +197,7 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Cellの.を取得する.
-        let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) 
         
         // Cellに値を設定する.
         cell.textLabel!.text = "\(self.logList[indexPath.row].log)"
@@ -228,7 +228,7 @@ class ViewLog : UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        //let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
         self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: LiplisDefine.labelHight)
         self.tblLog.frame = CGRectMake(0, self.lblTitle.frame.height, displayWidth, displayHeight - self.lblTitle.frame.height - LiplisDefine.futterHight)
     }

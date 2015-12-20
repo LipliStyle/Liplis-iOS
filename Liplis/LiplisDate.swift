@@ -48,7 +48,7 @@ class LiplisDate {
     {
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
-        var comps:NSDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond,fromDate: date)
+        let comps:NSDateComponents = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second],fromDate: date)
         
         self.year = comps.year
         self.month = comps.month

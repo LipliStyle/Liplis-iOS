@@ -40,11 +40,11 @@ class LiplisWidgetDefault : LiplisWidget {
     internal override func initXml()
     {
         //プリセットファイルの読み込み
-        self.lpsChat = ObjLiplisChat(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("chat", ofType: "xml")!)!)
-        self.lpsBody = ObjLiplisBodyDefault(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("body", ofType: "xml")!)!)
-        self.lpsSkin = ObjLiplisSkin(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("skin", ofType: "xml")!)!)
-        self.lpsTouch = ObjLiplisTouch(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("touch", ofType: "xml")!)!)
-        self.lpsVer = ObjLiplisVersion(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("version", ofType: "xml")!)!)
+        self.lpsChat = ObjLiplisChat(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("chat", ofType: "xml")!))
+        self.lpsBody = ObjLiplisBodyDefault(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("body", ofType: "xml")!))
+        self.lpsSkin = ObjLiplisSkin(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("skin", ofType: "xml")!))
+        self.lpsTouch = ObjLiplisTouch(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("touch", ofType: "xml")!))
+        self.lpsVer = ObjLiplisVersion(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("version", ofType: "xml")!))
         self.lpsIcon = ObjLiplisIcon()
     }
     

@@ -50,14 +50,14 @@ class LiplisCharDataManager
         self.skinDataList.append(LiplisSkinData())
         
         //ドキュメントルートにあるディレクトリのリストを取得する
-        var documentRoot : String = LiplisFileManager.getDocumentRoot()
-        var rootDirList : Array<String> = LiplisFileManager.getFileNamesDocumentPath()
+        let documentRoot : String = LiplisFileManager.getDocumentRoot()
+        let rootDirList : Array<String> = LiplisFileManager.getFileNamesDocumentPath()
         
         //回して、skin.xmlを探す
         for dirName in rootDirList
         {
             //スキンフォルダの中のファイルリストを取得する
-            var fileList : Array<String>! = LiplisFileManager.contentsOfDirectoryAtPath(documentRoot + "/" + dirName)
+            let fileList : Array<String>! = LiplisFileManager.contentsOfDirectoryAtPath(documentRoot + "/" + dirName)
             
             //nilなら、ディレクトリではないので、スルー
             if fileList == nil
@@ -109,14 +109,14 @@ class LiplisCharDataManager
         var charNameList : Array<String> = Array<String>()
         
         //ドキュメントルートにあるディレクトリのリストを取得する
-        var documentRoot : String = LiplisFileManager.getDocumentRoot()
-        var rootDirList : Array<String> = LiplisFileManager.getFileNamesDocumentPath()
+        let documentRoot : String = LiplisFileManager.getDocumentRoot()
+        let rootDirList : Array<String> = LiplisFileManager.getFileNamesDocumentPath()
         
         //回して、skin.xmlを探す
         for dirName in rootDirList
         {
             //スキンフォルダの中のファイルリストを取得する
-            var fileList : Array<String>! = LiplisFileManager.contentsOfDirectoryAtPath(documentRoot + "/" + dirName)
+            let fileList : Array<String>! = LiplisFileManager.contentsOfDirectoryAtPath(documentRoot + "/" + dirName)
             
             //nilなら、ディレクトリではないので、スルー
             if fileList == nil

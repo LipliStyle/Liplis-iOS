@@ -10,7 +10,7 @@ import Foundation
 struct FctLiplisMsg {
     internal static func createMsgMassageDlFaild()->MsgShortNews
     {
-        var msg : MsgShortNews = MsgShortNews()
+        let msg : MsgShortNews = MsgShortNews()
         
         msg.nameList.append("データ")
         msg.nameList.append("の");

@@ -49,7 +49,7 @@ struct LiplisShortNewsJpJson {
     */
     internal static func json2MsgShortNews(json:JSON)->MsgShortNews
     {
-        var result : MsgShortNews = MsgShortNews()
+        let result : MsgShortNews = MsgShortNews()
         
         //URL取得
         if json[self.KEY_URL].string != nil
@@ -64,14 +64,14 @@ struct LiplisShortNewsJpJson {
         if json[self.KEY_RESULT].string != nil
         {
             //リザルト取得(コロン分割)
-            var resList : Array<String> = split(json[self.KEY_RESULT].string!,isSeparator : {$0 == ";"})
+            let resList : Array<String> = (json[self.KEY_RESULT].string!).characters.split(isSeparator : {$0 == ";"}).map { String($0) }
             var title : String = ""
             
             //リーフエモーション分割
             for leafAndEmotion : String in resList
             {
                 //コンマ分割
-                var leaf : Array<String> = split(leafAndEmotion,isSeparator : {$0 == ","})
+                var leaf : Array<String> = leafAndEmotion.characters.split(isSeparator : {$0 == ","}).map { String($0) }
                 
                 //リスト作成
                 
@@ -84,8 +84,8 @@ struct LiplisShortNewsJpJson {
                     }
                     
                     result.nameList.append(leaf[0])
-                    result.emotionList.append(leaf[1].toInt()!)
-                    result.pointList.append(leaf[2].toInt()!)
+                    result.emotionList.append(Int(leaf[1])!)
+                    result.pointList.append(Int(leaf[2])!)
                     
                     //タイトル作成
                     title = title + leaf[0]
@@ -117,7 +117,7 @@ struct LiplisShortNewsJpJson {
         var result :Array<MsgShortNews> = []
 
         //ニュースリストを回してメッセージリストに変換する
-        for (idx:String,subJson:JSON) in json[self.KEY_LSTNEWS]
+        for (_, subJson): (String, JSON) in json[self.KEY_LSTNEWS]
         {
             //メッセージ作成
             result.append(json2MsgShortNews(subJson))

@@ -28,7 +28,7 @@ struct LiplisUtil {
     */
     internal static func getRandormNumber(Min _Min : Float, Max _Max : Float)->Int
     {
-        var resF : Float = ( Float(arc4random_uniform(UINT32_MAX)) / Float(UINT32_MAX) ) * (_Max - _Min) + _Min
+        let resF : Float = ( Float(arc4random_uniform(UINT32_MAX)) / Float(UINT32_MAX) ) * (_Max - _Min) + _Min
         
         return Int(resF)
     }
@@ -38,7 +38,7 @@ struct LiplisUtil {
     */
     internal static func getRandormNumber(Min _Min : Int, Max _Max : Int)->Int
     {
-        var resF : Float = ( Float(arc4random_uniform(UINT32_MAX)) / Float(UINT32_MAX) ) * (Float(_Max) - Float(_Min)) + Float(_Min)
+        let resF : Float = ( Float(arc4random_uniform(UINT32_MAX)) / Float(UINT32_MAX) ) * (Float(_Max) - Float(_Min)) + Float(_Min)
         
         return Int(resF)
     }
@@ -53,13 +53,16 @@ struct LiplisUtil {
     */
     internal static func getRandormString(length : Int)->String
     {
-        var sb : StringBuilder = StringBuilder()
+        let sb : StringBuilder = StringBuilder()
         let alphabetList : Array<String> = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","x","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","X","Y","Z","1","2","3","4","5","6","7","8","9","0"]
         
         //指定数分、ランダムな文字列を作成する
         for i in 0...length
         {
             sb.append(alphabetList[getRandormNumber(Min: 0,Max: alphabetList.count - 1)])
+            
+            //警告を消すためのダミー処理
+            if(i==1){}
         }
         
         //連結文字を返す

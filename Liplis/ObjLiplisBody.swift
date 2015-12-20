@@ -205,7 +205,7 @@ class ObjLiplisBody : NSObject, NSXMLParserDelegate {
     */
     internal func loadXml(url : NSURL)
     {
-        var parser : NSXMLParser? = NSXMLParser(contentsOfURL: url)
+        let parser : NSXMLParser? = NSXMLParser(contentsOfURL: url)
         if parser != nil
         {
             parser!.delegate = self
@@ -243,7 +243,7 @@ class ObjLiplisBody : NSObject, NSXMLParserDelegate {
         didStartElement elementName: String,
         namespaceURI : String?,
         qualifiedName qName: String?,
-        attributes attributeDict: [NSObject : AnyObject])
+        attributes attributeDict: [String : String])
     {
         self._ParseKey = elementName
         
@@ -309,30 +309,30 @@ class ObjLiplisBody : NSObject, NSXMLParserDelegate {
     /**
         パースする。
     */
-    internal func parser(parser: NSXMLParser, foundCharacters value: String?)
+    internal func parser(parser: NSXMLParser, foundCharacters value: String)
     {
         if (self._ParseKey == "emotion") {
-            self._body!.emotion = value!
+            self._body!.emotion = value
         } else if (self._ParseKey.hasSuffix("11")) {
-            self._body!.eye_1_c = value!
+            self._body!.eye_1_c = value
         } else if (self._ParseKey.hasSuffix("12")) {
-            self._body!.eye_1_o = value!
+            self._body!.eye_1_o = value
         } else if (self._ParseKey.hasSuffix("21")) {
-            self._body!.eye_2_c = value!
+            self._body!.eye_2_c = value
         } else if (self._ParseKey.hasSuffix("22")) {
-            self._body!.eye_2_o = value!
+            self._body!.eye_2_o = value
         } else if (self._ParseKey.hasSuffix("31")) {
-            self._body!.eye_3_c = value!
+            self._body!.eye_3_c = value
         } else if (self._ParseKey.hasSuffix("32")) {
-            self._body!.eye_3_o = value!
+            self._body!.eye_3_o = value
         } else if (self._ParseKey.hasSuffix("height")) {
-            self.height = CGFloat(value!.toInt()!)
+            self.height = CGFloat(Int(value)!)
         } else if (self._ParseKey.hasSuffix("width")) {
-            self.width = CGFloat(value!.toInt()!)
+            self.width = CGFloat(Int(value)!)
         } else if (self._ParseKey.hasSuffix("locationX")) {
-            self.locationX = value!.toInt()
+            self.locationX = Int(value)
         } else if (self._ParseKey.hasSuffix("locationY")) {
-            self.locationY = value!.toInt()
+            self.locationY = Int(value)
         } else {
             // nop
         }
@@ -457,7 +457,7 @@ class ObjLiplisBody : NSObject, NSXMLParserDelegate {
     }
     internal func getLiplisBodyId(emotion: Int, point: Int ,eyeState: Int, mouthState: Int)->String
     {
-        var body : ObjBody = getLiplisBody(emotion,point: point)
+        let body : ObjBody = getLiplisBody(emotion,point: point)
         return body.getLiplisBodyId(eyeState, mouthState: mouthState)
     }
 
@@ -514,7 +514,7 @@ class ObjLiplisBody : NSObject, NSXMLParserDelegate {
     {
         if bodyList.count>0
         {
-            var idx = LiplisUtil.getRandormNumber(Min: 0, Max: bodyList.count)
+            let idx = LiplisUtil.getRandormNumber(Min: 0, Max: bodyList.count)
             return bodyList[idx]
         }
         

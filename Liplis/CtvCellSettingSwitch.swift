@@ -77,7 +77,7 @@ class CtvCellSettingSwitch: UITableViewCell
     internal func setSize(viewWidth : CGFloat)
     {
         self.viewWidth = viewWidth
-        var locationY : CGFloat = CGFloat(viewWidth - 50 - 20)
+        let locationY : CGFloat = CGFloat(viewWidth - 50 - 20)
         self.switchSelect.frame = CGRectMake(locationY, 6, 50, 15)
     }
     
@@ -90,7 +90,7 @@ class CtvCellSettingSwitch: UITableViewCell
         self.settingIdx = settingIdx
     }
     
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }

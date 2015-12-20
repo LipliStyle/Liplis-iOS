@@ -34,7 +34,7 @@ class CtvCellMenuTitle: UITableViewCell
         self.backgroundColor = UIColor.hexStr("FEE360", alpha: 255)
     }
     
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }

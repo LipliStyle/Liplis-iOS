@@ -104,7 +104,7 @@ class LiplisSkinData
         self.xmlVersion = nil
         
         //XML読み込み
-        self.lpsSkin = ObjLiplisSkin(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("skin", ofType: "xml")!)!)
+        self.lpsSkin = ObjLiplisSkin(url:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("skin", ofType: "xml")!))
         self.lpsBody = nil
         
         //ボディファイルロード

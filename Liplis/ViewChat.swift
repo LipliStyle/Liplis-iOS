@@ -46,7 +46,7 @@ class ViewChat : UIViewController,UITextFieldDelegate{
         self.initClass()
         self.initView()
     }
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     required override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
@@ -169,7 +169,7 @@ class ViewChat : UIViewController,UITextFieldDelegate{
     /*
     画面タッチ（閉じる）
     */
-    internal override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    internal override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.closeMe()
     }
     
@@ -250,7 +250,7 @@ class ViewChat : UIViewController,UITextFieldDelegate{
     */
     internal func sendChat()
     {
-        self.widget.chatTalkRecive(txtChat.text)
+        self.widget.chatTalkRecive(txtChat.text!)
         self.txtChat.text = ""
     }
     

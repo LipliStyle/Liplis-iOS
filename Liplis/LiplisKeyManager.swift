@@ -97,7 +97,7 @@ class LiplisKeyManager : ObjPreferenceBase
     */
     internal func saveKeyList()
     {
-        var jsonStr : StringBuilder = StringBuilder()
+        let jsonStr : StringBuilder = StringBuilder()
         
         //開始かっこ
         jsonStr.append("{\"")
@@ -143,13 +143,13 @@ class LiplisKeyManager : ObjPreferenceBase
         //キーリストの取得
         var json : JSON = getJsonFromString(getSetting(JSON_KEY, defaultValue: ""))
         
-        print(json[JSON_KEY] )
+        print(json[JSON_KEY], terminator: "" )
         
         //ヌルチェック
         if json[JSON_KEY] != nil
         {
             //回して復元
-            for (idx:String,subJson : JSON) in json[JSON_KEY]
+            for (_, subJson): (String, JSON) in json[JSON_KEY]
             {
                 self.keyList.append(subJson.description)
             }

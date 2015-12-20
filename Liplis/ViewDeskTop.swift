@@ -93,7 +93,7 @@ class ViewDeskTop: UIViewController{
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -104,7 +104,7 @@ class ViewDeskTop: UIViewController{
     private func initView()
     {
         //ビューの初期化
-        var img : UIImage = UIImage(named: ObjR.imgIconDesktop)!                    //アイコン取得
+        let img : UIImage = UIImage(named: ObjR.imgIconDesktop)!                    //アイコン取得
         self.view.opaque = true                                                     //背景透過許可
         self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)   //白透明背景
         self.tabBarItem = UITabBarItem(title: tagTitle,image: img, tag: 1)          //タブ設定//アイコン取得
@@ -267,10 +267,10 @@ class ViewDeskTop: UIViewController{
     /*
     タッチを感知した際に呼ばれるメソッド.
     */
-    internal override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    internal override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         var widgetListIdx : Int = 0
         
-        println("touchesBegan")
+        print("touchesBegan")
         
         //ウィジェットのタッチ開始イベントを呼び出す
         for lips in self.widgetList
@@ -294,10 +294,10 @@ class ViewDeskTop: UIViewController{
         ドラッグを感知した際に呼ばれるメソッド.
         (ドラッグ中何度も呼ばれる)
     */
-    internal override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    internal override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         var widgetListIdx : Int = 0
         
-        println("touchesMoved")
+        print("touchesMoved")
         
         //ウィジェットのムーブイベントを呼び出す
         for lips in self.widgetList
@@ -320,9 +320,9 @@ class ViewDeskTop: UIViewController{
     /*
         ドラッグエンド
     */
-    internal override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    internal override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        println("touchesEnded")
+        print("touchesEnded")
         
         //ウィジェットのタッチエンドイベントを呼び出す
         for lips in self.widgetList
@@ -386,14 +386,14 @@ class ViewDeskTop: UIViewController{
     /*
     トラッシュ表示終了
     */
-    internal func onDragTrashEnd(var widget : LiplisWidget!,touches: NSSet)
+    internal func onDragTrashEnd(widget : LiplisWidget!,touches: NSSet)
     {
         //もし破棄座標にドロップされていたら、対象のウィジェットを削除する
         let aTouch = touches.anyObject() as! UITouch
         let location = aTouch.locationInView(trashBox)
         if(location.x >= -10 && location.x <= trashRect.width + 10) && (location.y >= -10 && location.y <= trashRect.height + 10)
         {
-            print("trash!!!!!!!!")
+            print("trash!!!!!!!!", terminator: "")
             
             UIView.animateWithDuration(2.0,
                 animations: { () -> Void in
@@ -507,7 +507,7 @@ class ViewDeskTop: UIViewController{
     internal func addNewWidget(lsd : LiplisSkinData)
     {
         //新規キー作成
-        var os : ObjPreference = createObjPreferenceFromLsd(lsd)
+        let os : ObjPreference = createObjPreferenceFromLsd(lsd)
         
         //ウィジェット
         var lps: LiplisWidget!
@@ -537,10 +537,10 @@ class ViewDeskTop: UIViewController{
     internal func addLoadWidget(key : String)
     {
         //キー取得
-        var os : ObjPreference = createObjPreferenceFromKey(key)
+        let os : ObjPreference = createObjPreferenceFromKey(key)
         
         //スキンデータ取得
-        var lsd : LiplisSkinData! = app.cman.getLiplisSkinData(os.charName)
+        let lsd : LiplisSkinData! = app.cman.getLiplisSkinData(os.charName)
         
         //スキンデータ取得チェック
         if lsd != nil{
@@ -641,10 +641,9 @@ class ViewDeskTop: UIViewController{
     internal func delWidget(var widget : LiplisWidget!)
     {
         //ウィジェットのパーツのハッシュと登録オブジェクトのハッシュを比較し、対象を調べる。対象なら削除する。
-        let views = self.view.subviews
-        for (parts: UIView) in views as! [UIView]
+        for parts in self.view.subviews
         {
-            println("View:\(parts.description)")
+            print("View:\(parts.description)")
             
             //対象ウィジェットのパーツだった場合、削除する
             if(parts.hash == widget.imgWindow.hash || parts.hash == widget.imgBody.hash || parts.hash == widget.lblLpsTalkLabel.hash || parts.hash == widget.icoSleep.hash || parts.hash == widget.icoLog.hash || parts.hash == widget.icoSetting.hash || parts.hash == widget.icoChat.hash || parts.hash == widget.icoClock.hash || parts.hash == widget.icoBattery)
@@ -760,6 +759,6 @@ class ViewDeskTop: UIViewController{
     internal func desktopWebSetUrl(url : String)
     {
         // リクエストを作成する.
-        let request: NSURLRequest = NSURLRequest(URL: NSURL(string: url)!)
+        //let request: NSURLRequest = NSURLRequest(URL: NSURL(string: url)!)
     }
 }

@@ -70,7 +70,7 @@ class LiplisPreference : ObjPreferenceBase{
     */
     internal func setUID()
     {
-        var uid = getLiplisSetting("lpsUid")
+        let uid = getLiplisSetting("lpsUid")
         
         if uid == ""
         {

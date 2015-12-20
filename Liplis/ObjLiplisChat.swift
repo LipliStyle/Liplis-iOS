@@ -75,7 +75,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     */
     private func loadXml(url : NSURL)
     {
-        var parser : NSXMLParser? = NSXMLParser(contentsOfURL: url)
+        let parser : NSXMLParser? = NSXMLParser(contentsOfURL: url)
         if parser != nil
         {
             parser!.delegate = self
@@ -109,7 +109,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
         didStartElement elementName: String,
         namespaceURI: String?,
         qualifiedName qName: String?,
-        attributes attributeDict: [NSObject : AnyObject])
+        attributes attributeDict: [String : String])
 
     {
         //エレメント取得
@@ -128,7 +128,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
         } else if (_ParseKey == "discription") {
             self.discriptionList.append(self._Value!)
         } else if (_ParseKey == "emotion") {
-           self.emotionList.append(self._Value.toInt()!)
+           self.emotionList.append(Int(self._Value)!)
         } else if (_ParseKey == "prerequisite") {
             self.prerequisiteList.append(self._Value!)
         } else {
@@ -143,18 +143,18 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     /**
         パースする。
     */
-    internal func parser(parser: NSXMLParser, foundCharacters value: String?)
+    internal func parser(parser: NSXMLParser, foundCharacters value: String)
     {
         if (self._ParseKey == "name") {
-            self._Value = self._Value + value!
+            self._Value = self._Value + value
         } else if (self._ParseKey == "type") {
-            self._Value = self._Value + value!
+            self._Value = self._Value + value
         } else if (self._ParseKey == "discription") {
-           self._Value = self._Value + value!
+           self._Value = self._Value + value
         } else if (self._ParseKey == "emotion") {
-            self._Value = self._Value + value!
+            self._Value = self._Value + value
         } else if (self._ParseKey == "prerequisite") {
-            self._Value = self._Value + value!
+            self._Value = self._Value + value
         } else {
             // nop
         }
@@ -193,27 +193,27 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
             if(type == "greet"){
                 
                 prerequinste = prerequisiteList[idx]
-                timeList = split(prerequinste,isSeparator : {$0 == ","})
+                timeList = prerequinste.characters.split(isSeparator : {$0 == ","}).map { String($0) }
                 
                 if(timeList.count == 2)
                 {
-                    startList = split(timeList[0],isSeparator : {$0 == ":"});
-                    endList = split(timeList[1],isSeparator : {$0 == ":"});
+                    startList = timeList[0].characters.split(isSeparator : {$0 == ":"}).map { String($0) };
+                    endList = timeList[1].characters.split(isSeparator : {$0 == ":"}).map { String($0) };
                     
                     if(startList.count == 2 && endList.count == 2)
                     {
                         let date = NSDate()
                         let calendar = NSCalendar.currentCalendar()
-                        var comps:NSDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond,fromDate: date)
+                        let comps:NSDateComponents = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second],fromDate: date)
                         
                         nowHour = comps.hour
                         nowMin = comps.minute
                         
-                        startHour = startList[0].toInt()!
-                        startMin = startList[1].toInt()!
+                        startHour = Int(startList[0])!
+                        startMin = Int(startList[1])!
                         
-                        endHour = endList[0].toInt()!
-                        endMin = endList[1].toInt()!
+                        endHour = Int(endList[0])!
+                        endMin = Int(endList[1])!
                         
                         //スタートアワーの場合、分を確認
                         if(nowHour == startHour && nowMin >= startMin)
@@ -249,8 +249,8 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
         {
             if(nameList.count > 0)
             {
-                var ran : Int = LiplisUtil.getRandormNumber(Min: 0,Max: resList.count - 1)
-                var tarIdx : Int = resList[ran]
+                let ran : Int = LiplisUtil.getRandormNumber(Min: 0,Max: resList.count - 1)
+                let tarIdx : Int = resList[ran]
                 
                 result = MsgShortNews(name: discriptionList[tarIdx], emotion: emotionList[tarIdx], point: 99)
             }
@@ -287,8 +287,8 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
         {
             if(nameList.count > 0)
             {
-                var ran : Int = LiplisUtil.getRandormNumber(Min: 0,Max: resList.count - 1)
-                var tarIdx : Int = resList[ran]
+                let ran : Int = LiplisUtil.getRandormNumber(Min: 0,Max: resList.count - 1)
+                let tarIdx : Int = resList[ran]
                 
                 result = MsgShortNews(name: discriptionList[tarIdx], emotion: emotionList[tarIdx], point: 99)
             }
@@ -326,8 +326,8 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
         {
             if(nameList.count > 0)
             {
-                var ran : Int = LiplisUtil.getRandormNumber(Min: 0,Max: resList.count - 1)
-                var tarIdx : Int = resList[ran]
+                let ran : Int = LiplisUtil.getRandormNumber(Min: 0,Max: resList.count - 1)
+                let tarIdx : Int = resList[ran]
                 
                 result = discriptionList[tarIdx]
             }
@@ -351,7 +351,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     {
         
         var result : MsgShortNews
-        var batteryWord : MsgShortNews
+        //var batteryWord : MsgShortNews
         var resStr : String = ""
         
         //電池容量のセリフを取得
@@ -367,26 +367,26 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
         }
         
         //バッテリーレベルによってセリフを変える
-        if(batteryLevel > 70)
-        {
-            batteryWord = getChatWord("batteryHi")
-        }
-        else if(batteryLevel > 30)
-        {
-            batteryWord = getChatWord("batteryMid")
-        }
-        else if(batteryLevel > 0)
-        {
-            batteryWord = getChatWord("batteryLow")
-        }
-        else
-        {
-            batteryWord = MsgShortNews()
-        }
+//        if(batteryLevel > 70)
+//        {
+//            batteryWord = getChatWord("batteryHi")
+//        }
+//        else if(batteryLevel > 30)
+//        {
+//            batteryWord = getChatWord("batteryMid")
+//        }
+//        else if(batteryLevel > 0)
+//        {
+//            batteryWord = getChatWord("batteryLow")
+//        }
+//        else
+//        {
+//            batteryWord = MsgShortNews()
+//        }
         
         //メッセージ作成
         resStr = result.nameList[0]
-        resStr = resStr.stringByReplacingOccurrencesOfString("[?]", withString: String(batteryLevel), options: nil, range: nil)
+        resStr = resStr.stringByReplacingOccurrencesOfString("[?]", withString: String(batteryLevel), options: [], range: nil)
         result = MsgShortNews(name: resStr, emotion: result.emotionList[0], point: result.pointList[0])
         
         return result;
@@ -398,7 +398,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     internal func getClockInfo()->MsgShortNews
     {
         var resStr : String = "";
-        var nowTime : LiplisDate = LiplisDate()
+        let nowTime : LiplisDate = LiplisDate()
         
         //時刻情報のセリフを取得
         resStr = getChatWordStr("clockInfo")
@@ -421,7 +421,7 @@ class ObjLiplisChat : NSObject, NSXMLParserDelegate {
     */
     internal func getTimeSignal(hour : Int)->MsgShortNews!
     {
-        var result : MsgShortNews = MsgShortNews();
+        let result : MsgShortNews = MsgShortNews();
         var buf : MsgShortNews;
         
         switch hour

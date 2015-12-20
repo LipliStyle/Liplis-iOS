@@ -66,7 +66,7 @@ class CtvCellMenuCtrlWidget : UITableViewCell
         self.parView = parView
     }
     
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -77,7 +77,7 @@ class CtvCellMenuCtrlWidget : UITableViewCell
     internal func setSize(viewWidth : CGFloat)
     {
         self.viewWidth = viewWidth
-        var locationX : CGFloat = CGFloat(viewWidth - viewWidth/4 - 5)
+        let locationX : CGFloat = CGFloat(viewWidth - viewWidth/4 - 5)
         self.btnRun.frame = CGRectMake(locationX, 5,viewWidth/4,60)
         self.lblTitle.frame = CGRectMake(10, 5,viewWidth * 3/4 - 20,50)
     }

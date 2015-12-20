@@ -94,7 +94,7 @@ class CtvCellWidgetController : UITableViewCell
         self.parView = parView
     }
     
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }

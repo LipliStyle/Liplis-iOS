@@ -124,8 +124,8 @@ class ObjBattery
         //バッテリー状態の監視.
         myDevice.batteryMonitoringEnabled = true
     
-        var myBatteryLevel = myDevice.batteryLevel
-        var myBatteryState = myDevice.batteryState
+        let myBatteryLevel = myDevice.batteryLevel
+        //let myBatteryState = myDevice.batteryState
         
         if myBatteryLevel != -1
         {

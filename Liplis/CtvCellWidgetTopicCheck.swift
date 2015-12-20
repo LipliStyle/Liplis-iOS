@@ -110,7 +110,7 @@ class CtvCellWidgetTopicCheck : UITableViewCell
     internal func setSize(viewWidth : CGFloat)
     {
         self.viewWidth = viewWidth
-        var locationY : CGFloat = CGFloat(viewWidth - 50 - 9)
+        let locationY : CGFloat = CGFloat(viewWidth - 50 - 9)
         self.btnCheckBox.frame = CGRectMake(locationY, 6, 32, 32)
     }
     
@@ -133,7 +133,7 @@ class CtvCellWidgetTopicCheck : UITableViewCell
         }
     }
     
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -151,7 +151,7 @@ class CtvCellWidgetTopicCheck : UITableViewCell
     internal func onClickCheck(sender: UIButton) {
         if(self.on == true)
         {
-            println("チェックボックスOFF")
+            print("チェックボックスOFF")
             let imgOff : UIImage = UIImage(named: ObjR.imgCheckOff)!
             self.btnCheckBox.setImage(imgOff, forState: UIControlState.Normal)
             self.on = false
@@ -159,7 +159,7 @@ class CtvCellWidgetTopicCheck : UITableViewCell
         }
         else
         {
-            println("チェックボックスON")
+            print("チェックボックスON")
             let imgOn : UIImage = UIImage(named: ObjR.imgCheckOn)!
             self.btnCheckBox.setImage(imgOn, forState: UIControlState.Normal)
             self.on = true

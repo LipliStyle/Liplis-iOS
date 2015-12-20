@@ -67,7 +67,7 @@ class ObjLiplisVersion : NSObject, NSXMLParserDelegate {
     */
     internal func loadXml(url : NSURL)
     {
-        var parser : NSXMLParser? = NSXMLParser(contentsOfURL: url)
+        let parser : NSXMLParser? = NSXMLParser(contentsOfURL: url)
         if parser != nil
         {
             parser!.delegate = self
@@ -101,7 +101,7 @@ class ObjLiplisVersion : NSObject, NSXMLParserDelegate {
         didStartElement elementName: String,
         namespaceURI : String?,
         qualifiedName qName: String?,
-        attributes attributeDict: [NSObject : AnyObject])
+        attributes attributeDict: [String : String])
     {
         //エレメント取得
         self._ParseKey = elementName
@@ -132,16 +132,16 @@ class ObjLiplisVersion : NSObject, NSXMLParserDelegate {
     /**
     パースする。
     */
-    internal func parser(parser: NSXMLParser, foundCharacters value: String?)
+    internal func parser(parser: NSXMLParser, foundCharacters value: String)
     {
         if (self._ParseKey == "skinVersion") {
-            self._Value = self._Value + value!
+            self._Value = self._Value + value
         } else if (self._ParseKey == "liplisMiniVersion") {
-            self._Value = self._Value + value!
+            self._Value = self._Value + value
         } else if (self._ParseKey == "url") {
-            self._Value = self._Value + value!
+            self._Value = self._Value + value
         } else if (self._ParseKey == "apkUrl") {
-            self._Value = self._Value + value!
+            self._Value = self._Value + value
         } else {
             // nop
         }

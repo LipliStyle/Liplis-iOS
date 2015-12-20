@@ -12,6 +12,7 @@
 //   2015/05/12 ver1.1.0 リファクタリング
 //   2015/05/19 ver1.4.0 Swift1.2対応
 //   2015/05/19 ver1.4.1 会話中にすぐに通常おしゃべりに戻るバグ修正
+//   2015/12/18 ver1.5.0 Swift2.0対応
 //
 //  Created by sachin on 2015/04/11.
 //  Copyright (c) 2015年 sachin. All rights reserved.
@@ -90,7 +91,7 @@ class LiplisWidget : NSObject {
     internal var nowDirection : Int! = 0         //現在の方向
     internal var prvDirection  : Int = 0         //１つ前の方向
     internal var cntSlow  : Int! = 0             //スローカウント
-
+    
     //=================================
     //制御フラグ
     internal var flgConnect     : Bool = false   //接続フラグ
@@ -146,20 +147,16 @@ class LiplisWidget : NSObject {
         
         //ビューの初期化
         self.initView()
-
+        
         //あいさつ
         self.greet()
     }
     
     /*
-        画面要素の初期化
+    画面要素の初期化
     */
     internal func initView()
     {
-        //画面サイズの取得
-        let width = desk.view.frame.maxX
-        let height = desk.view.frame.maxY
-
         // UIImageViewを作成する.
         self.lblLpsTalkLabel = UILabel(frame: CGRectMake(0, 0, 140, 60))
         self.imgWindow = UIImageView(frame: CGRectMake(0,0,150,60))
@@ -202,17 +199,17 @@ class LiplisWidget : NSObject {
         
         //イベントハンドラマッピング
         self.icoSleep.addTarget(self, action: "onDownIcoSleep:", forControlEvents: .TouchDown)
-        self.icoSleep.addTarget(self, action: "onUpIcoSleep:", forControlEvents: .TouchUpInside | .TouchUpOutside)
+        self.icoSleep.addTarget(self, action: "onUpIcoSleep:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
         self.icoLog.addTarget(self, action: "onDownIcoLog:", forControlEvents: .TouchDown)
-        self.icoLog.addTarget(self, action: "onUpIcoLog:", forControlEvents: .TouchUpInside | .TouchUpOutside)
+        self.icoLog.addTarget(self, action: "onUpIcoLog:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
         self.icoSetting.addTarget(self, action: "onDownIcoSetting:", forControlEvents: .TouchDown)
-        self.icoSetting.addTarget(self, action: "onUpIcoSetting:", forControlEvents: .TouchUpInside | .TouchUpOutside)
+        self.icoSetting.addTarget(self, action: "onUpIcoSetting:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
         self.icoChat.addTarget(self, action: "onDownIcoChat:", forControlEvents: .TouchDown)
-        self.icoChat.addTarget(self, action: "onUpIcoChat:", forControlEvents: .TouchUpInside | .TouchUpOutside)
+        self.icoChat.addTarget(self, action: "onUpIcoChat:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
         self.icoClock.addTarget(self, action: "onDownIoClock:", forControlEvents: .TouchDown)
-        self.icoClock.addTarget(self, action: "onUpIoClock:", forControlEvents: .TouchUpInside | .TouchUpOutside)
+        self.icoClock.addTarget(self, action: "onUpIoClock:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
         self.icoBattery.addTarget(self, action: "onDownIcoBattery:", forControlEvents: .TouchDown)
-        self.icoBattery.addTarget(self, action: "onUpIcoBattery:", forControlEvents: .TouchUpInside | .TouchUpOutside)
+        self.icoBattery.addTarget(self, action: "onUpIcoBattery:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
         
         //要素の登録はデスクトップで行う
         self.desk.registWidget(self)
@@ -252,13 +249,13 @@ class LiplisWidget : NSObject {
         
         //バッテリーオブジェクトの初期化
         self.lpsBattery = ObjBattery()
-            
+        
         //チャットAPIインスタンス
         self.lpsChatTalk = LiplisApiChat()
     }
-
+    
     /*
-        チャット情報の初期化
+    チャット情報の初期化
     */
     internal func initChatInfo()
     {
@@ -328,11 +325,11 @@ class LiplisWidget : NSObject {
     {
         //プリファレンスの破棄
         self.os.delPreference()
-            
+        
         //タイマー停止
         self.stopNextTimer()
         self.stopUpdateTimer()
-       
+        
         //イメージの破棄
         if self.imgWindow != nil {self.imgWindow.image = nil}
         if self.imgBody != nil {self.imgBody.image = nil}
@@ -345,7 +342,7 @@ class LiplisWidget : NSObject {
         if self.imgClockBase != nil {self.imgClockBase.image = nil}
         if self.imgClockLongHand != nil {self.imgClockLongHand.image = nil}
         if self.imgClockShortHand != nil {self.imgClockShortHand.image = nil}
-            
+        
         //要素の破棄
         self.lblLpsTalkLabel = nil
         self.imgWindow = nil
@@ -432,9 +429,9 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        おしゃべりタイマー
-        10秒間隔で実行
-        おしゃべり中は停止する
+    おしゃべりタイマー
+    10秒間隔で実行
+    おしゃべり中は停止する
     */
     internal func onNext(timer : NSTimer)
     {
@@ -450,8 +447,8 @@ class LiplisWidget : NSObject {
     
     
     /*
-        おしゃべりタイマー
-        0.1間隔で実行
+    おしゃべりタイマー
+    0.1間隔で実行
     */
     internal func onUpdate(timer : NSTimer)
     {
@@ -464,7 +461,7 @@ class LiplisWidget : NSObject {
     
     
     /*
-        アップデートカウントのリセット
+    アップデートカウントのリセット
     */
     func reSetUpdateCount()
     {
@@ -508,18 +505,18 @@ class LiplisWidget : NSObject {
     //============================================================
     
     /*
-        タッチ開始イベント
+    タッチ開始イベント
     */
     internal func touchesBegan(touches: NSSet)->Bool {
         //フレーム取得
-        var frameImgBody: CGRect = self.imgBody.frame
+        let frameImgBody: CGRect = self.imgBody.frame
         
         // タッチイベントを取得.
         let aTouch = touches.anyObject() as! UITouch
         
         // タッチ位置の取得
         let location = aTouch.locationInView(self.imgBody)
-
+        
         //範囲チェック
         if((location.x >= 0 && location.x <= frameImgBody.width) && (location.y >= 0 && location.y <= frameImgBody.height))
         {
@@ -529,7 +526,7 @@ class LiplisWidget : NSObject {
                 animations: { () -> Void in
                     self.imgBody.transform = CGAffineTransformMakeScale(0.9, 0.9)
                 })
-            { (Bool) -> Void in}
+                { (Bool) -> Void in}
             
             //移動制御タイマー開始
             self.startStartMoveTimer()
@@ -538,7 +535,7 @@ class LiplisWidget : NSObject {
         }
         
         //ウインドウフレーム取得
-        var frameImgWindow : CGRect = imgWindow.frame
+        let frameImgWindow : CGRect = imgWindow.frame
         
         //ウインドウクリックモードチェック
         //down時はアニメーションのみ
@@ -551,19 +548,19 @@ class LiplisWidget : NSObject {
             if((locationWindow.x >= 0 && locationWindow.x <= frameImgWindow.width) && (locationWindow.y >= 0 && locationWindow.y <= frameImgWindow.height))
             {
                 UIView.animateWithDuration(0.06,
-                animations: { () -> Void in
-                    self.imgWindow.transform = CGAffineTransformMakeScale(0.9, 0.9)
+                    animations: { () -> Void in
+                        self.imgWindow.transform = CGAffineTransformMakeScale(0.9, 0.9)
                 })
                 
                 return true
             }
         }
-
+        
         return false
     }
     
     /*
-        ドラッグイベント
+    ドラッグイベント
     */
     internal func touchesMoved(touches: NSSet)->Bool  {
         if(desk.flgMoving)
@@ -572,7 +569,7 @@ class LiplisWidget : NSObject {
             let aTouch = touches.anyObject() as! UITouch
             
             //ボディフレーム
-            var frameImgBody : CGRect = imgBody.frame
+            let frameImgBody : CGRect = imgBody.frame
             
             // 移動した先の座標を取得.
             let location = aTouch.locationInView(imgBody)
@@ -589,27 +586,27 @@ class LiplisWidget : NSObject {
                 // 移動した分の距離をmyFrameの座標にプラスする.
                 self.imgBody.frame.origin.x += deltaX
                 self.imgBody.frame.origin.y += deltaY
-
+                
                 //ほかパーツの追随
                 self.setWidgetLocation(0,windowOffsetY : 0)
-         
+                
                 return true
             }
         }
-
+        
         return false
     }
     
     /*
-        タッチ終了イベント
+    タッチ終了イベント
     */
     internal func touchesEnded(touches: NSSet)->Bool  {
         //フレーム取得
-        var frameImgBody : CGRect = imgBody.frame
-            
+        let frameImgBody : CGRect = imgBody.frame
+        
         //タッチイベントを取得.
         let aTouch = touches.anyObject() as! UITouch
-            
+        
         //タッチ位置取得
         let location = aTouch.locationInView(imgBody)
         
@@ -621,10 +618,10 @@ class LiplisWidget : NSObject {
             
             //アニメーション.
             UIView.animateWithDuration(0.1,
-            // アニメーション中の処理(縮小して拡大)
-            animations: { () -> Void in
-                self.imgBody.transform = CGAffineTransformMakeScale(0.4, 0.4)
-                self.imgBody.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                // アニメーション中の処理(縮小して拡大)
+                animations: { () -> Void in
+                    self.imgBody.transform = CGAffineTransformMakeScale(0.4, 0.4)
+                    self.imgBody.transform = CGAffineTransformMakeScale(1.0, 1.0)
             })
             
             //クリックイベント
@@ -635,7 +632,7 @@ class LiplisWidget : NSObject {
             {
                 rescue(40)
             }
-
+            
             //移動終了
             self.desk.flgMoving = false
             
@@ -646,7 +643,7 @@ class LiplisWidget : NSObject {
         }
         
         //ウインドウフレーム取得
-        var frameImgWindow : CGRect = imgWindow.frame
+        let frameImgWindow : CGRect = imgWindow.frame
         
         //ウインドウクリック設定が有効なら、ウインドウ範囲チェックを行う
         if(self.desk.baseSetting.lpsTalkWindowClickMode == 1)
@@ -662,11 +659,11 @@ class LiplisWidget : NSObject {
                         self.imgWindow.transform = CGAffineTransformMakeScale(0.4, 0.4)
                         self.imgWindow.transform = CGAffineTransformMakeScale(1.0, 1.0)
                         self.onClickWindow()
-                    })
+                })
                 return true
             }
         }
-
+        
         return false
     }
     
@@ -676,7 +673,7 @@ class LiplisWidget : NSObject {
     internal func setWidgetLocation(offsetY : CGFloat, windowOffsetY : CGFloat)
     {
         //ボディフレーム
-        var frameImgBody : CGRect = imgBody.frame
+        let frameImgBody : CGRect = imgBody.frame
         
         var frameImgWindow : CGRect = imgWindow.frame
         var frameLblTalkLabel : CGRect = lblLpsTalkLabel.frame
@@ -732,10 +729,10 @@ class LiplisWidget : NSObject {
     {
         //アニメーション
         UIView.animateWithDuration(0.06,
-        animations: { () -> Void in
-            self.imgBody.transform = CGAffineTransformMakeScale(0.4, 0.4)
-            self.imgBody.transform = CGAffineTransformMakeScale(1.0, 1.0)
-            self.imgBody.transform = CGAffineTransformMakeScale(0.9, 0.9)
+            animations: { () -> Void in
+                self.imgBody.transform = CGAffineTransformMakeScale(0.4, 0.4)
+                self.imgBody.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                self.imgBody.transform = CGAffineTransformMakeScale(0.9, 0.9)
         })
         
         //ウィジェットを最前面に移動する
@@ -747,7 +744,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        ボディクリック時処理
+    ボディクリック時処理
     */
     internal func onClickBody()
     {
@@ -842,14 +839,14 @@ class LiplisWidget : NSObject {
         {
             self.imgBody.frame.origin.y = self.desk.view.frame.height - self.frame.height - 80
         }
-
+        
         //パーツの位置調整
         self.setWidgetLocation(-10, windowOffsetY: 5)
         
         //座標セーブ
         self.saveLocation()
     }
-
+    
     /*
     座標をセーブルする
     */
@@ -878,8 +875,8 @@ class LiplisWidget : NSObject {
     }
     internal func onUpIcoSleep(sender: UIButton){
         UIView.animateWithDuration(0.1,animations: { () -> Void in
-        self.icoSleep.transform = CGAffineTransformMakeScale(0.4, 0.4)
-        self.icoSleep.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            self.icoSleep.transform = CGAffineTransformMakeScale(0.4, 0.4)
+            self.icoSleep.transform = CGAffineTransformMakeScale(1.0, 1.0)
         })
     }
     
@@ -888,13 +885,13 @@ class LiplisWidget : NSObject {
     */
     internal func onDownIcoLog(sender: UIButton){
         UIView.animateWithDuration(0.06,animations: { () -> Void in
-        self.icoLog.transform = CGAffineTransformMakeScale(0.9, 0.9)
+            self.icoLog.transform = CGAffineTransformMakeScale(0.9, 0.9)
         })
     }
     internal func onUpIcoLog(sender: UIButton){
         UIView.animateWithDuration(0.1,animations: { () -> Void in
-        self.icoLog.transform = CGAffineTransformMakeScale(0.4, 0.4)
-        self.icoLog.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            self.icoLog.transform = CGAffineTransformMakeScale(0.4, 0.4)
+            self.icoLog.transform = CGAffineTransformMakeScale(1.0, 1.0)
         })
         
         //タブ移動 ログ画面
@@ -906,13 +903,13 @@ class LiplisWidget : NSObject {
     */
     internal func onDownIcoSetting(sender: UIButton){
         UIView.animateWithDuration(0.06,animations: { () -> Void in
-        self.icoSetting.transform = CGAffineTransformMakeScale(0.9, 0.9)
+            self.icoSetting.transform = CGAffineTransformMakeScale(0.9, 0.9)
         })
     }
     internal func onUpIcoSetting(sender: UIButton){
         UIView.animateWithDuration(0.1,animations: { () -> Void in
-        self.icoSetting.transform = CGAffineTransformMakeScale(0.4, 0.4)
-        self.icoSetting.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            self.icoSetting.transform = CGAffineTransformMakeScale(0.4, 0.4)
+            self.icoSetting.transform = CGAffineTransformMakeScale(1.0, 1.0)
         })
         //ウィジェット設定メニュー呼び出し
         self.callWidgetSetting()
@@ -923,25 +920,25 @@ class LiplisWidget : NSObject {
     */
     internal func onDownIcoChat(sender: UIButton){
         UIView.animateWithDuration(0.06,animations: { () -> Void in
-        self.icoChat.transform = CGAffineTransformMakeScale(0.9, 0.9)
+            self.icoChat.transform = CGAffineTransformMakeScale(0.9, 0.9)
         })
     }
     internal func onUpIcoChat(sender: UIButton){
         UIView.animateWithDuration(0.1,animations: { () -> Void in
-        self.icoChat.transform = CGAffineTransformMakeScale(0.4, 0.4)
-        self.icoChat.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            self.icoChat.transform = CGAffineTransformMakeScale(0.4, 0.4)
+            self.icoChat.transform = CGAffineTransformMakeScale(1.0, 1.0)
         })
         
         //おしゃべり画面呼び出し
         self.callChat()
     }
-
+    
     /*
     クロックボタンイベント
     */
     internal func onDownIoClock(sender: UIButton){
         UIView.animateWithDuration(0.06,animations: { () -> Void in
-        self.icoClock.transform = CGAffineTransformMakeScale(0.9, 0.9)
+            self.icoClock.transform = CGAffineTransformMakeScale(0.9, 0.9)
         })
         
         //時刻おしゃべり
@@ -949,8 +946,8 @@ class LiplisWidget : NSObject {
     }
     internal func onUpIoClock(sender: UIButton){
         UIView.animateWithDuration(0.1,animations: { () -> Void in
-        self.icoClock.transform = CGAffineTransformMakeScale(0.4, 0.4)
-        self.icoClock.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            self.icoClock.transform = CGAffineTransformMakeScale(0.4, 0.4)
+            self.icoClock.transform = CGAffineTransformMakeScale(1.0, 1.0)
         })
         
     }
@@ -960,7 +957,7 @@ class LiplisWidget : NSObject {
     */
     internal func onDownIcoBattery(sender: UIButton){
         UIView.animateWithDuration(0.06,animations: { () -> Void in
-        self.icoBattery.transform = CGAffineTransformMakeScale(0.9, 0.9)
+            self.icoBattery.transform = CGAffineTransformMakeScale(0.9, 0.9)
         })
         
         //バッテリー情報おしゃべり
@@ -968,19 +965,19 @@ class LiplisWidget : NSObject {
     }
     internal func onUpIcoBattery(sender: UIButton){
         UIView.animateWithDuration(0.1,animations: { () -> Void in
-        self.icoBattery.transform = CGAffineTransformMakeScale(0.4, 0.4)
-        self.icoBattery.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            self.icoBattery.transform = CGAffineTransformMakeScale(0.4, 0.4)
+            self.icoBattery.transform = CGAffineTransformMakeScale(1.0, 1.0)
         })
     }
-
+    
     //============================================================
     //
     //定型おしゃべり
     //
     //============================================================
-
+    
     /*
-        挨拶
+    挨拶
     */
     internal func greet()
     {
@@ -999,7 +996,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        バッテリー情報おしゃべり
+    バッテリー情報おしゃべり
     */
     internal func batteryInfo()
     {
@@ -1008,10 +1005,10 @@ class LiplisWidget : NSObject {
         
         //挨拶の選定
         self.liplisNowTopic = self.lpsChat.getBatteryInfo(Int(self.lpsBattery.batteryNowLevel * 100))
-           
+        
         //チャット情報の初期化
         self.initChatInfo()
-                
+        
         //チャットスタート
         self.chatStart()
     }
@@ -1020,29 +1017,29 @@ class LiplisWidget : NSObject {
     時刻情報おしゃべり
     */
     internal func clockInfo()
-        {
+    {
         //座り中なら回避
         if(self.flgSitdown){return}
         
         //挨拶の選定
         self.liplisNowTopic = self.lpsChat.getClockInfo()
-            
+        
         //チャット情報の初期化
         self.initChatInfo()
-            
+        
         //チャットスタート
         self.chatStart()
     }
     
     /*
-        時報チェック
+    時報チェック
     */
     internal func onTimeSignal()->Bool
     {
         var result : Bool = false
         
         //現在時間取得
-        var nowHour : Int = self.getHour()
+        let nowHour : Int = self.getHour()
         
         if(nowHour != self.prvHour)
         {
@@ -1077,7 +1074,7 @@ class LiplisWidget : NSObject {
     時刻取得
     */
     internal func getHour()->Int{
-        var date : LiplisDate = LiplisDate()
+        let date : LiplisDate = LiplisDate()
         return date.hour!
     }
     
@@ -1093,7 +1090,7 @@ class LiplisWidget : NSObject {
         
         //挨拶の選定
         self.liplisNowTopic = lpsChatTalk.apiPost(self.desk.baseSetting.lpsUid, toneUrl: self.lpsSkin.tone,version: "I" + LiplisUtil.getAppVersion(),sentence: chatText)
-            
+        
         //チャット情報の初期化
         self.initChatInfo()
         
@@ -1108,7 +1105,7 @@ class LiplisWidget : NSObject {
     //
     //============================================================
     /*
-        チャット情報の初期化
+    チャット情報の初期化
     */
     internal func initchatInfo()
     {
@@ -1126,7 +1123,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        話題残量チェック
+    話題残量チェック
     */
     internal func checkRunout()->Bool
     {
@@ -1138,9 +1135,9 @@ class LiplisWidget : NSObject {
     //おしゃべり処理
     //
     //============================================================
-
+    
     /*
-        次の話題
+    次の話題
     */
     internal func nextLiplis()
     {
@@ -1224,7 +1221,7 @@ class LiplisWidget : NSObject {
     
     
     /*
-        リプリスの更新
+    リプリスの更新
     */
     internal func updateLiplis()
     {
@@ -1267,7 +1264,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        リフレッシュ
+    リフレッシュ
     */
     internal func refreshLiplis()
     {
@@ -1297,7 +1294,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        瞬時リフレッシュ
+    瞬時リフレッシュ
     */
     internal func immediateRefresh()
     {
@@ -1318,7 +1315,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        メッセージチェック
+    メッセージチェック
     */
     internal func checkMsg()->Bool
     {
@@ -1332,7 +1329,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        スキップチェック
+    スキップチェック
     */
     internal func checkSkip()->Bool
     {
@@ -1356,7 +1353,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        スキップ
+    スキップ
     */
     internal func skipLiplis()->Bool
     {
@@ -1380,7 +1377,7 @@ class LiplisWidget : NSObject {
                     //なうポイントの取得
                     self.nowPoint = self.liplisNowTopic.pointList[0]
                 }
-                //初回ワードチェック
+                    //初回ワードチェック
                 else if(idx == 0)
                 {
                     self.liplisNowWord = self.liplisNowTopic.nameList[idx]
@@ -1388,7 +1385,7 @@ class LiplisWidget : NSObject {
                     //空だったら、空じゃなくなるまで繰り返す
                     if(self.liplisNowWord != "")
                     {
-                        do
+                        repeat
                         {
                             //次ワード遷移
                             idx++
@@ -1396,28 +1393,28 @@ class LiplisWidget : NSObject {
                             //終了チェック
                             if(self.liplisNowTopic.nameList.count < idx)
                             {
-                                if(idx > count(self.liplisNowTopic.nameList[idx].utf16)){break}
+                                if(idx > self.liplisNowTopic.nameList[idx].utf16.count){break}
                                 
                                 //ナウワードの初期化
                                 self.liplisNowWord = self.liplisNowTopic.nameList[idx]
                             }
                         }
-                        while(self.liplisNowWord == "")
+                            while(self.liplisNowWord == "")
                     }
                 }
-                //おしゃべり中は何もしない
+                    //おしゃべり中は何もしない
                 else
                 {
                     
                 }
                 
-                for(var kdx : Int = 0, n = count(self.liplisNowWord.utf16); kdx<n; kdx++)
+                for(var kdx : Int = 0, n = self.liplisNowWord.utf16.count; kdx<n; kdx++)
                 {
                     self.liplisChatText = self.liplisChatText + (self.liplisNowWord as NSString).substringWithRange(NSRange(location : kdx,length : 1))
                 }
                 
                 self.cntLnw = self.liplisNowTopic.nameList.count
-                self.cntLct = count(self.liplisNowWord.utf16)
+                self.cntLct = self.liplisNowWord.utf16.count
             }
             return true
         }
@@ -1428,7 +1425,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        座りチェック
+    座りチェック
     */
     internal func checkSitdown()->Bool
     {
@@ -1442,7 +1439,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        終了チェック
+    終了チェック
     */
     internal func checkEnd()->Bool
     {
@@ -1458,14 +1455,14 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        テキストの更新
+    テキストの更新
     */
     internal func setText()->Bool
     {
         //送りワード文字数チェック
         if(self.cntLnw != 0)
         {
-            if(self.cntLct >= count(self.liplisNowWord.utf16))
+            if(self.cntLct >= self.liplisNowWord.utf16.count)
             {
                 //終了チェック
                 if(self.checkEnd()){return true}
@@ -1503,28 +1500,28 @@ class LiplisWidget : NSObject {
             
             //なうワードの初期化
             self.liplisNowWord = self.liplisNowTopic.nameList[self.cntLnw]
-
+            
             //次ワード遷移
             self.cntLnw = self.cntLnw + 1
             
             //空だったら、空じゃなくなるまで繰り返す
             if(self.liplisNowWord == "")
             {
-                do
+                repeat
                 {
                     //チェックエンド
                     checkEnd()
                     
                     //終了チェック
-                    if(self.cntLnw > count(self.liplisNowTopic.nameList[cntLnw].utf16)){break}
+                    if(self.cntLnw > self.liplisNowTopic.nameList[cntLnw].utf16.count){break}
                     
                     //ナウワードの初期化
                     self.liplisNowWord = self.liplisNowTopic.nameList[self.cntLnw]
-
+                    
                     //次ワード遷移
                     self.cntLnw = self.cntLnw + 1
                 }
-                while(self.liplisNowWord == "")
+                    while(self.liplisNowWord == "")
             }
         }
         else
@@ -1539,7 +1536,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        テキストビューの更新
+    テキストビューの更新
     */
     internal func updateText()
     {
@@ -1547,7 +1544,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        ボディの更新
+    ボディの更新
     */
     internal func updateBody()->Bool
     {
@@ -1574,10 +1571,10 @@ class LiplisWidget : NSObject {
             self.imgBody.image = self.ob.getLiplisBodyImgIdIns(self.getBlinkState(),mouthState: self.cntMouth)
             self.imgBody.setNeedsDisplay()
         }
-       
+        
         return true
     }
-
+    
     /*
     ボディの更新
     */
@@ -1598,7 +1595,7 @@ class LiplisWidget : NSObject {
     //============================================================
     
     /*
-        ボディの取得
+    ボディの取得
     */
     internal func setObjectBody()->Bool
     {
@@ -1616,7 +1613,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        ボディを初期状態に戻す
+    ボディを初期状態に戻す
     */
     internal func setObjectBodyNeutral()->Bool
     {
@@ -1642,14 +1639,14 @@ class LiplisWidget : NSObject {
     
     
     /*
-        まばたきカウント
+    まばたきカウント
     */
     internal func getBlincCnt()->Int{
         return LiplisUtil.getRandormNumber(Min: 30,Max: 50)
     }
     
     /*
-        まばたき状態の取得
+    まばたき状態の取得
     */
     internal func getBlinkState()->Int
     {
@@ -1669,7 +1666,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        半目チェック
+    半目チェック
     */
     internal func herfEyeCheck()
     {
@@ -1687,7 +1684,7 @@ class LiplisWidget : NSObject {
     //============================================================
     
     /*
-        チャットスタート
+    チャットスタート
     */
     internal func chatStart()
     {
@@ -1709,7 +1706,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        チャットストップ
+    チャットストップ
     */
     internal func chatStop()
     {
@@ -1729,7 +1726,7 @@ class LiplisWidget : NSObject {
     //============================================================
     
     /*
-        1件のトピックを取得する
+    1件のトピックを取得する
     */
     internal func getTopic()
     {
@@ -1744,7 +1741,7 @@ class LiplisWidget : NSObject {
     
     
     /*
-        ニュースキューチェック
+    ニュースキューチェック
     */
     internal func onCheckNewsQueue()
     {
@@ -1755,7 +1752,7 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        ニュースを取得する
+    ニュースを取得する
     */
     internal func getShortNews()
     {
@@ -1775,11 +1772,11 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        ポストパラメーターの作成(ニュース単体向け)
+    ポストパラメーターの作成(ニュース単体向け)
     */
     internal func getPostDataForLiplisNews()->NSData
     {
-        var nameValuePair : NameValuePair = NameValuePair()
+        let nameValuePair : NameValuePair = NameValuePair()
         nameValuePair.add(BasicNameValuePair(key: "tone", value: self.lpsSkin.tone))
         nameValuePair.add(BasicNameValuePair(key: "newsFlg", value: self.os.getNewsFlg()))
         nameValuePair.add(BasicNameValuePair(key: "randomkey", value: LiplisDate().getTimeStr()))   //キャッシュ防止
@@ -1787,11 +1784,11 @@ class LiplisWidget : NSObject {
     }
     
     /*
-        ポストパラメーターの作成(ニュースリスト向け)
+    ポストパラメーターの作成(ニュースリスト向け)
     */
     internal func getPostDataForLiplisNewsList()->NSData
     {
-        var nameValuePair : NameValuePair = NameValuePair()
+        let nameValuePair : NameValuePair = NameValuePair()
         nameValuePair.add(BasicNameValuePair(key: "userid", value: self.desk.baseSetting.lpsUid))
         nameValuePair.add(BasicNameValuePair(key : "tone", value: self.lpsSkin.tone))
         nameValuePair.add(BasicNameValuePair(key: "newsFlg", value: self.os.getNewsFlg()))
@@ -1804,7 +1801,7 @@ class LiplisWidget : NSObject {
         
         return nameValuePair.getPostData()
     }
-
+    
     //============================================================
     //
     //状態制御
@@ -1830,7 +1827,7 @@ class LiplisWidget : NSObject {
     おやすみ
     */
     internal func sleep()
-        {
+    {
         //ウェイクアップ状態の場合、おやすみ
         self.flgSitdown = true
         
@@ -1898,7 +1895,7 @@ class LiplisWidget : NSObject {
     //============================================================
     
     /*
-   　ウィジェット設定画面を呼び出す
+    　ウィジェット設定画面を呼び出す
     */
     internal func callWidgetSetting()
     {
@@ -1915,7 +1912,7 @@ class LiplisWidget : NSObject {
         let modalView : ViewChat = ViewChat(widget : self)
         modalView.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
         modalView.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
-            
+        
         self.desk.presentViewController(modalView, animated: true, completion: nil)
     }
 }

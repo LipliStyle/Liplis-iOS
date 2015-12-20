@@ -83,7 +83,7 @@ struct LiplisApi
         let request = NSMutableURLRequest(URL: URL, cachePolicy:NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
         request.HTTPMethod = "POST"
         request.HTTPBody = postData
-        var result : NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
+        let result : NSData? = try? NSURLConnection.sendSynchronousRequest(request, returningResponse: nil)
         
         return self.data2str(result)
     }
@@ -98,7 +98,7 @@ struct LiplisApi
         
         request.HTTPMethod = "POST"
         request.HTTPBody = postData
-        var result : NSData! = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
+        let result : NSData! = try? NSURLConnection.sendSynchronousRequest(request, returningResponse: nil)
         
         return result
     }
@@ -109,14 +109,14 @@ struct LiplisApi
     */
     internal static func postJson(url: String,postData : NSData!)->JSON{
         let URL = NSURL(string: url)!
-        var request = NSMutableURLRequest(URL: URL)
+        let request = NSMutableURLRequest(URL: URL)
         request.HTTPMethod = "POST"
         request.HTTPBody = postData
-        var result : NSData! = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
+        let result : NSData! = try? NSURLConnection.sendSynchronousRequest(request, returningResponse: nil)
         
         if result != nil
         {
-            print(data2str(result))
+            print(data2str(result), terminator: "")
             return JSON(data:result)
         }
         else

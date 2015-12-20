@@ -18,6 +18,9 @@
 //   2015/05/19 ver1.4.1 話題2chを凍結、デフォルト選択話題をニュースのみに設定
 //   　　　　　　　　　　　　会話中にすぐに通常おしゃべりに戻るバグ修正
 //
+//   2015/05/30 ver1.4.2 Documentsをバックアップさせない設定を付与
+//   2015/05/30 ver1.4.3 チャット時、コンテキストを送信していなかった問題を修正
+//   2015/12/18 ver1.5.0 Swift2.0対応
 //
 //  Created by sachin on 2015/01/04.
 //  Copyright (c) 2015年 sachin. All rights reserved.
@@ -127,7 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.myTabBarController = UITabBarController()
         
         // ViewControllerを設定する.
-        self.myTabBarController?.setViewControllers(activityList as [AnyObject], animated: false)
+        self.myTabBarController?.setViewControllers((activityList as? [UIViewController]), animated: false)
         
         // RootViewControllerに設定する.
         self.window!.rootViewController = myTabBarController

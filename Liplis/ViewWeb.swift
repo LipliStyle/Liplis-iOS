@@ -48,7 +48,7 @@ class ViewWeb : UIViewController , UIWebViewDelegate {
         self.initView()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -70,7 +70,7 @@ class ViewWeb : UIViewController , UIWebViewDelegate {
     private func initView()
     {
         //ビューの初期化
-        var img : UIImage = UIImage(named : ObjR.imgIconWeb)!                       //アイコン取得
+        let img : UIImage = UIImage(named : ObjR.imgIconWeb)!                       //アイコン取得
         self.view.opaque = true                                                     //背景透過許可
         self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)   //白透明背景
         self.tabBarItem = UITabBarItem(title: self.tagTitle,image: img, tag: 5)     //タブ設定
@@ -151,14 +151,14 @@ class ViewWeb : UIViewController , UIWebViewDelegate {
     Pageがすべて読み込み終わった時呼ばれる
     */
     internal func webViewDidFinishLoad(webView: UIWebView) {
-        println("webViewDidFinishLoad")
+        print("webViewDidFinishLoad")
     }
     
     /*
     Pageがloadされ始めた時、呼ばれる
     */
     internal func webViewDidStartLoad(webView: UIWebView) {
-        println("webViewDidStartLoad")
+        print("webViewDidStartLoad")
     }
     
     //============================================================
@@ -185,7 +185,7 @@ class ViewWeb : UIViewController , UIWebViewDelegate {
         //ビューフレームサイズを取得
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        //let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
         self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: LiplisDefine.labelHight)
         self.myWebView.frame = CGRectMake(0, self.lblTitle.frame.height, displayWidth, displayHeight - self.lblTitle.frame.height - LiplisDefine.futterHight)
     }

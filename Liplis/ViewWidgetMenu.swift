@@ -51,7 +51,7 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
         self.initView()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -263,8 +263,8 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     Cellが選択された際に呼び出される.
     */
     func tableView(tableView: UITableView, indexPath: NSIndexPath)->NSIndexPath? {
-        println("Num: \(indexPath.row)")
-        println("Value: \(tblItems[indexPath.row].title)")
+        print("Num: \(indexPath.row)")
+        print("Value: \(tblItems[indexPath.row].title)")
         
         return nil;
     }
@@ -273,7 +273,7 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     Cellの総数を返す.
     */
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println("numberOfRowsInSection")
+        print("numberOfRowsInSection")
         return self.tblItems.count
     }
     
@@ -281,7 +281,7 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     Editableの状態にする.
     */
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        println("canEditRowAtIndexPath")
+        print("canEditRowAtIndexPath")
         
         return true
     }
@@ -290,14 +290,14 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     特定の行のボタン操作を有効にする.
     */
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        println("commitEdittingStyle:\(editingStyle)")
+        print("commitEdittingStyle:\(editingStyle)")
     }
     
     /*
     Cellに値を設定する.
     */
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        println("cellForRowAtIndexPath")
+        print("cellForRowAtIndexPath")
         return self.settingCell(indexPath)
     }
     
@@ -307,7 +307,7 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     */
     func settingCell(indexPath : NSIndexPath) -> UITableViewCell!
     {
-        var cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
+        let cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
         
         switch(cellSetting.partsType)
         {
@@ -342,12 +342,12 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        println("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
+        print("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
         return CGFloat(30)
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        println("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
-        var cellSetting : MsgSettingViewCell = self.tblItems[indexPath.row]
+        print("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
+        let cellSetting : MsgSettingViewCell = self.tblItems[indexPath.row]
         
         return cellSetting.rowHeight
     }
@@ -400,7 +400,7 @@ class ViewWidgetMenu :  UIViewController, UITableViewDelegate, UITableViewDataSo
         
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        //let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
         self.lblTitle.frame = CGRectMake(0, 0, displayWidth, LiplisDefine.labelHight)
         self.btnBack.frame = CGRectMake(self.lblTitle.frame.origin.x + 5,self.lblTitle.frame.origin.y + 25, displayWidth/6, 30)
         self.tblSetting.frame = CGRectMake(0, self.lblTitle.frame.height, displayWidth, displayHeight - self.lblTitle.frame.height)

@@ -67,7 +67,7 @@ class ObjPreferenceBase {
     */
     internal func getSetting(key : String, defaultValue : String)->String
     {
-        var readStr = readPreference(key)
+        let readStr = readPreference(key)
         
         if readStr != ""
         {
@@ -80,11 +80,11 @@ class ObjPreferenceBase {
     }
     internal func getSettingInt(key : String, defaultValue : Int)->Int
     {
-        var readStr = readPreference(key)
+        let readStr = readPreference(key)
         
         if readStr != ""
         {
-            return readStr.toInt()!
+            return Int(readStr)!
         }
         else
         {
@@ -115,11 +115,11 @@ class ObjPreferenceBase {
     }
     internal func getLiplisSettingInt(key : String)->Int
     {
-        var readStr = readPreference("setting_" + key)
+        let readStr = readPreference("setting_" + key)
         
         if readStr != ""
         {
-            return readStr.toInt()!
+            return Int(readStr)!
         }
         else
         {
@@ -132,7 +132,7 @@ class ObjPreferenceBase {
     */
     internal func getJsonFromString(jsonStr : String)->JSON
     {
-        var json : JSON = JSON(data:jsonStr.dataUsingEncoding(NSUTF8StringEncoding)!)
+        let json : JSON = JSON(data:jsonStr.dataUsingEncoding(NSUTF8StringEncoding)!)
         return json
     }
     

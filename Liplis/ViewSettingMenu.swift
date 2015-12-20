@@ -60,7 +60,7 @@ class ViewSettingMenu :  UIViewController, UITableViewDelegate, UITableViewDataS
         self.initView()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -82,7 +82,7 @@ class ViewSettingMenu :  UIViewController, UITableViewDelegate, UITableViewDataS
     private func initView()
     {
         //ビューの初期化
-        var img : UIImage = UIImage(named : ObjR.imgIconSetting)!                   //アイコン取得
+        let img : UIImage = UIImage(named : ObjR.imgIconSetting)!                   //アイコン取得
         self.view.opaque = true                                                     //背景透過許可
         self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)   //白透明背景
         self.tabBarItem = UITabBarItem(title: self.tagTitle,image: img, tag: 2)     //タブ設定
@@ -303,8 +303,8 @@ class ViewSettingMenu :  UIViewController, UITableViewDelegate, UITableViewDataS
     Cellが選択された際に呼び出される.
     */
     internal func tableView(tableView: UITableView, indexPath: NSIndexPath)->NSIndexPath? {
-        println("Num: \(indexPath.row)")
-        println("Value: \(tblItems[indexPath.row].title)")
+        print("Num: \(indexPath.row)")
+        print("Value: \(tblItems[indexPath.row].title)")
         
         return nil;
     }
@@ -313,7 +313,7 @@ class ViewSettingMenu :  UIViewController, UITableViewDelegate, UITableViewDataS
     Cellの総数を返す.
     */
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println("numberOfRowsInSection")
+        print("numberOfRowsInSection")
         return tblItems.count
     }
     
@@ -321,7 +321,7 @@ class ViewSettingMenu :  UIViewController, UITableViewDelegate, UITableViewDataS
     Editableの状態にする.
     */
     internal func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        println("canEditRowAtIndexPath")
+        print("canEditRowAtIndexPath")
         
         return true
     }
@@ -330,14 +330,14 @@ class ViewSettingMenu :  UIViewController, UITableViewDelegate, UITableViewDataS
     特定の行のボタン操作を有効にする.
     */
     internal func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        println("commitEdittingStyle:\(editingStyle)")
+        print("commitEdittingStyle:\(editingStyle)")
     }
     
     /*
     Cellに値を設定する.
     */
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        println("cellForRowAtIndexPath")
+        print("cellForRowAtIndexPath")
         return settingCell(indexPath)
     }
     
@@ -347,7 +347,7 @@ class ViewSettingMenu :  UIViewController, UITableViewDelegate, UITableViewDataS
     */
     internal func settingCell(indexPath : NSIndexPath) -> UITableViewCell!
     {
-        var cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
+        let cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
         
         switch(cellSetting.partsType)
         {
@@ -385,12 +385,12 @@ class ViewSettingMenu :  UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     internal func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        println("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
+        print("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
         return CGFloat(30)
     }
     internal func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        println("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
-        var cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
+        print("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
+        let cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
         
         return cellSetting.rowHeight
     }
@@ -425,7 +425,7 @@ class ViewSettingMenu :  UIViewController, UITableViewDelegate, UITableViewDataS
          //画面要素調整
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        //let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
         self.lblTitle.frame = CGRectMake(0, 0, displayWidth, LiplisDefine.labelHight)
         self.btnBack.frame = CGRectMake(self.lblTitle.frame.origin.x + 5,self.lblTitle.frame.origin.y + 25, displayWidth/6, 30)
         self.tblSetting.frame = CGRectMake(0, self.lblTitle.frame.height, displayWidth, displayHeight - self.lblTitle.frame.height)

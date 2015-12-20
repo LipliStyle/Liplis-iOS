@@ -20,7 +20,8 @@ struct LiplisChatJson {
     internal static let KEY_TITLE            : String = "title"
     internal static let KEY_URL              : String = "url"
     internal static let KEY_DESCRIPTION_LIST : String = "descriptionList"
-
+    internal static let KEY_OPLIST           : String = "opList"
+    
     //============================================================
     //
     //メッセージ生成
@@ -31,7 +32,7 @@ struct LiplisChatJson {
     /**
     ショートニュースリストの取得
     */
-    internal static func getChatTalkResponseRes(json:JSON)->MsgShortNews
+    internal static func getChatTalkResponseRes(json:JSON)->ResLpsChatResponse
     {
         return json2MsgShortNews(json)
     }
@@ -40,28 +41,44 @@ struct LiplisChatJson {
     /**
     ショートニュースのJSON変換取得
     */
-    internal static func json2MsgShortNews(json:JSON)->MsgShortNews
+    internal static func json2MsgShortNews(json:JSON)->ResLpsChatResponse
     {
-        var result : MsgShortNews = MsgShortNews()
+        let msg : MsgShortNews = MsgShortNews()
+        let result : ResLpsChatResponse = ResLpsChatResponse()
         
         //タイトル取得
         if json[self.KEY_TITLE].string != nil
         {
-            result.title = json[self.KEY_TITLE].string!
+            msg.title = json[self.KEY_TITLE].string!
         }
         else
         {
-            result.title = ""
+            msg.title = ""
         }
         
         //URL取得
         if json[self.KEY_URL].string != nil
         {
-            result.url = json[self.KEY_URL].string!
+            msg.url = json[self.KEY_URL].string!
         }
         else
         {
-            result.url = ""
+            msg.url = ""
+        }
+        
+        //オプション取得
+        if json[self.KEY_OPLIST].array != nil
+        {
+            for (_, subJson): (String, JSON) in json[self.KEY_OPLIST]
+            {
+                result.opList.append(subJson.string!)
+            }
+            
+            if result.opList.count == 2
+            {
+                result.context = result.opList[0]
+                result.mode = result.opList[1]
+            }
         }
         
         //alreadyフィールドが用意されているが不要のため無視
@@ -77,17 +94,16 @@ struct LiplisChatJson {
         //内容取得
         if json[self.KEY_DESCRIPTION_LIST] != nil
         {
-            for (idx:String,subJson:JSON) in json[self.KEY_DESCRIPTION_LIST]
+            for (_, subJson): (String, JSON) in json[self.KEY_DESCRIPTION_LIST]
             {
                 //リザルト取得(コロン分割)
-                var resList : Array<String> = split(subJson.description,isSeparator : {$0 == ";"})
-                var title : String = ""
+                let resList : Array<String> = subJson.description.characters.split(isSeparator : {$0 == ";"}).map { String($0) }
                 
                 //リーフエモーション分割
                 for leafAndEmotion : String in resList
                 {
                     //コンマ分割
-                    var leaf : Array<String> = split(leafAndEmotion,isSeparator : {$0 == ","})
+                    var leaf : Array<String> = leafAndEmotion.characters.split(isSeparator : {$0 == ","}).map { String($0) }
                     
                     //リスト作成
                     
@@ -99,22 +115,25 @@ struct LiplisChatJson {
                             break
                         }
                         
-                        result.nameList.append(leaf[0])
-                        result.emotionList.append(leaf[1].toInt()!)
-                        result.pointList.append(leaf[2].toInt()!)
+                        msg.nameList.append(leaf[0])
+                        msg.emotionList.append(Int(leaf[1])!)
+                        msg.pointList.append(Int(leaf[2])!)
                     }
                 }
             }
         }
         else
         {
-            result.nameList = []
-            result.emotionList = []
-            result.pointList = []
+            msg.nameList = []
+            msg.emotionList = []
+            msg.pointList = []
         }
         
         //読み込み完了
-        result.flgSuccess = true
+        msg.flgSuccess = true
+        
+        //メッセージセット
+        result.msg = msg
         
         return result
     }

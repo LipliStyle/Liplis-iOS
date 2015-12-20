@@ -65,7 +65,7 @@ class JsonManager : ObjPreferenceBase
             }
             else if self.json[key].int32 != nil
             {
-                self.setInt(key,value: self.json[key].description.toInt()!)
+                self.setInt(key,value: Int(self.json[key].description)!)
             }
             else
             {
@@ -115,9 +115,9 @@ class JsonManager : ObjPreferenceBase
     }
     internal func getDataInt(key : String)->Int
     {
-        if self.dataSet[key]!.toInt() != nil
+        if Int(self.dataSet[key]!) != nil
         {
-            return dataSet[key]!.toInt()!
+            return Int(dataSet[key]!)!
         }
         else
         {
@@ -144,21 +144,23 @@ class JsonManager : ObjPreferenceBase
     */
     internal func getJson()->String
     {
-        var jsonStr : StringBuilder = StringBuilder()
+        let jsonStr : StringBuilder = StringBuilder()
         
         //開始かっこ
         jsonStr.append("{")
         
         if dataSetJson.count >= 2
         {
-            for (key,value) in dataSetJson
+            //for (_,value) in dataSetJson
+            //記述変更 2015/12/18 ver1.5
+            for (_,value) in dataSetJson
             {
                 jsonStr.append(value + ",")
             }
             
             //最後の1文字を消して、閉じかっこをつける
             var str = jsonStr.toString()
-            str = str.substringToIndex(advance(str.startIndex,count(str.utf16)  - 1))
+            str = str.substringToIndex(str.startIndex.advancedBy(str.utf16.count  - 1))
             str = str + "}"
             
             return str
@@ -166,7 +168,9 @@ class JsonManager : ObjPreferenceBase
         else if dataSetJson.count == 1
         {
             //要素が1個の場合
-            for (key,val) in dataSetJson
+            //for (_,value) in dataSetJson
+            //記述変更 2015/12/18 ver1.5
+            for (_,val) in dataSetJson
             {
                 jsonStr.append(val)
             }

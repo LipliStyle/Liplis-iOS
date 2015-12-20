@@ -66,7 +66,7 @@ class CtvCellWidgetCtrlDelWidget : UITableViewCell
         self.parView = parView
     }
     
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -77,7 +77,7 @@ class CtvCellWidgetCtrlDelWidget : UITableViewCell
     internal func setSize(viewWidth : CGFloat)
     {
         self.viewWidth = viewWidth
-        var locationX : CGFloat = CGFloat(viewWidth - viewWidth/4 - 5)
+        let locationX : CGFloat = CGFloat(viewWidth - viewWidth/4 - 5)
         self.btnHelp.frame = CGRectMake(locationX, 5,viewWidth/4,60)
         self.lblTitle.frame = CGRectMake(10, 5,viewWidth * 3/4 - 20,50)
     }
@@ -95,10 +95,10 @@ class CtvCellWidgetCtrlDelWidget : UITableViewCell
         let myAlert: UIAlertController = UIAlertController(title: "ウィジェット削除", message: "全てのウィジェットを削除しますか？", preferredStyle: .Alert)
         let myOkAction = UIAlertAction(title: "実行", style: .Default) { action in
             self.parView.app.activityDeskTop.delWidgetAll()
-            println("実行しました。")
+            print("実行しました。")
         }
         let myCancelAction = UIAlertAction(title: "キャンセル", style: .Default) { action in
-            println("中止しました。")
+            print("中止しました。")
         }
 
         myAlert.addAction(myOkAction)

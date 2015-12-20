@@ -51,7 +51,7 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
         self.initView()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -230,7 +230,7 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
                 rowHeight: CGFloat(26)
             )
         )
-        var lpsNewsRange : MsgSettingViewCell = MsgSettingViewCell(
+        let lpsNewsRange : MsgSettingViewCell = MsgSettingViewCell(
             title: "",
             content: "",
             partsType: LiplisDefine.PARTS_TYPE_RADIO,
@@ -349,7 +349,7 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
                 rowHeight: CGFloat(26)
             )
         )
-        var lpsNewsRunOut : MsgSettingViewCell =
+        let lpsNewsRunOut : MsgSettingViewCell =
         MsgSettingViewCell(
             title: "",
             content: "",
@@ -417,8 +417,8 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
     Cellが選択された際に呼び出される.
     */
     internal func tableView(tableView: UITableView, indexPath: NSIndexPath)->NSIndexPath? {
-        println("Num: \(indexPath.row)")
-        println("Value: \(tblItems[indexPath.row].title)")
+        print("Num: \(indexPath.row)")
+        print("Value: \(tblItems[indexPath.row].title)")
         
         return nil;
     }
@@ -427,7 +427,7 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
     Cellの総数を返す.
     */
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println("numberOfRowsInSection")
+        print("numberOfRowsInSection")
         return tblItems.count
     }
     
@@ -435,7 +435,7 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
     Editableの状態にする.
     */
     internal func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        println("canEditRowAtIndexPath")
+        print("canEditRowAtIndexPath")
         
         return true
     }
@@ -444,14 +444,14 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
     特定の行のボタン操作を有効にする.
     */
     internal func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        println("commitEdittingStyle:\(editingStyle)")
+        print("commitEdittingStyle:\(editingStyle)")
     }
     
     /*
     Cellに値を設定する.
     */
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        println("cellForRowAtIndexPath")
+        print("cellForRowAtIndexPath")
         return settingCell(indexPath)
     }
     
@@ -461,7 +461,7 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
     */
     internal func settingCell(indexPath : NSIndexPath) -> UITableViewCell!
     {
-        var cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
+        let cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
         
         switch(cellSetting.partsType)
         {
@@ -492,12 +492,12 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
     }
     
     internal func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        println("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
+        print("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
         return CGFloat(30)
     }
     internal func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        println("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
-        var cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
+        print("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
+        let cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
         
         return cellSetting.rowHeight
     }
@@ -507,12 +507,12 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
     */
     internal func selectCheck(settingIdx : Int, val : Bool)
     {
-        println("チェック選択 idx:" + String(settingIdx) + " val:" + String(LiplisUtil.bit2Int(val)))
+        print("チェック選択 idx:" + String(settingIdx) + " val:" + String(LiplisUtil.bit2Int(val)))
         widget.os.saveDataFromIdx(settingIdx, val: LiplisUtil.bit2Int(val))
     }
     internal func selectVal(settingIdx : Int, val : Int)
     {
-        println("ラジオ選択 idx:" + String(settingIdx) + " val:" + String(val))
+        print("ラジオ選択 idx:" + String(settingIdx) + " val:" + String(val))
         widget.os.saveDataFromIdx(settingIdx, val: val)
     }
     
@@ -539,7 +539,7 @@ class ViewWidgetTopicSetting :  UIViewController, UITableViewDelegate, UITableVi
         
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        //let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
         self.lblTitle.frame = CGRectMake(0, 0, displayWidth, LiplisDefine.labelHight)
         self.btnBack.frame = CGRectMake(self.lblTitle.frame.origin.x + 5,self.lblTitle.frame.origin.y + 25, displayWidth/6, 30)
         self.tblSetting.frame = CGRectMake(0, self.lblTitle.frame.height, displayWidth, displayHeight - self.lblTitle.frame.height)

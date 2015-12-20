@@ -53,7 +53,7 @@ class CtvCellGeneralSettingRadio : UITableViewCell
         self.imgOff = UIImage(named: "radioOff.png")!
     }
     
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -75,7 +75,7 @@ class CtvCellGeneralSettingRadio : UITableViewCell
         self.viewWidth = viewWidth
         
         var baseLocationY : CGFloat = 5
-        var checkBoxLocationX : CGFloat = CGFloat(viewWidth - 50 - 9)
+        let checkBoxLocationX : CGFloat = CGFloat(viewWidth - 50 - 9)
         var idx : Int = 0
         
         //初期化されていない場合は初期化する
@@ -90,8 +90,7 @@ class CtvCellGeneralSettingRadio : UITableViewCell
         {
             baseLocationY = CGFloat(5 + idx * 45)
             
-            let views = self.subviews
-            for (parts: UIView) in views as! [UIView]
+            for parts in self.subviews
             {
                 //対象ウィジェットのパーツだった場合、位置調整する
                 if(parts.hash == hashVal.hash)
@@ -109,7 +108,7 @@ class CtvCellGeneralSettingRadio : UITableViewCell
     internal func initCell()
     {
         var baseLocationY : CGFloat = 5
-        var checkBoxLocationX : CGFloat = CGFloat(self.viewWidth - 50 - 9)
+        let checkBoxLocationX : CGFloat = CGFloat(self.viewWidth - 50 - 9)
         var idx : Int = 0
         
         for msg : MsgSettingViewCell in childList
@@ -159,12 +158,11 @@ class CtvCellGeneralSettingRadio : UITableViewCell
         
         for hashVal in childList
         {
-            let views = self.contentView.subviews
-            for (parts: UIView) in views as! [UIView]
+            for parts in self.contentView.subviews
             {
                 if(parts.hash == hashVal.hash)
                 {
-                    var uiv = parts as! UIButton
+                    let uiv = parts as! UIButton
                     if hashVal.trueValue == val
                     {
                         uiv.setImage(self.imgOn, forState: UIControlState.Normal)
@@ -188,18 +186,17 @@ class CtvCellGeneralSettingRadio : UITableViewCell
     クリックイベント
     */
     internal func onClickCheck(sender: UIButton) {
-        println("チェックボックスON")
+        print("チェックボックスON")
         var idx : Int = 0
         
         
         for hashVal in childList
         {
-            let views = self.contentView.subviews
-            for (parts: UIView) in views as! [UIView]
+            for parts in self.contentView.subviews
             {
                 if(parts.hash == hashVal.hash)
                 {
-                    var uiv = parts as! UIButton
+                    let uiv = parts as! UIButton
                     
                     //選択ボタンの場合
                     if parts.hash == sender.hash

@@ -52,7 +52,7 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
         self.initClass()
         self.initView()
     }
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -75,7 +75,7 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
     private func initView()
     {
         //ビューの初期化
-        var img : UIImage = UIImage(named : ObjR.imgIconChar)!                   //アイコン取得
+        let img : UIImage = UIImage(named : ObjR.imgIconChar)!                   //アイコン取得
         self.view.opaque = true                                                     //背景透過許可
         self.view.backgroundColor = UIColor(red:255,green:255,blue:255,alpha:255)   //白透明背景
         self.tabBarItem = UITabBarItem(title: self.tagTitle,image: img, tag: 3)     //タブ設定
@@ -153,8 +153,8 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
     Cellが選択された際に呼び出されるデリゲートメソッド.
     */
     internal func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("Num: \(indexPath.row)")
-        println("Value: \(self.app.cman.skinDataList[indexPath.row].charName)")
+        print("Num: \(indexPath.row)")
+        print("Value: \(self.app.cman.skinDataList[indexPath.row].charName)")
         
         //デスクトップに移動し、洗濯したウィジェットを追加する
         self.tabBarController?.selectedIndex=0
@@ -174,7 +174,7 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
     (実装必須)
     */
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.Subtitle,reuseIdentifier:"CharCell")
+        let cell:UITableViewCell! = UITableViewCell(style: UITableViewCellStyle.Subtitle,reuseIdentifier:"CharCell")
         cell.textLabel!.text = self.app.cman.skinDataList[indexPath.row].charName
         cell.detailTextLabel!.text = self.app.cman.skinDataList[indexPath.row].charDescription
         cell.imageView!.image = self.app.cman.skinDataList[indexPath.row].imgIco
@@ -201,7 +201,6 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
     {
         // 現在のデバイスの向きを取得.
         let deviceOrientation: UIDeviceOrientation!  = UIDevice.currentDevice().orientation
-        var idx : Int = 0
         
         // 向きの判定.
         if UIDeviceOrientationIsLandscape(deviceOrientation) {
@@ -214,7 +213,7 @@ class ViewCharacter : UIViewController, UITableViewDelegate, UITableViewDataSour
         //サイズ設定
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        //let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
         self.lblTitle.frame = CGRectMake(0, 0, displayWidth, self.labelHight)
         self.tblCharList.frame = CGRectMake(0, self.lblTitle.frame.height, displayWidth, displayHeight - self.lblTitle.frame.height - LiplisDefine.futterHight)
         

@@ -69,8 +69,7 @@ class ObjLiplisBodyDefault : ObjLiplisBody {
         didStartElement elementName: String,
         namespaceURI : String?,
         qualifiedName qName: String?,
-        attributes attributeDict: [NSObject : AnyObject])
-
+        attributes attributeDict: [String : String])
     {
         _ParseKey = elementName
         
@@ -99,4 +98,6 @@ class ObjLiplisBodyDefault : ObjLiplisBody {
         else if elementName == "batteryMid"     {self._body = ObjBody()}
         else if elementName == "batteryLow"     {self._body = ObjBody()}
     }
+    
+
 }

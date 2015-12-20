@@ -61,7 +61,7 @@ class ViewWidgetCtrl :  UIViewController, UITableViewDelegate, UITableViewDataSo
         self.initView()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -232,8 +232,8 @@ class ViewWidgetCtrl :  UIViewController, UITableViewDelegate, UITableViewDataSo
     Cellが選択された際に呼び出される.
     */
     internal func tableView(tableView: UITableView, indexPath: NSIndexPath)->NSIndexPath? {
-        println("Num: \(indexPath.row)")
-        println("Value: \(tblItems[indexPath.row].title)")
+        print("Num: \(indexPath.row)")
+        print("Value: \(tblItems[indexPath.row].title)")
         
         return nil;
     }
@@ -242,7 +242,7 @@ class ViewWidgetCtrl :  UIViewController, UITableViewDelegate, UITableViewDataSo
     Cellの総数を返す.
     */
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println("numberOfRowsInSection")
+        print("numberOfRowsInSection")
         return tblItems.count
     }
     
@@ -250,7 +250,7 @@ class ViewWidgetCtrl :  UIViewController, UITableViewDelegate, UITableViewDataSo
     Editableの状態にする.
     */
     internal func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        println("canEditRowAtIndexPath")
+        print("canEditRowAtIndexPath")
         
         return true
     }
@@ -259,14 +259,14 @@ class ViewWidgetCtrl :  UIViewController, UITableViewDelegate, UITableViewDataSo
     特定の行のボタン操作を有効にする.
     */
     internal func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        println("commitEdittingStyle:\(editingStyle)")
+        print("commitEdittingStyle:\(editingStyle)")
     }
     
     /*
     Cellに値を設定する.
     */
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        println("cellForRowAtIndexPath")
+        print("cellForRowAtIndexPath")
         return settingCell(indexPath)
     }
     
@@ -276,7 +276,7 @@ class ViewWidgetCtrl :  UIViewController, UITableViewDelegate, UITableViewDataSo
     */
     internal func settingCell(indexPath : NSIndexPath) -> UITableViewCell!
     {
-        var cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
+        let cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
         
         switch(cellSetting.partsType)
         {
@@ -302,12 +302,12 @@ class ViewWidgetCtrl :  UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     internal func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        println("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
+        print("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
         return CGFloat(30)
     }
     internal func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        println("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
-        var cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
+        print("estimatedHeightForRowAtIndexPath" + String(indexPath.row))
+        let cellSetting : MsgSettingViewCell = tblItems[indexPath.row]
         
         return cellSetting.rowHeight
     }
@@ -341,7 +341,7 @@ class ViewWidgetCtrl :  UIViewController, UITableViewDelegate, UITableViewDataSo
         
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        //let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
         self.lblTitle.frame = CGRect(x: 0, y: 0, width: displayWidth, height: LiplisDefine.labelHight)
         self.btnBack.frame = CGRectMake(self.lblTitle.frame.origin.x + 5,self.lblTitle.frame.origin.y + 25, displayWidth/6, 30)
         self.tblSetting.frame = CGRect(x: 0, y: self.lblTitle.frame.height, width: displayWidth, height: displayHeight - self.lblTitle.frame.height)

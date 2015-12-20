@@ -22,15 +22,15 @@ extension Array {
     //Stack - LIFO
     //Arrayをスタックとして使うための拡張
     //============================================================
-    mutating func push(newElement: T) {
+    mutating func push(newElement: Element) {
         self.append(newElement)
     }
     
-    mutating func pop() -> T? {
+    mutating func pop() -> Element? {
         return self.removeLast()
     }
     
-    func peekAtStack() -> T? {
+    func peekAtStack() -> Element? {
         return self.last
     }
     
@@ -39,15 +39,15 @@ extension Array {
     //Queue - FIFO
     //Arrayをキューとして使うための拡張
     //============================================================
-    mutating func enqueue(newElement: T) {
+    mutating func enqueue(newElement: Element) {
         self.append(newElement)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Element? {
         return self.removeAtIndex(0)
     }
     
-    func peekAtQueue() -> T? {
+    func peekAtQueue() -> Element? {
         return self.first
     }
     
@@ -58,13 +58,13 @@ extension Array {
     // 現状、使えいない？
     //============================================================
     mutating func shuffle() {
-        var result : Array<T> = Array<T>()
+        var result : Array<Element> = Array<Element>()
         let cnt = self.count
         
         //ランダムに並べ直す
         for var i = 0; i<cnt; i++
         {
-            var idx = Int(arc4random()) % self.count
+            let idx = Int(arc4random()) % self.count
             
             result.append(self[idx])
             self.removeAtIndex(idx)
@@ -79,7 +79,7 @@ extension Array {
     //addRange
     //配列を追加する
     //============================================================
-    mutating func addRange(addArray : Array<T>) {
+    mutating func addRange(addArray : Array<Element>) {
         for item in addArray
         {
             self.append(item)
@@ -91,7 +91,7 @@ extension Array {
     //配列コンストラクター
     //
     //============================================================
-    init(lst : Array<T>)
+    init(lst : Array<Element>)
     {
         self = lst
     }

@@ -52,13 +52,11 @@ class LiplisNews {
     */
     internal func getShortNews(postData : NSData!)->MsgShortNews!
     {
-        var result : MsgShortNews = MsgShortNews()
-        
         //キューチェック
         if(self.newsQueue?.count > 0)
         {
             //メッセージ出力
-            println("LiplisNews getShortNews" + String(self.newsQueue!.count))
+            print("LiplisNews getShortNews" + String(self.newsQueue!.count))
             
             //１件のデータを返す
             return self.newsQueue!.dequeue()
@@ -66,7 +64,7 @@ class LiplisNews {
         else
         {
             //メッセージ出力
-            println("LiplisNews getShortNews キューが枯渇" + String(self.newsQueue!.count))
+            print("LiplisNews getShortNews キューが枯渇" + String(self.newsQueue!.count))
             
             //非同期処理実行
             AsyncGetNewsTask(postData)
@@ -111,12 +109,41 @@ class LiplisNews {
     */
     internal func AsyncGetNewsTask(postData : NSData!)
     {
-        var URL = NSURL(string: LiplisDefine.API_SHORT_NEWS_URL_LSIT)!
-        var request = NSMutableURLRequest(URL: URL)
+        let URL = NSURL(string: LiplisDefine.API_SHORT_NEWS_URL_LSIT)
+        let request = NSMutableURLRequest(URL: URL!)
+        
         request.HTTPMethod = "POST"
         request.HTTPBody = postData
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: callBackGetNewsList)
+        
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: configuration, delegate:nil, delegateQueue:NSOperationQueue.mainQueue())
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: {
+            (data, response, error) -> Void in
+            do {
+                if error == nil {
+                    //取得したニュースデータをキューに入れる
+                    for newsData : MsgShortNews in LiplisShortNewsJpJson.getShortNewsList(JSON(data:data!))
+                    {
+                        self.newsQueue?.enqueue(newsData)
+                    }
+                }
+            } catch {
+                //エラー処理
+            }
+        })
+        task.resume()
     }
+    
+    
+//    internal func AsyncGetNewsTask(postData : NSData!)
+//    {
+//        var URL = NSURL(string: LiplisDefine.API_SHORT_NEWS_URL_LSIT)!
+//        var request = NSMutableURLRequest(URL: URL)
+//        request.HTTPMethod = "POST"
+//        request.HTTPBody = postData
+//        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: callBackGetNewsList)
+//    }
     
     //============================================================
     //
@@ -126,18 +153,18 @@ class LiplisNews {
     /**
     ニュースリスト取得のコールバック
     */
-    internal func callBackGetNewsList(res: NSURLResponse!, data: NSData!, error: NSError!) {
-        //UIの更新
-        if error == nil {
-            //取得したニュースデータをキューに入れる
-            for newsData : MsgShortNews in LiplisShortNewsJpJson.getShortNewsList(JSON(data:data))
-            {
-                self.newsQueue?.enqueue(newsData)
-            }
-            
-        } else {
-            
-        }
-    }
+//    internal func callBackGetNewsList(res: NSURLResponse!, data: NSData!, error: NSError!) {
+//        //UIの更新
+//        if error == nil {
+//            //取得したニュースデータをキューに入れる
+//            for newsData : MsgShortNews in LiplisShortNewsJpJson.getShortNewsList(JSON(data:data))
+//            {
+//                self.newsQueue?.enqueue(newsData)
+//            }
+//            
+//        } else {
+//            
+//        }
+//    }
 
 }

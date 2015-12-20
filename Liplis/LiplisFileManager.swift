@@ -22,7 +22,7 @@ struct LiplisFileManager
     internal static func getAllFileNamesFromDocumentPath(path: String) -> Array<String>
     {
         //初期リスト
-        var resList : Array<String> = []
+        let resList : Array<String> = []
         
         //結果を返す
         return getAllFileNamesFromTargetPath(path,inList: resList)
@@ -30,7 +30,7 @@ struct LiplisFileManager
     internal static func getAllFileNamesFromTargetPath(path: String, inList : Array<String>) -> Array<String>
     {
         //指定パスのファイル/ディレクトリのリスト
-        var contents : Array<String>! = contentsOfDirectoryAtPath(path)
+        let contents : Array<String>! = contentsOfDirectoryAtPath(path)
         
         //バッファリスト作成
         var resList : Array<String> = []
@@ -83,7 +83,13 @@ struct LiplisFileManager
     internal static func contentsOfDirectoryAtPath(path: String) -> Array<String>!{
         var error: NSError? = nil
         let fileManager = NSFileManager.defaultManager()
-        let contents = fileManager.contentsOfDirectoryAtPath(path, error: &error)
+        let contents: [AnyObject]?
+        do {
+            contents = try fileManager.contentsOfDirectoryAtPath(path)
+        } catch let error1 as NSError {
+            error = error1
+            contents = nil
+        }
         if contents == nil {
             return nil
         }
@@ -98,8 +104,10 @@ struct LiplisFileManager
     */
     internal static func getDocumentRoot()->String
     {
-        return NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-
+        //共有フォルダをバックアップさせない設定
+        notBackupSetting()
+        
+        return NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
     }
     
     /**
@@ -107,11 +115,32 @@ struct LiplisFileManager
     */
     internal static func getDocumentRootUrl()->NSURL
     {
+        //共有フォルダをバックアップさせない設定
+        notBackupSetting()
+        
         let fileManager = NSFileManager.defaultManager()
-        return fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]as! NSURL
+        return fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         
         //配下フォルダへのアクセス例
         //url2 = url.URLByAppendingPathComponent("LiliRenew/skin.xml")
     }
     
+    /**
+    バックアップさせない設定
+    */
+    internal static func notBackupSetting()
+    {
+        let fileManager = NSFileManager.defaultManager()
+        var error : NSError?
+        let url : NSURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        
+        do {
+            //バックアップさせない！
+            try url.setResourceValue(true, forKey : NSURLIsExcludedFromBackupKey)
+        } catch let error1 as NSError {
+            error = error1
+        }
+        
+    }
+
 }
